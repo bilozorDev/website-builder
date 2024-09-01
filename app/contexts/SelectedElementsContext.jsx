@@ -17,7 +17,7 @@ export function SelectedElementsProvider({ children }) {
     simpleFlyoutMenu: {
       selected: false,
     },
-    alignment: { options: [{ id: "left" }, { id: "center" }, { id: "right" }], selected: "center" },
+    alignment: { options: [{ id: "start" }, { id: "center" }, { id: "end" }], selected: "center" },
   });
 
   return (

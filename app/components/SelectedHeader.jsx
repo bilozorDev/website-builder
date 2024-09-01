@@ -16,94 +16,43 @@ const navigation = [
 export default function SelectedHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { setHeader, header } = useSelectedElements();
-console.log(header)
+  console.log(header);
+  
 
-if(header?.alignment?.selected === 'center'){
 
-  return (
-    <header className="bg-white">
-      <NavWrapper>
-        <div className="flex lg:flex-1">
-          <Logo />
-        </div>
-        <HamburgerMenuOpener setMobileMenuOpen={setMobileMenuOpen} />
-        <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-      </NavWrapper>
-      <MobileMenuDialog
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
-        navigation={navigation}
-      />
-    </header>
-  );
-}
-else if(header?.alignment?.selected === 'left'){
-  return (
-    <header className="bg-white">
-      <NavWrapper>
-          <div className="flex items-center gap-x-12">
-        <Logo/>
-          <div className="hidden lg:flex lg:gap-x-12">
+    return (
+      <header className="bg-white">
+        <NavWrapper>
+          <div className="flex-none">
+            <Logo />
+          </div>
+          <HamburgerMenuOpener setMobileMenuOpen={setMobileMenuOpen} />
+          <div className={`hidden lg:flex lg:flex-grow lg:justify-${header?.alignment?.selected} lg:gap-x-12`}>
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
                 {item.name}
               </a>
             ))}
           </div>
-        </div>
-        <HamburgerMenuOpener setMobileMenuOpen={setMobileMenuOpen} />
-        <div className="hidden lg:flex">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-      </NavWrapper>
-      <MobileMenuDialog
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
-        navigation={navigation}
-      />
-    </header>
-  );
-}
-else if(header?.alignment?.selected === 'right'){
-  return (
-    <header className="bg-white">
-      <NavWrapper>
-        <Logo/>
-        <HamburgerMenuOpener setMobileMenuOpen={setMobileMenuOpen} />
-        <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
-              {item.name}
+          <div className="hidden lg:flex lg:flex-none ">
+            <a
+              href="#"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
             </a>
-          ))}
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-     </NavWrapper>
-     <MobileMenuDialog
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
-        navigation={navigation}
-      />
-    </header>
-  );
-}
+          </div>
+        </NavWrapper>
+        <MobileMenuDialog
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+          navigation={navigation}
+        />
+      </header>
+    );
 }

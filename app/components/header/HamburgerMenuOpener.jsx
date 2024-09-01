@@ -1,7 +1,7 @@
 import React from "react";
-import { Bars3Icon } from '@heroicons/react/24/outline'
+import { Bars3Icon } from "@heroicons/react/24/outline";
 
-const HamburgerMenuOpener = (setMobileMenuOpen) => {
+const HamburgerMenuOpener = ({setMobileMenuOpen}) => {
   return (
     <div className="flex lg:hidden">
       <button
