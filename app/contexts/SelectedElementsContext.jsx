@@ -8,7 +8,7 @@ export function SelectedElementsProvider({ children }) {
   const [currentStep, setCurrentStep] = useState("Header");
   const [header, setHeader] = useState({
     darkBg: false,
-    constrained: false,
+    constrained: true,
     brandBg: false,
     flyoutMegaMenu: {
       selected: false,
