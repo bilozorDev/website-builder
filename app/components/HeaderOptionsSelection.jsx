@@ -4,6 +4,7 @@ import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import { useState } from "react";
 import { Description, Field, Label, Switch } from "@headlessui/react";
 import { HexColorPicker } from "react-colorful";
+import MenuItemsEditor from "./MenuItemsEditor";
 
 const HeaderOptionsSelection = () => {
   const { setHeader, header } = useSelectedElements();
@@ -15,7 +16,7 @@ const HeaderOptionsSelection = () => {
       bgColor: color,
     });
   }, [color]);
-  
+
   {
     /*
   {
@@ -72,7 +73,7 @@ const HeaderOptionsSelection = () => {
           ))}
         </div>
       </fieldset>
-
+      <hr className="my-8"/>
       <Field className="flex items-center">
         <Switch
           checked={header?.constrained}
@@ -90,9 +91,13 @@ const HeaderOptionsSelection = () => {
           <span className="font-medium text-gray-900">Boxed</span>{" "}
         </Label>
       </Field>
-      <hr />
+      <hr className="my-8"/>
 
       <HexColorPicker color={color} onChange={setColor} />
+
+      <hr className="my-8"/>
+
+      <MenuItemsEditor />
     </>
   );
 };

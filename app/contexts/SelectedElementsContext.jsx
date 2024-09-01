@@ -7,7 +7,6 @@ const SelectedElementsContext = createContext();
 export function SelectedElementsProvider({ children }) {
   const [currentStep, setCurrentStep] = useState("Header");
   const [header, setHeader] = useState({
-    
     constrained: true,
     bgColor: "#ffffff",
     flyoutMegaMenu: {
@@ -17,7 +16,19 @@ export function SelectedElementsProvider({ children }) {
     simpleFlyoutMenu: {
       selected: false,
     },
-    alignment: { options: [{ id: "start" }, { id: "center" }, { id: "end" }], selected: "center" },
+    alignment: {
+      options: [{ id: "start" }, { id: "center" }, { id: "end" }],
+      selected: "center",
+    },
+    menuItems: {
+      regularItems: [
+        { name: "Product", href: "#" },
+        { name: "Features", href: "#" },
+        { name: "Marketplace", href: "#" },
+        { name: "Company", href: "#" },
+      ],
+    }
+
   });
 
   return (

@@ -9,8 +9,9 @@ import { useSelectedElements } from "../contexts/SelectedElementsContext";
 // Utility function to convert hex color to RGB
 function hexToRgb(hex) {
   // Expand shorthand hex notation (e.g. "03F") to full form (e.g. "0033FF")
-  const fullHex = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) =>
-    r + r + g + g + b + b
+  const fullHex = hex.replace(
+    /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+    (m, r, g, b) => r + r + g + g + b + b
   );
 
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(fullHex);
@@ -37,13 +38,6 @@ function getTextColorForBackground(hexColor) {
   return colourIsLight(r, g, b) ? "black" : "white";
 }
 
-const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
-];
-
 export default function SelectedHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { header } = useSelectedElements();
@@ -61,7 +55,7 @@ export default function SelectedHeader() {
         <div
           className={`hidden lg:flex lg:flex-grow lg:justify-${header?.alignment?.selected} lg:gap-x-12`}
         >
-          {navigation.map((item) => (
+          {header?.menuItems?.regularItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
@@ -86,7 +80,7 @@ export default function SelectedHeader() {
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
-        navigation={navigation}
+        navigation={header?.menuItems?.regularItems}
       />
     </header>
   );
