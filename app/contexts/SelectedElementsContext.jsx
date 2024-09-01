@@ -7,9 +7,9 @@ const SelectedElementsContext = createContext();
 export function SelectedElementsProvider({ children }) {
   const [currentStep, setCurrentStep] = useState("Header");
   const [header, setHeader] = useState({
-    darkBg: false,
+    
     constrained: true,
-    brandBg: false,
+    bgColor: "#ffffff",
     flyoutMegaMenu: {
       selected: false,
       fullWidth: false,
