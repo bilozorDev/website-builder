@@ -41,7 +41,7 @@ function getTextColorForBackground(hexColor) {
 export default function SelectedHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { header } = useSelectedElements();
-
+  console.log(header.alignment.selected)
   // Determine text color based on background color
   const textColor = getTextColorForBackground(header?.bgColor || "#ffffff");
 
@@ -53,7 +53,7 @@ export default function SelectedHeader() {
         </div>
         <HamburgerMenuOpener setMobileMenuOpen={setMobileMenuOpen} />
         <div
-          className={`hidden lg:flex lg:flex-grow lg:justify-${header?.alignment?.selected} lg:gap-x-12`}
+          className={`hidden lg:flex lg:flex-grow lg:justify-${header.alignment.selected} lg:gap-x-12`}
         >
           {header?.menuItems?.regularItems.map((item) => (
             <a
