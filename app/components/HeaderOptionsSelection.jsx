@@ -9,7 +9,7 @@ import MenuItemsEditor from "./MenuItemsEditor";
 const HeaderOptionsSelection = () => {
   const { setHeader, header } = useSelectedElements();
   const [color, setColor] = useState("#aabbcc");
-
+console.log(header.alignment.selected)
   useEffect(() => {
     setHeader({
       ...header,
@@ -46,6 +46,7 @@ const HeaderOptionsSelection = () => {
         </p>
         <div className="mt-6 space-y-6">
           {header.alignment.options.map((aligmentSelection) => (
+            
             <div key={aligmentSelection.id} className="flex items-center">
               <input
                 defaultChecked={aligmentSelection.id === "center"}
@@ -53,13 +54,16 @@ const HeaderOptionsSelection = () => {
                 name="notification-method"
                 type="radio"
                 onClick={() =>
+                  
+                  {
+                    console.log(aligmentSelection.id)
                   setHeader({
                     ...header,
                     alignment: {
                       ...header.alignment,
                       selected: aligmentSelection.id,
                     },
-                  })
+                  })}
                 }
                 className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
               />
