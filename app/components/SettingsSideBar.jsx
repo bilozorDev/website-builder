@@ -18,7 +18,7 @@ export default function SettingsSideBar({open, setOpen}) {
               transition
               className="pointer-events-auto w-screen max-w-2xl transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
             >
-              
+             
               <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                 <div className="px-4 sm:px-6">
                   <div className="flex items-start justify-between">
