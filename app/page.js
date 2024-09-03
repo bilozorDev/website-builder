@@ -8,17 +8,17 @@ import { useState } from "react";
 
 export default function Home() {
   const { header } = useSelectedElements();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <>
       <SelectedHeader config={header} />
-      <div
+      {/* <div
         className="bg-white flex justify-end pr-7 py-2 items-center group hover:cursor-pointer"
         onClick={() => setOpen(true)}
       >
         <ArrowLeftIcon className="h-6 w-6 inline-flex group-hover:mr-2 transition-all duration-300" />
         <span className="font-thin">Settings </span>
-      </div>
+      </div> */}
       <SettingsSideBar open={open} setOpen={setOpen} />
     </>
   );

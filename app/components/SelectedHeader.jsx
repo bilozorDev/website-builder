@@ -131,15 +131,16 @@ export default function SelectedHeader() {
                         </div>
                       </PopoverPanel>
                     </Popover>
-                  ) : null}
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-sm font-semibold leading-6"
-                    style={{ color: textColor }}
-                  >
-                    {item.name}
-                  </a>
+                  ) : (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="text-sm font-semibold leading-6"
+                      style={{ color: textColor }}
+                    >
+                      {item.name}
+                    </a>
+                  )}
                 </>
               );
             })}
@@ -159,7 +160,7 @@ export default function SelectedHeader() {
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
-        navigation={header?.menuItems?.regularItems}
+        navigation={header?.menuItems}
       />
     </header>
   );

@@ -80,7 +80,8 @@ export function SelectedElementsProvider({ children }) {
         },
         { name: "Features", href: "#" },
         { name: "Marketplace", href: "#" },
-        { name: "Company", href: "#" },
+        { name: "Company", href: "#",
+      },
       ],
     },
   });
