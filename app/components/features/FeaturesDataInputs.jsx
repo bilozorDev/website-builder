@@ -116,6 +116,7 @@ const FeaturesDataInputs = () => {
             description={feature.description}
             Icon={feature.icon}
             onClick={() => handleEditFeature(feature)}
+            link={feature.link}
           />
         ))}
         <div

@@ -5,6 +5,7 @@ export default function FeaturesEditList({
   description = "",
   Icon = ChartPieIcon,
   onClick,
+  link
 }) {
   return (
     <div
@@ -20,6 +21,8 @@ export default function FeaturesEditList({
         <span aria-hidden="true" className="absolute inset-0" />
         <p className=" font-medium text-gray-900 pb-1">{name}</p>
         <p className="truncate text-sm text-gray-500">{description}</p>
+        <p className="truncate text-sm text-blue-600 mt-1">{link}</p>
+        
       </div>
       <PencilSquareIcon
         onClick={onClick}

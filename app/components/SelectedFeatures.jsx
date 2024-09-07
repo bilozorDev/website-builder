@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
+import { LinkIcon } from "@heroicons/react/24/outline";
 
 export default function SelectedFeatures() {
   const { features } = useSelectedElements();
@@ -34,7 +36,7 @@ export default function SelectedFeatures() {
                       className="h-6 w-6 text-white"
                     />
                   </div>
-                  {feature.name}
+                 {feature.link? <Link href={feature.link} className="text-blue-800" >{feature.name} <LinkIcon className="w-3 -top-1 relative inline-block" /></Link> : feature.name}
                 </dt>
                 <dd className="mt-2 text-base leading-7 text-gray-600">
                   {feature.description}

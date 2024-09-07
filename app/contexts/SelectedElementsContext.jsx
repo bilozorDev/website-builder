@@ -148,22 +148,26 @@ export function SelectedElementsProvider({ children }) {
           description:
             "Get a better understanding where your traffic is coming from",
           icon: ChartPieIcon,
+          link: "http://localhost:3000/"
         },
         {
           name: "Engagement",
           description:
             "Speak directly to your customers with our engagement tool",
           icon: CursorArrowRaysIcon,
+          link: ""
         },
         {
           name: "Security",
           description: "Your customers’ data will be safe and secure",
           icon: FingerPrintIcon,
+          link: ""
         },
         {
           name: "Integrations",
           description: "Your customers’ data will be safe and secure",
           icon: SquaresPlusIcon,
+          link: ""
         },
       ],
 
