@@ -3,13 +3,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import { Radio, RadioGroup } from "@headlessui/react";
-
+import { PhotoIcon } from "@heroicons/react/24/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-{/*
+{
+  /*
 
 {
     display: true,
@@ -59,15 +60,14 @@ function classNames(...classes) {
       ],
     },
   }
-*/}
-
-
+*/
+}
 
 const BodyOptionsSelection = () => {
   const { hero, setHero } = useSelectedElements();
   const [selected, setSelected] = useState(hero.options.styleSelections[0]);
   const settings = hero.options.styleSelections;
-  
+
   //update the hero state with the selected style
   useEffect(() => {
     setHero({
@@ -82,7 +82,7 @@ const BodyOptionsSelection = () => {
         }),
       },
     });
-  } , [selected]);
+  }, [selected]);
 
   return (
     <>
@@ -113,10 +113,9 @@ const BodyOptionsSelection = () => {
           </div>
           {hero.display ? (
             <>
-
-<h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-         Styles
-        </h2>
+              <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                Styles
+              </h2>
               <fieldset aria-label="Privacy setting">
                 <RadioGroup
                   value={selected}
@@ -158,8 +157,8 @@ const BodyOptionsSelection = () => {
 
               <hr />
               <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-         Data
-        </h2>
+                Data
+              </h2>
               <div className="isolate -space-y-px rounded-md shadow-sm">
                 <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
                   <label
@@ -470,6 +469,21 @@ const BodyOptionsSelection = () => {
                       <option value="text">text</option>
                     </select>
                   </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="mt-2 flex items-center gap-x-3">
+                  <PhotoIcon
+                    aria-hidden="true"
+                    className="h-12 w-12 text-gray-300"
+                  />
+                  <button
+                    type="button"
+                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                  >
+                    Change
+                  </button>
                 </div>
               </div>
             </>
