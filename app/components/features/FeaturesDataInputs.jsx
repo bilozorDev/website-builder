@@ -61,6 +61,8 @@ const FeaturesDataInputs = () => {
       <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         Data
       </h2>
+
+      <div className="space-y-5">
       <InfoInput
         text="Headline"
         value={features.options.headline.text}
@@ -114,6 +116,7 @@ const FeaturesDataInputs = () => {
         }
         placeholder="Deploy faster"
       />
+      </div>
     </>
   );
 };
