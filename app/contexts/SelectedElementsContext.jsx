@@ -105,7 +105,7 @@ export function SelectedElementsProvider({ children }) {
           style: "btn"
         },
         {
-          text: "Learn More",
+          text: "Learn Morse",
           link: "#", 
           style: "text"
         }

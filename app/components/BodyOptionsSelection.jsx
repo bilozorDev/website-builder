@@ -209,6 +209,41 @@ const BodyOptionsSelection = () => {
                     className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
                 </div>
+                <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+                  <div>
+                    <label
+                      htmlFor="btn-style"
+                      className="block text-xs font-medium text-gray-900"
+                    >
+                      Button style
+                    </label>
+                    <select
+                      id="btn-style"
+                      name="btn-style"
+                      value={hero.options.cta[0].style}
+                      onChange={(e) =>
+                        setHero({
+                          ...hero,
+                          options: {
+                            ...hero.options,
+                            cta: [
+                              {
+                                text: hero.options.cta[0].text,
+                                link: hero.options.cta[0].link,
+                                style: e.target.value,
+                              },
+                              hero.options.cta[1],
+                            ],
+                          },
+                        })
+                      }
+                      className="relative block w-full rounded-none rounded-t-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    >
+                      <option value="btn">button</option>
+                      <option value="text">text</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div className="isolate -space-y-px rounded-md shadow-sm">
@@ -275,6 +310,41 @@ const BodyOptionsSelection = () => {
                     placeholder="https://example.com"
                     className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
+                </div>
+                <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+                  <div>
+                    <label
+                      htmlFor="btn-style"
+                      className="block text-xs font-medium text-gray-900"
+                    >
+                      Button style
+                    </label>
+                    <select
+                      id="btn-style"
+                      name="btn-style"
+                      value={hero.options.cta[1].style}
+                      onChange={(e) =>
+                        setHero({
+                          ...hero,
+                          options: {
+                            ...hero.options,
+                            cta: [
+                              hero.options.cta[0],
+                              {
+                                text: hero.options.cta[1].text,
+                                link: hero.options.cta[1].link,
+                                style: e.target.value,
+                              },
+                            ],
+                          },
+                        })
+                      }
+                      className="relative block w-full rounded-none rounded-t-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    >
+                      <option value="btn">button</option>
+                      <option value="text">text</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </>
