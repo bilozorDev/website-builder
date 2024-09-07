@@ -1,11 +1,15 @@
 "use client";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
-import { Radio, RadioGroup } from "@headlessui/react";
-import { PhotoIcon } from "@heroicons/react/24/outline";
+import { Disclosure, DisclosureButton, DisclosurePanel, Radio, RadioGroup } from "@headlessui/react";
+import { ChevronDownIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import HeroSettings from "./hero/HeroSettings";
 import HeroDataInputs from "./hero/HeroDataInputs";
+import FeaturesSettings from "./features/FeaturesSettings";
+import FeaturesDataInputs from "./features/FeaturesDataInputs";
+import { AnimatePresence, easeOut, motion } from 'framer-motion'
+import clsx from 'clsx'
 
 const BodyOptionsSelection = () => {
   const { hero, setHero, features, setFeatures } = useSelectedElements();
@@ -31,54 +35,71 @@ const BodyOptionsSelection = () => {
 
   return (
     <>
-      <fieldset>
-        <legend className="sr-only">Notifications</legend>
+     
+        
         <div className="space-y-5">
-          <HeroSettings/>
-          {hero.display ? <HeroDataInputs/> : null}
-          
-          <div className="relative flex items-start">
-            <div className="flex h-6 items-center">
-              <input
-                id="features"
-                name="features"
-                type="checkbox"
-                checked={features.display}
-                onChange={() => setFeatures({ ...features, display: !features.display })}
-                aria-describedby="features-description"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-            </div>
-            <div className="ml-3 text-sm leading-6">
-              <label htmlFor="features" className="font-medium text-gray-900">
-                Feautures
-              </label>
-              <p id="features-description" className="text-gray-500">
-                Add features section
-              </p>
-            </div>
-          </div>
-          <div className="relative flex items-start">
-            <div className="flex h-6 items-center">
-              <input
-                id="offers"
-                name="offers"
-                type="checkbox"
-                aria-describedby="offers-description"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-            </div>
-            <div className="ml-3 text-sm leading-6">
-              <label htmlFor="offers" className="font-medium text-gray-900">
-                Offers
-              </label>
-              <p id="offers-description" className="text-gray-500">
-                Get notified when a candidate accepts or rejects an offer.
-              </p>
-            </div>
-          </div>
+          {/* Hero Settings */}
+          <HeroSettings />
+          {hero.display ? (
+           <Disclosure as="div" className="">
+           {({ open }) => (
+             <>
+               <DisclosureButton className="w-full border-b pb-2 text-left flex items-center" >Settings <ChevronDownIcon className={clsx('w-5 ml-4', open && 'rotate-180')} /></DisclosureButton>
+               <div className="overflow-hidden py-2">
+                 <AnimatePresence>
+                   {open && (
+                     <DisclosurePanel static as={Fragment}>
+                       <motion.div
+                         initial={{ opacity: 0, y: -24 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         exit={{ opacity: 0, y: -24 }}
+                         transition={{ duration: 0.2, ease: easeOut }}
+                         className="origin-top"
+                       >
+                         <HeroDataInputs/>
+                       </motion.div>
+                     </DisclosurePanel>
+                   )}
+                 </AnimatePresence>
+               </div>
+             </>
+           )}
+         </Disclosure>
+          ) : null}
+
+
+
+          {/* Features Settings */}
+          <FeaturesSettings />
+          {features.display ? (
+           <Disclosure as="div" className="">
+           {({ open }) => (
+             <>
+               <DisclosureButton className="w-full border-b pb-2 text-left flex items-center" >Settings <ChevronDownIcon className={clsx('w-5 ml-4', open && 'rotate-180')} /></DisclosureButton>
+               <div className="overflow-hidden py-2">
+                 <AnimatePresence>
+                   {open && (
+                     <DisclosurePanel static as={Fragment}>
+                       <motion.div
+                         initial={{ opacity: 0, y: -24 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         exit={{ opacity: 0, y: -24 }}
+                         transition={{ duration: 0.2, ease: easeOut }}
+                         className="origin-top"
+                       >
+                         <FeaturesDataInputs/>
+                       </motion.div>
+                     </DisclosurePanel>
+                   )}
+                 </AnimatePresence>
+               </div>
+             </>
+           )}
+         </Disclosure>
+          ) : null}
+        
         </div>
-      </fieldset>
+     
     </>
   );
 };

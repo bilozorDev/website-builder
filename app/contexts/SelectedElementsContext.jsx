@@ -85,7 +85,7 @@ export function SelectedElementsProvider({ children }) {
     },
   });
   const [hero, setHero] = useState({
-    display: false,
+    display: true,
     options: {
       styleSelections: [
         {
@@ -168,14 +168,14 @@ export function SelectedElementsProvider({ children }) {
       ],
 
       subtitle: {
-        text: "Announcing our next round of funding.",
+        text: "Deploy faster",
       
       },
       headline: {
-        text: "Data to enrich your online business",
+        text: "Everything you need to deploy your app",
       },
       description: {
-        text: "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.",
+        text: "Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.",
       },
     },
   });

@@ -34,7 +34,7 @@ const HeroDataInputs = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         Styles
       </h2>
       <fieldset aria-label="Privacy setting">
@@ -77,125 +77,127 @@ const HeroDataInputs = () => {
       </fieldset>
 
       <hr />
-      <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         Data
       </h2>
-      <InfoInput
-        text="Headline"
-        value={hero.options.headline.text}
-        onChange={(e) =>
-          setHero({
-            ...hero,
-            options: {
-              ...hero.options,
-              headline: { text: e.target.value },
-            },
-          })
-        }
-        placeholder="Data to enrich your online business"
-      />
-      <InfoInput
-        text="Description"
-        value={hero.options.description.text}
-        onChange={(e) =>
-          setHero({
-            ...hero,
-            options: {
-              ...hero.options,
-              description: { text: e.target.value },
-            },
-          })
-        }
-        placeholder="Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
-      />
-      <InfoInput
-        text="News text"
-        value={hero.options.news.text}
-        onChange={(e) =>
-          setHero({
-            ...hero,
-            options: {
-              ...hero.options,
-              news: { ...hero.options.news, text: e.target.value },
-            },
-          })
-        }
-        placeholder="Announcing our next round of funding."
-        link={true}
-        linkValue={hero.options.news.link || ""}
-        linkOnChange={(e) =>
-          setHero({
-            ...hero,
-            options: {
-              ...hero.options,
-              news: { ...hero.options.news, link: e.target.value },
-            },
-          })
-        }
-      />
 
-      <InfoInput
-        text="CTA button"
-        value={hero.options.cta[0].text || ""}
-        onChange={(e) =>
-          setHero({
-            ...hero,
-            options: {
-              ...hero.options,
-              cta: [
-                {
-                  text: e.target.value,
-                  link: hero.options.cta[0].link,
-                  style: hero.options.cta[0].style,
-                },
-                hero.options.cta[1],
-              ],
-            },
-          })
-        }
-        placeholder="Announcing our next round of funding."
-        link={true}
-        linkValue={hero.options.cta[0].link || ""}
-        linkOnChange={(e) =>
-          setHero({
-            ...hero,
-            options: {
-              ...hero.options,
-              cta: [
-                {
-                  text: hero.options.cta[0].text,
-                  link: e.target.value,
-                  style: hero.options.cta[0].style,
-                },
-                hero.options.cta[1],
-              ],
-            },
-          })
-        }
-        btn={true}
-        btnValue={hero.options.cta[0].style}
-        btnOnChange={(e) =>
-          setHero({
-            ...hero,
-            options: {
-              ...hero.options,
-              cta: [
-                {
-                  text: hero.options.cta[0].text,
-                  link: hero.options.cta[0].link,
-                  style: e.target.value,
-                },
-                hero.options.cta[1],
-              ],
-            },
-          })
-        }
-      />
+      <div className="space-y-5">
+        <InfoInput
+          text="Headline"
+          value={hero.options.headline.text}
+          onChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                headline: { text: e.target.value },
+              },
+            })
+          }
+          placeholder="Data to enrich your online business"
+        />
+        <InfoInput
+          text="Description"
+          value={hero.options.description.text}
+          onChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                description: { text: e.target.value },
+              },
+            })
+          }
+          placeholder="Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
+        />
+        <InfoInput
+          text="News text"
+          value={hero.options.news.text}
+          onChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                news: { ...hero.options.news, text: e.target.value },
+              },
+            })
+          }
+          placeholder="Announcing our next round of funding."
+          link={true}
+          linkValue={hero.options.news.link || ""}
+          linkOnChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                news: { ...hero.options.news, link: e.target.value },
+              },
+            })
+          }
+        />
 
-<InfoInput
-        text="Secondary button"
-        value={hero.options.cta[1].text || ""}
-        onChange={(e) =>
+        <InfoInput
+          text="CTA button"
+          value={hero.options.cta[0].text || ""}
+          onChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                cta: [
+                  {
+                    text: e.target.value,
+                    link: hero.options.cta[0].link,
+                    style: hero.options.cta[0].style,
+                  },
+                  hero.options.cta[1],
+                ],
+              },
+            })
+          }
+          placeholder="Announcing our next round of funding."
+          link={true}
+          linkValue={hero.options.cta[0].link || ""}
+          linkOnChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                cta: [
+                  {
+                    text: hero.options.cta[0].text,
+                    link: e.target.value,
+                    style: hero.options.cta[0].style,
+                  },
+                  hero.options.cta[1],
+                ],
+              },
+            })
+          }
+          btn={true}
+          btnValue={hero.options.cta[0].style}
+          btnOnChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                cta: [
+                  {
+                    text: hero.options.cta[0].text,
+                    link: hero.options.cta[0].link,
+                    style: e.target.value,
+                  },
+                  hero.options.cta[1],
+                ],
+              },
+            })
+          }
+        />
+
+        <InfoInput
+          text="Secondary button"
+          value={hero.options.cta[1].text || ""}
+          onChange={(e) =>
             setHero({
               ...hero,
               options: {
@@ -211,10 +213,10 @@ const HeroDataInputs = () => {
               },
             })
           }
-        placeholder="Announcing our next round of funding."
-        link={true}
-        linkValue={hero.options.cta[1].link || ""}
-        linkOnChange={(e) =>
+          placeholder="Announcing our next round of funding."
+          link={true}
+          linkValue={hero.options.cta[1].link || ""}
+          linkOnChange={(e) =>
             setHero({
               ...hero,
               options: {
@@ -230,9 +232,9 @@ const HeroDataInputs = () => {
               },
             })
           }
-        btn={true}
-        btnValue={hero.options.cta[1].style}
-        btnOnChange={(e) =>
+          btn={true}
+          btnValue={hero.options.cta[1].style}
+          btnOnChange={(e) =>
             setHero({
               ...hero,
               options: {
@@ -248,11 +250,8 @@ const HeroDataInputs = () => {
               },
             })
           }
-      />
-
-
-     
-
+        />
+      </div>
       <div>
         <div className="mt-2 flex items-center gap-x-3">
           <PhotoIcon aria-hidden="true" className="h-12 w-12 text-gray-300" />
