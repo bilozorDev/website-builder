@@ -1,10 +1,11 @@
 import { useSelectedElements } from "../contexts/SelectedElementsContext"
 import StyledButton from "./StyledButton"
+import { v4 } from "uuid";
 
 export default function SelectedHero() {
   const {hero} = useSelectedElements()
   const {news, headline, description, cta} = hero.options
-  console.log(cta)
+
 
   
   return (
@@ -41,9 +42,10 @@ export default function SelectedHero() {
               {description?.text}
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              {cta.map((cta)=>{
-                <StyledButton text={cta.text} link={cta.link} style={cta.style} />
-              })}
+            {cta.map((cta)=>(
+              <StyledButton text={cta.text} link={cta.link} style={cta.style}   key={v4()} />
+            ))}
+             
             </div>
           </div>
         </div>
