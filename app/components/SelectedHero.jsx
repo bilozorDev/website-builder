@@ -26,10 +26,11 @@ export default function SelectedHero() {
             />
           </div>
           <HeroWrapper>
-           <div class="flex-1">
+            <div className="flex-1">
               <div
                 className={`hidden sm:mb-8 sm:flex ${
-                  selectedId === "image_right" || selectedId === "array_of_images"
+                  selectedId === "image_right" ||
+                  selectedId === "array_of_images"
                     ? "sm:justify-start"
                     : "sm:justify-center"
                 }`}
@@ -37,43 +38,46 @@ export default function SelectedHero() {
                 <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                   {news?.text}{" "}
                   <Link
-                    href={news?.link}
+                    href={news?.link || "#"}
                     className="font-semibold text-indigo-600"
                   >
                     <span aria-hidden="true" className="absolute inset-0" />
                     Read more <span aria-hidden="true">&rarr;</span>
                   </Link>
                 </div>
-             
-            </div>
-            <div
-              className={
-                selectedId === "image_right" || selectedId === "array_of_images" ? "text-left" : "text-center"
-              }
-            >
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                {headline?.text}
-              </h1>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                {description?.text}
-              </p>
-              <div
-                className={`mt-10 flex items-center ${
-                  selectedId === "image_right" || selectedId === "array_of_images"
-                    ? "justify-start"
-                    : "justify-center"
-                }  gap-x-6 `}
-              >
-                {cta.map((cta) => (
-                  <StyledButton
-                    text={cta.text}
-                    link={cta.link}
-                    style={cta.style}
-                    key={v4()}
-                  />
-                ))}
               </div>
-            </div>
+              <div
+                className={
+                  selectedId === "image_right" ||
+                  selectedId === "array_of_images"
+                    ? "text-left"
+                    : "text-center"
+                }
+              >
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                  {headline?.text}
+                </h1>
+                <p className="mt-6 text-lg leading-8 text-gray-600">
+                  {description?.text}
+                </p>
+                <div
+                  className={`mt-10 flex items-center ${
+                    selectedId === "image_right" ||
+                    selectedId === "array_of_images"
+                      ? "justify-start"
+                      : "justify-center"
+                  }  gap-x-6 `}
+                >
+                  {cta.map((cta) => (
+                    <StyledButton
+                      text={cta.text}
+                      link={cta.link}
+                      style={cta.style}
+                      key={v4()}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </HeroWrapper>
           <div

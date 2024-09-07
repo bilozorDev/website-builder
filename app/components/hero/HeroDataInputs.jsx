@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
+import InfoInput from "../InfoInput";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -79,318 +80,178 @@ const HeroDataInputs = () => {
       <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         Data
       </h2>
-      <div className="isolate -space-y-px rounded-md shadow-sm">
-        <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="headline"
-            className="block text-xs font-medium text-gray-900"
-          >
-            Headline
-          </label>
-          <input
-            id="headline"
-            name="headline"
-            type="text"
-            value={hero.options.headline.text}
-            onChange={(e) =>
-              setHero({
-                ...hero,
-                options: {
-                  ...hero.options,
-                  headline: { text: e.target.value },
-                },
-              })
-            }
-            placeholder="Data to enrich your online business"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-      </div>
+      <InfoInput
+        text="Headline"
+        value={hero.options.headline.text}
+        onChange={(e) =>
+          setHero({
+            ...hero,
+            options: {
+              ...hero.options,
+              headline: { text: e.target.value },
+            },
+          })
+        }
+        placeholder="Data to enrich your online business"
+      />
+      <InfoInput
+        text="Description"
+        value={hero.options.description.text}
+        onChange={(e) =>
+          setHero({
+            ...hero,
+            options: {
+              ...hero.options,
+              description: { text: e.target.value },
+            },
+          })
+        }
+        placeholder="Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
+      />
+      <InfoInput
+        text="News text"
+        value={hero.options.news.text}
+        onChange={(e) =>
+          setHero({
+            ...hero,
+            options: {
+              ...hero.options,
+              news: { ...hero.options.news, text: e.target.value },
+            },
+          })
+        }
+        placeholder="Announcing our next round of funding."
+        link={true}
+        linkValue={hero.options.news.link || ""}
+        linkOnChange={(e) =>
+          setHero({
+            ...hero,
+            options: {
+              ...hero.options,
+              news: { ...hero.options.news, link: e.target.value },
+            },
+          })
+        }
+      />
 
-      <div className="isolate -space-y-px rounded-md shadow-sm">
-        <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="headline"
-            className="block text-xs font-medium text-gray-900"
-          >
-            Description
-          </label>
-          <input
-            id="description"
-            name="description"
-            type="text"
-            value={hero.options.description.text}
-            onChange={(e) =>
-              setHero({
-                ...hero,
-                options: {
-                  ...hero.options,
-                  description: { text: e.target.value },
+      <InfoInput
+        text="CTA button"
+        value={hero.options.cta[0].text || ""}
+        onChange={(e) =>
+          setHero({
+            ...hero,
+            options: {
+              ...hero.options,
+              cta: [
+                {
+                  text: e.target.value,
+                  link: hero.options.cta[0].link,
+                  style: hero.options.cta[0].style,
                 },
-              })
-            }
-            placeholder="Data to enrich your online business"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-      </div>
+                hero.options.cta[1],
+              ],
+            },
+          })
+        }
+        placeholder="Announcing our next round of funding."
+        link={true}
+        linkValue={hero.options.cta[0].link || ""}
+        linkOnChange={(e) =>
+          setHero({
+            ...hero,
+            options: {
+              ...hero.options,
+              cta: [
+                {
+                  text: hero.options.cta[0].text,
+                  link: e.target.value,
+                  style: hero.options.cta[0].style,
+                },
+                hero.options.cta[1],
+              ],
+            },
+          })
+        }
+        btn={true}
+        btnValue={hero.options.cta[0].style}
+        btnOnChange={(e) =>
+          setHero({
+            ...hero,
+            options: {
+              ...hero.options,
+              cta: [
+                {
+                  text: hero.options.cta[0].text,
+                  link: hero.options.cta[0].link,
+                  style: e.target.value,
+                },
+                hero.options.cta[1],
+              ],
+            },
+          })
+        }
+      />
 
-      <div className="isolate -space-y-px rounded-md shadow-sm">
-        <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="news"
-            className="block text-xs font-medium text-gray-900"
-          >
-            News text
-          </label>
-          <input
-            id="news"
-            name="news"
-            value={hero.options.news.text || ""}
-            onChange={(e) =>
-              setHero({
-                ...hero,
-                options: {
-                  ...hero.options,
-                  news: { text: e.target.value },
-                },
-              })
-            }
-            type="text"
-            placeholder="Announcing our next round of funding."
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="news-link"
-            className="block text-xs font-medium text-gray-900"
-          >
-            News link
-          </label>
-          <input
-            id="news-link"
-            value={hero.options.news.link || ""}
-            onChange={(e) =>
-              setHero({
-                ...hero,
-                options: {
-                  ...hero.options,
-                  news: { ...hero.options.news, link: e.target.value },
-                },
-              })
-            }
-            name="news-link"
-            type="text"
-            placeholder="https://example.com"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-      </div>
-
-      <div className="isolate -space-y-px rounded-md shadow-sm">
-        <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="news"
-            className="block text-xs font-medium text-gray-900"
-          >
-            CTA button
-          </label>
-          <input
-            id="news"
-            name="news"
-            value={hero.options.cta[0].text || ""}
-            onChange={(e) =>
-              setHero({
-                ...hero,
-                options: {
-                  ...hero.options,
-                  cta: [
-                    {
-                      text: e.target.value,
-                      link: hero.options.cta[0].link,
-                      style: hero.options.cta[0].style,
-                    },
-                    hero.options.cta[1],
-                  ],
-                },
-              })
-            }
-            type="text"
-            placeholder="Announcing our next round of funding."
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="news-link"
-            className="block text-xs font-medium text-gray-900"
-          >
-            CTA link
-          </label>
-          <input
-            id="news-link"
-            value={hero.options.cta[0].link || ""}
-            onChange={(e) =>
-              setHero({
-                ...hero,
-                options: {
-                  ...hero.options,
-                  cta: [
-                    {
-                      text: hero.options.cta[0].text,
-                      link: e.target.value,
-                      style: hero.options.cta[0].style,
-                    },
-                    hero.options.cta[1],
-                  ],
-                },
-              })
-            }
-            name="news-link"
-            type="text"
-            placeholder="https://example.com"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <div>
-            <label
-              htmlFor="btn-style"
-              className="block text-xs font-medium text-gray-900"
-            >
-              Button style
-            </label>
-            <select
-              id="btn-style"
-              name="btn-style"
-              value={hero.options.cta[0].style}
-              onChange={(e) =>
-                setHero({
-                  ...hero,
-                  options: {
-                    ...hero.options,
-                    cta: [
-                      {
-                        text: hero.options.cta[0].text,
-                        link: hero.options.cta[0].link,
-                        style: e.target.value,
-                      },
-                      hero.options.cta[1],
-                    ],
+<InfoInput
+        text="Secondary button"
+        value={hero.options.cta[1].text || ""}
+        onChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                cta: [
+                  hero.options.cta[0],
+                  {
+                    text: e.target.value,
+                    link: hero.options.cta[1].link,
+                    style: hero.options.cta[1].style,
                   },
-                })
-              }
-              className="relative block w-full rounded-none rounded-t-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            >
-              <option value="btn">button</option>
-              <option value="text">text</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div className="isolate -space-y-px rounded-md shadow-sm">
-        <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="news"
-            className="block text-xs font-medium text-gray-900"
-          >
-            Secondary button
-          </label>
-          <input
-            id="news"
-            name="news"
-            value={hero.options.cta[1].text || ""}
-            onChange={(e) =>
-              setHero({
-                ...hero,
-                options: {
-                  ...hero.options,
-                  cta: [
-                    hero.options.cta[0],
-                    {
-                      text: e.target.value,
-                      link: hero.options.cta[1].link,
-                      style: hero.options.cta[1].style,
-                    },
-                  ],
-                },
-              })
-            }
-            type="text"
-            placeholder="Announcing our next round of funding."
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="news-link"
-            className="block text-xs font-medium text-gray-900"
-          >
-            Secondary button link
-          </label>
-          <input
-            id="news-link"
-            value={hero.options.cta[1].link || ""}
-            onChange={(e) =>
-              setHero({
-                ...hero,
-                options: {
-                  ...hero.options,
-                  cta: [
-                    hero.options.cta[0],
-                    {
-                      text: hero.options.cta[1].text,
-                      link: e.target.value,
-                      style: hero.options.cta[1].style,
-                    },
-                  ],
-                },
-              })
-            }
-            name="news-link"
-            type="text"
-            placeholder="https://example.com"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <div>
-            <label
-              htmlFor="btn-style"
-              className="block text-xs font-medium text-gray-900"
-            >
-              Button style
-            </label>
-            <select
-              id="btn-style"
-              name="btn-style"
-              value={hero.options.cta[1].style}
-              onChange={(e) =>
-                setHero({
-                  ...hero,
-                  options: {
-                    ...hero.options,
-                    cta: [
-                      hero.options.cta[0],
-                      {
-                        text: hero.options.cta[1].text,
-                        link: hero.options.cta[1].link,
-                        style: e.target.value,
-                      },
-                    ],
+                ],
+              },
+            })
+          }
+        placeholder="Announcing our next round of funding."
+        link={true}
+        linkValue={hero.options.cta[1].link || ""}
+        linkOnChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                cta: [
+                  hero.options.cta[0],
+                  {
+                    text: hero.options.cta[1].text,
+                    link: e.target.value,
+                    style: hero.options.cta[1].style,
                   },
-                })
-              }
-              className="relative block w-full rounded-none rounded-t-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            >
-              <option value="btn">button</option>
-              <option value="text">text</option>
-            </select>
-          </div>
-        </div>
-      </div>
+                ],
+              },
+            })
+          }
+        btn={true}
+        btnValue={hero.options.cta[1].style}
+        btnOnChange={(e) =>
+            setHero({
+              ...hero,
+              options: {
+                ...hero.options,
+                cta: [
+                  hero.options.cta[0],
+                  {
+                    text: hero.options.cta[1].text,
+                    link: hero.options.cta[1].link,
+                    style: e.target.value,
+                  },
+                ],
+              },
+            })
+          }
+      />
+
+
+     
 
       <div>
         <div className="mt-2 flex items-center gap-x-3">
