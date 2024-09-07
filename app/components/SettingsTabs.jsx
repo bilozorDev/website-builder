@@ -3,6 +3,7 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import HeaderOptionsSelection from "./HeaderOptionsSelection";
+import BodyOptionsSelection from "./BodyOptionsSelection";
 
 const tabs = [
   { name: "Header", value: "Header", count: "12" },
@@ -28,7 +29,7 @@ export default function SettingsTabs() {
       case "Header":
         return <HeaderOptionsSelection />;
       case "Body":
-        return <div>Body Content</div>;
+        return <BodyOptionsSelection/>;
       case "Footer":
         return <div>Footer Content</div>;
       case "Description":

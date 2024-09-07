@@ -9,7 +9,7 @@ import MenuItemsEditor from "./MenuItemsEditor";
 const HeaderOptionsSelection = () => {
   const { setHeader, header } = useSelectedElements();
   const [color, setColor] = useState("#aabbcc");
-console.log(header.alignment.selected)
+
   useEffect(() => {
     setHeader({
       ...header,
