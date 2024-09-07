@@ -8,63 +8,9 @@ import { PhotoIcon } from "@heroicons/react/24/outline";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-
-{
-  /*
-
-{
-    display: true,
-    options: {
-      styleSelections: [
-        {
-          id: "default",
-          name: "Centered text without image",
-          description: "Include a headline and description",
-            selected: true,
-        },
-        {
-          id: "image_right",
-          name: "Split with image",
-          description: "Image on the left, text on the right",
-            selected: false,
-        },
-        {
-          id: "image_bottom",
-          name: "Image on the bottom",
-          description: "Text on top, image on the bottom",
-           selected: false,
-        },
-      ],
-
-      news: {
-        text: "Announcing our next round of funding.",
-        link: "#",
-      },
-      headline: {
-        text: "Data to enrich your online business",
-      },
-      description: {
-        text: "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.",
-      },
-      cta: [
-        {
-          text: "Get Started",
-          link: "#",
-          style: "btn",
-        },
-        {
-          text: "Learn Morse",
-          link: "#",
-          style: "text",
-        },
-      ],
-    },
-  }
-*/
-}
-
 const BodyOptionsSelection = () => {
-  const { hero, setHero } = useSelectedElements();
+  const { hero, setHero, features, setFeatures } = useSelectedElements();
+
   const [selected, setSelected] = useState(hero.options.styleSelections[0]);
   const settings = hero.options.styleSelections;
 
@@ -95,8 +41,8 @@ const BodyOptionsSelection = () => {
                 id="comments"
                 name="comments"
                 type="checkbox"
-                checked={hero.display}
                 aria-describedby="comments-description"
+                checked={hero.display}
                 onChange={() => setHero({ ...hero, display: !hero.display })}
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
               />
@@ -491,19 +437,21 @@ const BodyOptionsSelection = () => {
           <div className="relative flex items-start">
             <div className="flex h-6 items-center">
               <input
-                id="candidates"
-                name="candidates"
+                id="features"
+                name="features"
                 type="checkbox"
-                aria-describedby="candidates-description"
+                checked={features.display}
+                onChange={() => setFeatures({ ...features, display: !features.display })}
+                aria-describedby="features-description"
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
               />
             </div>
             <div className="ml-3 text-sm leading-6">
-              <label htmlFor="candidates" className="font-medium text-gray-900">
-                Candidates
+              <label htmlFor="features" className="font-medium text-gray-900">
+                Feautures
               </label>
-              <p id="candidates-description" className="text-gray-500">
-                Get notified when a candidate applies for a job.
+              <p id="features-description" className="text-gray-500">
+                Add features section
               </p>
             </div>
           </div>

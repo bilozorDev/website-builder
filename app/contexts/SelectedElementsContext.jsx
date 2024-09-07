@@ -85,7 +85,7 @@ export function SelectedElementsProvider({ children }) {
     },
   });
   const [hero, setHero] = useState({
-    display: true,
+    display: false,
     options: {
       styleSelections: [
         {
@@ -138,10 +138,60 @@ export function SelectedElementsProvider({ children }) {
       ],
     },
   });
+  const [features, setFeatures] = useState({
+    display: true,
+    options: {
+      styleSelections: [{}],
+      featuresList: [
+        {
+          name: "Analyticsss",
+          description:
+            "Get a better understanding where your traffic is coming from",
+          icon: ChartPieIcon,
+        },
+        {
+          name: "Engagement",
+          description:
+            "Speak directly to your customers with our engagement tool",
+          icon: CursorArrowRaysIcon,
+        },
+        {
+          name: "Security",
+          description: "Your customers’ data will be safe and secure",
+          icon: FingerPrintIcon,
+        },
+        {
+          name: "Integrations",
+          description: "Your customers’ data will be safe and secure",
+          icon: SquaresPlusIcon,
+        },
+      ],
+
+      subtitle: {
+        text: "Announcing our next round of funding.",
+      
+      },
+      headline: {
+        text: "Data to enrich your online business",
+      },
+      description: {
+        text: "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.",
+      },
+    },
+  });
 
   return (
     <SelectedElementsContext.Provider
-      value={{ currentStep, setCurrentStep, header, setHeader, hero, setHero }}
+      value={{
+        currentStep,
+        setCurrentStep,
+        header,
+        setHeader,
+        hero,
+        setHero,
+        features,
+        setFeatures,
+      }}
     >
       {children}
     </SelectedElementsContext.Provider>
