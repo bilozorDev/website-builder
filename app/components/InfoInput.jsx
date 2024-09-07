@@ -61,23 +61,8 @@ const InfoInput = ({
             <select
               id="btn-style"
               name="btn-style"
-              value={hero.options.cta[0].style}
-              onChange={(e) =>
-                setHero({
-                  ...hero,
-                  options: {
-                    ...hero.options,
-                    cta: [
-                      {
-                        text: hero.options.cta[0].text,
-                        link: hero.options.cta[0].link,
-                        style: e.target.value,
-                      },
-                      hero.options.cta[1],
-                    ],
-                  },
-                })
-              }
+              value={btnValue}
+              onChange={btnOnChange}
               className="relative block w-full rounded-none rounded-t-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             >
               <option value="btn">button</option>
