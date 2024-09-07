@@ -11,8 +11,8 @@ export default function SettingsSideBar({open, setOpen}) {
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <div className="fixed inset-0" />
-      <div className="fixed inset-0 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
+      <div className="fixed inset-0 ">
+        <div className="absolute inset-0 ">
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
             <DialogPanel
               transition

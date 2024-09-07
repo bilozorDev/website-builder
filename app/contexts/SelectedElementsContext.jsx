@@ -144,7 +144,7 @@ export function SelectedElementsProvider({ children }) {
       styleSelections: [{}],
       featuresList: [
         {
-          name: "Analyticsss",
+          name: "Analytics",
           description:
             "Get a better understanding where your traffic is coming from",
           icon: ChartPieIcon,

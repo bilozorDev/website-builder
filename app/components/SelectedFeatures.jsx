@@ -1,9 +1,3 @@
-import {
-  ArrowPathIcon,
-  CloudArrowUpIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
-} from "@heroicons/react/24/outline";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
 
 export default function SelectedFeatures() {

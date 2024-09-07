@@ -2,9 +2,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
-import { PhotoIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import InfoInput from "../InfoInput";
+import FeaturesEditList from "./FeaturesEditList";
+import AddOrEditFeatureModal from "./AddOrEditFeatureModal";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -12,50 +14,38 @@ function classNames(...classes) {
 
 const FeaturesDataInputs = () => {
   const { features, setFeatures } = useSelectedElements();
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedFeature, setSelectedFeature] = useState({
+    name: "",
+    description: "",
+    icon: PhotoIcon,
+  });
+
+  const handleAddFeature = () => {
+    setSelectedFeature({ name: "", description: "", icon: PhotoIcon });
+    setOpenModal(true);
+  };
+
+  const handleEditFeature = (feature) => {
+    setSelectedFeature(feature);
+    setOpenModal(true);
+  };
+
+  const addNewFeature = (selectedFeature) => {
+    setFeatures({
+      ...features,
+      options: {
+        ...features.options,
+        featuresList: [...features.options.featuresList, selectedFeature],
+      },
+    });
+  };
 
   return (
     <>
       <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         Styles
       </h2>
-      {/* <fieldset aria-label="Privacy setting">
-        <RadioGroup
-          value={selected}
-          onChange={setSelected}
-          className="-space-y-px rounded-md bg-white"
-        >
-          {hero.options.styleSelections.map((setting, settingIdx) => (
-            <Radio
-              key={setting.name}
-              value={setting}
-              aria-label={setting.name}
-              aria-description={setting.description}
-              className={classNames(
-                settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
-                settingIdx === settings.length - 1
-                  ? "rounded-bl-md rounded-br-md"
-                  : "",
-                "group relative flex cursor-pointer border border-gray-200 p-4 focus:outline-none data-[checked]:z-10 data-[checked]:border-indigo-200 data-[checked]:bg-indigo-50"
-              )}
-            >
-              <span
-                aria-hidden="true"
-                className="mt-0.5 flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full border border-gray-300 bg-white group-data-[checked]:border-transparent group-data-[checked]:bg-indigo-600 group-data-[focus]:ring-2 group-data-[focus]:ring-indigo-600 group-data-[focus]:ring-offset-2"
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              </span>
-              <span className="ml-3 flex flex-col">
-                <span className="block text-sm font-medium text-gray-900 group-data-[checked]:text-indigo-900">
-                  {setting.name}
-                </span>
-                <span className="block text-sm text-gray-500 group-data-[checked]:text-indigo-700">
-                  {setting.description}
-                </span>
-              </span>
-            </Radio>
-          ))}
-        </RadioGroup>
-      </fieldset> */}
 
       <hr />
       <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
@@ -63,60 +53,80 @@ const FeaturesDataInputs = () => {
       </h2>
 
       <div className="space-y-5">
-      <InfoInput
-        text="Headline"
-        value={features.options.headline.text}
-        onChange={(e) =>
-          setFeatures({
-            ...features,
-            options: {
-              ...features.options,
-              headline: {
-                ...features.options.headline,
-                text: e.target.value,
+        <InfoInput
+          text="Headline"
+          value={features.options.headline.text}
+          onChange={(e) =>
+            setFeatures({
+              ...features,
+              options: {
+                ...features.options,
+                headline: {
+                  ...features.options.headline,
+                  text: e.target.value,
+                },
               },
-            },
-          })
-        }
-        placeholder="Everything you need to deploy your app"
-      />
+            })
+          }
+          placeholder="Everything you need to deploy your app"
+        />
 
-      <InfoInput
-        text="Subtitle"
-        value={features.options.subtitle.text}
-        onChange={(e) =>
-          setFeatures({
-            ...features,
-            options: {
-              ...features.options,
-              subtitle: {
-                ...features.options.subtitle,
-                text: e.target.value,
+        <InfoInput
+          text="Subtitle"
+          value={features.options.subtitle.text}
+          onChange={(e) =>
+            setFeatures({
+              ...features,
+              options: {
+                ...features.options,
+                subtitle: {
+                  ...features.options.subtitle,
+                  text: e.target.value,
+                },
               },
-            },
-          })
-        }
-        placeholder="Deploy faster"
-      />
+            })
+          }
+          placeholder="Deploy faster"
+        />
 
-      <InfoInput
-        text="Description"
-        value={features.options.description.text}
-        onChange={(e) =>
-          setFeatures({
-            ...features,
-            options: {
-              ...features.options,
-              description: {
-                ...features.options.description,
-                text: e.target.value,
+        <InfoInput
+          text="Description"
+          value={features.options.description.text}
+          onChange={(e) =>
+            setFeatures({
+              ...features,
+              options: {
+                ...features.options,
+                description: {
+                  ...features.options.description,
+                  text: e.target.value,
+                },
               },
-            },
-          })
-        }
-        placeholder="Deploy faster"
-      />
+            })
+          }
+          placeholder="Deploy faster"
+        />
+        <h3 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate  sm:tracking-tight">
+          List of features
+        </h3>
+        {features.options.featuresList.map((feature) => (
+          <FeaturesEditList
+            key={feature.name}
+            name={feature.name}
+            description={feature.description}
+            Icon={feature.icon}
+            onClick={() => handleEditFeature(feature)}
+          />
+        ))}
+        <div
+          onClick={handleAddFeature}
+          className="relative flex justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
+        >
+          Add Feature
+          <PlusIcon className="h-5 w-5 ml-2 cursor-pointer  text-gray-600 z-50" />
+        </div>
       </div>
+      <AddOrEditFeatureModal open={openModal} setOpen={setOpenModal} />
     </>
   );
 };
