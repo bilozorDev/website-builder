@@ -11,7 +11,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, easeOut, motion } from "framer-motion";
 import clsx from "clsx";
 import HeroDataInputs from "./HeroDataInputs";
-import CheckBox from "../CheckBox";
+import CheckBox from "../SettingsToggle";
 import AccordionPanel from "../AccordionPanel";
 
 const HeroSettings = () => {

@@ -1,6 +1,6 @@
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import AccordionPanel from "../AccordionPanel";
-import CheckBox from "../CheckBox";
+import CheckBox from "../SettingsToggle";
 import NewsletterDataInputs from "./NewsletterDataInputs";
 
 const NewsletterSettings = () => {
@@ -13,8 +13,8 @@ const NewsletterSettings = () => {
       onChange={() =>
         setNewsletter({ ...newsletter, display: !newsletter.display })
       }
-      title="Add Features"
-      description="Add features section"
+      title="Add Newsletter"
+      description="Add newsletter section"
     />
 
     {/* Display the newsletter settings only if the newsletter section is displayed */}

@@ -6,6 +6,7 @@ import InfoInput from "../InfoInput";
 import FeaturesEditList from "../features/FeaturesEditList";
 import useSelectedHeroStyle from "@/app/hooks/useSelectedHeroStyle";
 import classNamesJoin from "@/app/utils/classNamesJoin";
+import SettingsTitle from "../SettingsTitle";
 
 function NewsletterDataInputs() {
   const { newsletter, setNewsletter } = useSelectedElements();
@@ -52,9 +53,7 @@ function NewsletterDataInputs() {
 
   return (
     <>
-      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Styles
-      </h2>
+     <SettingsTitle title="Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedStyle}
@@ -96,10 +95,8 @@ function NewsletterDataInputs() {
 
       {selectedId === "with-bullet-points" ? (
         <>
-          <h3 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate  sm:tracking-tight">
-            Bullet points
-          </h3>
-          <div className="space-y-4">
+         <SettingsTitle title="Features"/>
+          <div className="space-y-4 pl-8">
             {newsletter.options.bulletPoints.map((feature) => (
               <FeaturesEditList
                 key={feature.name}
@@ -112,9 +109,7 @@ function NewsletterDataInputs() {
             ))}
           </div>
 
-          <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-            Icon styles
-          </h2>
+         <SettingsTitle title="Icon Style" />
           <fieldset aria-label="Features Block Style">
             <RadioGroup
               value={selectedIconStyle}
@@ -156,9 +151,7 @@ function NewsletterDataInputs() {
         </>
       ) : null}
       <hr />
-      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Data
-      </h2>
+      <SettingsTitle title="Content" />
 
       <div className="space-y-5">
         <InfoInput

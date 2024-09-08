@@ -8,6 +8,7 @@ import InfoInput from "../InfoInput";
 import FeaturesEditList from "./FeaturesEditList";
 import AddOrEditFeatureModal from "./AddOrEditFeatureModal";
 import classNamesJoin from "@/app/utils/classNamesJoin";
+import SettingsTitle from "../SettingsTitle";
 
 
 
@@ -91,9 +92,7 @@ const FeaturesDataInputs = () => {
   
   return (
     <>
-      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Styles
-      </h2>
+      <SettingsTitle title="Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedStyle}
@@ -133,9 +132,7 @@ const FeaturesDataInputs = () => {
         </RadioGroup>
       </fieldset>
 
-      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Features List style
-      </h2>
+      <SettingsTitle title="List Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedListStyle}
@@ -177,9 +174,7 @@ const FeaturesDataInputs = () => {
       </fieldset>
 
 
-      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Icon styles
-      </h2>
+      <SettingsTitle title="Icon Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedIconStyle}
@@ -220,9 +215,7 @@ const FeaturesDataInputs = () => {
       </fieldset>
 
       <hr />
-      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Data
-      </h2>
+      <SettingsTitle title="Content" />
 
       <div className="space-y-5">
         <InfoInput
@@ -278,9 +271,7 @@ const FeaturesDataInputs = () => {
           }
           placeholder="Deploy faster"
         />
-        <h3 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate  sm:tracking-tight">
-          List of features
-        </h3>
+        <SettingsTitle title="Features" />
 
         
 

@@ -1,5 +1,5 @@
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import CheckBox from "../CheckBox";
+import CheckBox from "../SettingsToggle";
 import AccordionPanel from "../AccordionPanel";
 import FeaturesDataInputs from "./FeaturesDataInputs";
 

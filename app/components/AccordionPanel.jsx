@@ -4,25 +4,23 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, easeOut, motion } from "framer-motion";
 import clsx from "clsx";
 
-const AccordionPanel = ({ children, title="Settings" }) => {
+const AccordionPanel = ({ children, title = "Settings" }) => {
   return (
-    <Disclosure as="div" className="">
+    <Disclosure as="div" className="" defaultOpen={true}>
       {({ open }) => (
         <>
           <DisclosureButton className="w-full border-b pb-2 text-left flex items-center">
             {title}{" "}
-            <ChevronDownIcon
-              className={clsx("w-5 ml-4", open && "rotate-180")}
-            />
+            <ChevronUpIcon className={clsx("w-5 ml-4", open && "rotate-180")} />
           </DisclosureButton>
           <div className="overflow-hidden py-2">
             <AnimatePresence>
               {open && (
-                <DisclosurePanel static as={Fragment}>
+                <DisclosurePanel static as={Fragment} >
                   <motion.div
                     initial={{ opacity: 0, y: -24 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -31,6 +29,7 @@ const AccordionPanel = ({ children, title="Settings" }) => {
                     className="origin-top"
                   >
                     {children}
+                    
                   </motion.div>
                 </DisclosurePanel>
               )}

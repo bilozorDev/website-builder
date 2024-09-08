@@ -6,10 +6,10 @@ import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import InfoInput from "../InfoInput";
 import classNamesJoin from "@/app/utils/classNamesJoin";
+import SettingsTitle from "../SettingsTitle";
 
 const HeroDataInputs = () => {
-  const { hero, setHero, features, setFeatures } = useSelectedElements();
-
+  const { hero, setHero } = useSelectedElements();
   const [selected, setSelected] = useState(hero.options.styleSelections[0]);
   const settings = hero.options.styleSelections;
 
@@ -31,9 +31,7 @@ const HeroDataInputs = () => {
 
   return (
     <>
-      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Styles
-      </h2>
+      <SettingsTitle title="Style" />
       <fieldset aria-label="Privacy setting">
         <RadioGroup
           value={selected}
@@ -73,11 +71,7 @@ const HeroDataInputs = () => {
         </RadioGroup>
       </fieldset>
 
-      <hr />
-      <h2 className="text-2xl my-4 font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Data
-      </h2>
-
+      <SettingsTitle title="Content" />
       <div className="space-y-5">
         <InfoInput
           text="Headline"
