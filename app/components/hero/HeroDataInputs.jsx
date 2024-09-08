@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import InfoInput from "../InfoInput";
+import TextInput from "../TextInput";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import SettingsTitle from "../SettingsTitle";
+import LinkInput from "../LinkInput";
 
 const HeroDataInputs = () => {
   const { hero, setHero } = useSelectedElements();
@@ -73,7 +74,7 @@ const HeroDataInputs = () => {
 
       <SettingsTitle title="Content" />
       <div className="space-y-5">
-        <InfoInput
+        <TextInput
           text="Headline"
           value={hero.options.headline.text}
           onChange={(e) =>
@@ -87,7 +88,7 @@ const HeroDataInputs = () => {
           }
           placeholder="Data to enrich your online business"
         />
-        <InfoInput
+        <TextInput
           text="Description"
           value={hero.options.description.text}
           onChange={(e) =>
@@ -101,7 +102,7 @@ const HeroDataInputs = () => {
           }
           placeholder="Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
         />
-        <InfoInput
+        <TextInput
           text="News text"
           value={hero.options.news.text}
           onChange={(e) =>
@@ -127,7 +128,7 @@ const HeroDataInputs = () => {
           }
         />
 
-        <InfoInput
+        <LinkInput
           text="CTA button"
           value={hero.options.cta[0].text || ""}
           onChange={(e) =>
@@ -185,7 +186,7 @@ const HeroDataInputs = () => {
           }
         />
 
-        <InfoInput
+        <LinkInput
           text="Secondary button"
           value={hero.options.cta[1].text || ""}
           onChange={(e) =>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { PhotoIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import InfoInput from "../InfoInput";
+import TextInput from "../TextInput";
 import FeaturesEditList from "./FeaturesEditList";
 import AddOrEditFeatureModal from "./AddOrEditFeatureModal";
 import classNamesJoin from "@/app/utils/classNamesJoin";
@@ -218,7 +218,7 @@ const FeaturesDataInputs = () => {
       <SettingsTitle title="Content" />
 
       <div className="space-y-5">
-        <InfoInput
+        <TextInput
           text="Headline"
           value={features.options.headline.text}
           onChange={(e) =>
@@ -236,7 +236,7 @@ const FeaturesDataInputs = () => {
           placeholder="Everything you need to deploy your app"
         />
 
-        <InfoInput
+        <TextInput
           text="Subtitle"
           value={features.options.subtitle.text}
           onChange={(e) =>
@@ -254,7 +254,7 @@ const FeaturesDataInputs = () => {
           placeholder="Deploy faster"
         />
 
-        <InfoInput
+        <TextInput
           text="Description"
           value={features.options.description.text}
           onChange={(e) =>

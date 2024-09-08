@@ -2,11 +2,12 @@ import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import { Radio, RadioGroup } from "@headlessui/react";
 import React from "react";
 import { useState, useEffect } from "react";
-import InfoInput from "../InfoInput";
+import TextInput from "../TextInput";
 import FeaturesEditList from "../features/FeaturesEditList";
 import useSelectedHeroStyle from "@/app/hooks/useSelectedHeroStyle";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import SettingsTitle from "../SettingsTitle";
+import LinkInput from "../LinkInput";
 
 function NewsletterDataInputs() {
   const { newsletter, setNewsletter } = useSelectedElements();
@@ -154,7 +155,7 @@ function NewsletterDataInputs() {
       <SettingsTitle title="Content" />
 
       <div className="space-y-5">
-        <InfoInput
+        <TextInput
           text="Description"
           value={newsletter.options.headline.text}
           onChange={(e) =>
@@ -169,7 +170,7 @@ function NewsletterDataInputs() {
           placeholder="Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
         />
 
-        <InfoInput
+        <TextInput
           text="Description"
           value={newsletter.options.subheadline.text}
           onChange={(e) =>
@@ -184,7 +185,7 @@ function NewsletterDataInputs() {
           placeholder="Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
         />
 
-        <InfoInput
+        <LinkInput
           text="Privacy notice"
           value={newsletter.options.privacyNote.text}
           onChange={(e) =>
@@ -210,7 +211,7 @@ function NewsletterDataInputs() {
           }
         />
 
-        <InfoInput
+        <TextInput
           text="Button text"
           value={newsletter.options.button.text}
           onChange={(e) =>
