@@ -11,7 +11,11 @@ import { useHero } from "@/app/contexts/HeroContext";
 
 const HeroDataInputs = () => {
   const { hero, setHero } = useHero();
-  const [selected, setSelected] = useState(hero.options.styleSelections[0]);
+  // Find the initially selected style based on the `selected: true` property
+  const initialSelected = hero.options.styleSelections.find(
+    (style) => style.selected
+  ) || hero.options.styleSelections[0];
+  const [selected, setSelected] = useState(initialSelected);
   const settings = hero.options.styleSelections;
 
   //update the hero state with the selected style

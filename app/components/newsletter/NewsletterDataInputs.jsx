@@ -11,47 +11,56 @@ import useGetSelectedStyleId from "@/app/hooks/useGetSelectedStyleId";
 
 function NewsletterDataInputs() {
   const { newsletter, setNewsletter } = useNewsletter();
-  const [selectedIconStyle, setSelectedIconStyle] = useState(
-    newsletter.options.iconsStyle[0]
-  );
-  const settingsIcon = newsletter.options.iconsStyle;
-  const [selectedStyle, setSelectedStyle] = useState(
-    newsletter.options.styleSelections[0]
-  );
-  const settings = newsletter.options.styleSelections;
-  const { styleSelections } = newsletter.options;
-  const selectedId = useGetSelectedStyleId(styleSelections);
 
-  // update the selected style for icon design
-  useEffect(() => {
-    setNewsletter({
-      ...newsletter,
-      options: {
-        ...newsletter.options,
-        iconsStyle: settingsIcon.map((iconStyle) => {
-          return {
-            ...iconStyle,
-            selected: iconStyle.id === selectedIconStyle.id,
-          };
-        }),
-      },
-    });
-  }, [selectedIconStyle]);
+// Find the initially selected icon style based on the `selected: true` property
+const initialSelectedIconStyle = newsletter.options.iconsStyle.find(
+  (style) => style.selected
+) || newsletter.options.iconsStyle[0]; // Fallback to the first if none are selected
 
-  // update the selected style for entire block
-  useEffect(() => {
-    setNewsletter({
-      ...newsletter,
-      options: {
-        ...newsletter.options,
-        styleSelections: newsletter.options.styleSelections.map((setting) => ({
-          ...setting,
-          selected: setting.name === selectedStyle.name,
-        })),
-      },
-    });
-  }, [selectedStyle]);
+// Find the initially selected style based on the `selected: true` property
+const initialSelectedStyle = newsletter.options.styleSelections.find(
+  (style) => style.selected
+) || newsletter.options.styleSelections[0]; // Fallback to the first if none are selected
 
+// Use the selected styles for state initialization
+const [selectedIconStyle, setSelectedIconStyle] = useState(initialSelectedIconStyle);
+const settingsIcon = newsletter.options.iconsStyle;
+
+const [selectedStyle, setSelectedStyle] = useState(initialSelectedStyle);
+const settings = newsletter.options.styleSelections;
+
+const { styleSelections } = newsletter.options;
+const selectedId = useGetSelectedStyleId(styleSelections);
+
+// Update the selected style for icon design
+useEffect(() => {
+  setNewsletter({
+    ...newsletter,
+    options: {
+      ...newsletter.options,
+      iconsStyle: settingsIcon.map((iconStyle) => {
+        return {
+          ...iconStyle,
+          selected: iconStyle.id === selectedIconStyle.id,
+        };
+      }),
+    },
+  });
+}, [selectedIconStyle]);
+
+// Update the selected style for the entire block
+useEffect(() => {
+  setNewsletter({
+    ...newsletter,
+    options: {
+      ...newsletter.options,
+      styleSelections: newsletter.options.styleSelections.map((setting) => ({
+        ...setting,
+        selected: setting.id === selectedStyle.id,
+      })),
+    },
+  });
+}, [selectedStyle]);
   return (
     <>
       <SettingsTitle title="Style" />
