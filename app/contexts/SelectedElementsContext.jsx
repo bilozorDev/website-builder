@@ -167,6 +167,20 @@ export function SelectedElementsProvider({ children }) {
           selected: false,
         },
       ],
+      listStyle: [
+        {
+          id: "default",
+          name: "2 Columns",
+          description: "List of features in 2 columns",
+          selected: true,
+        },
+        {
+          id: "3-columns",
+          name: "3 Columns",
+          description: "List of features in 3 columns",
+          selected: false,
+        },
+      ],
       styleSelections: [
         {
           id: "default",

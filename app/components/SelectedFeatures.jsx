@@ -9,6 +9,9 @@ export default function SelectedFeatures() {
   const { features } = useSelectedElements();
   const { styleSelections } = features.options;
   const selectedId = useSelectedFeatureStyle(styleSelections);
+  const { listStyle } = features.options;
+  const selectedIdForList = useSelectedFeatureStyle(listStyle);
+  console.log(selectedIdForList)
   const {
     subtitle = "Deploy faster",
     headline = "Everything you need to deploy your app",
@@ -46,19 +49,25 @@ export default function SelectedFeatures() {
             </div>
           </div>
         ) : null}
-        <div className="mx-auto mt-12 max-w-2xl sm:mt-20  lg:max-w-4xl">
+        <div className={`mx-auto mt-12 max-w-7xl sm:mt-20  ${selectedIdForList == "3-columns" ? null : "lg:max-w-4xl"}`}>
           {selectedId === "image-right" ? (
             <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
               {featuresList.map((feature) => (
                 <div key={feature.name} className="relative pl-9 flex flex-row">
                   <SelectedIcon Icon={feature.icon} />
-                  
-                  <dd className="flex-inline ml-4"><span className="font-semibold text-gray-900 "> {feature.name}</span> {feature.description}</dd>
+
+                  <dd className="flex-inline ml-4">
+                    <span className="font-semibold text-gray-900 ">
+                      {" "}
+                      {feature.name}
+                    </span>{" "}
+                    {feature.description}
+                  </dd>
                 </div>
               ))}
             </dl>
           ) : (
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+            <dl className={`grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none ${selectedIdForList == "3-columns" ? "lg:grid-cols-3" : "lg:grid-cols-2" }  lg:gap-y-16`}>
               {featuresList.map((feature) => (
                 <div key={feature.name} className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-gray-900">
