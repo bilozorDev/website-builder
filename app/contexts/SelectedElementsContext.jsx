@@ -180,6 +180,12 @@ export function SelectedElementsProvider({ children }) {
           description: "List of features in 3 columns",
           selected: false,
         },
+        {
+          id: "4-columns",
+          name: "4 Columns",
+          description: "List of features in 4 columns",
+          selected: false,
+        },
       ],
       styleSelections: [
         {

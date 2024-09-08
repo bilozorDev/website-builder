@@ -49,7 +49,7 @@ export default function SelectedFeatures() {
             </div>
           </div>
         ) : null}
-        <div className={`mx-auto mt-12 max-w-7xl sm:mt-20  ${selectedIdForList == "3-columns" ? null : "lg:max-w-4xl"}`}>
+        <div className={`mx-auto mt-12 max-w-7xl sm:mt-20  ${selectedIdForList == "default" ? "lg:max-w-4xl" : null}`}>
           {selectedId === "image-right" ? (
             <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
               {featuresList.map((feature) => (
@@ -67,7 +67,7 @@ export default function SelectedFeatures() {
               ))}
             </dl>
           ) : (
-            <dl className={`grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none ${selectedIdForList == "3-columns" ? "lg:grid-cols-3" : "lg:grid-cols-2" }  lg:gap-y-16`}>
+            <dl className={`grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none ${selectedIdForList == "3-columns" ? "lg:grid-cols-3" : selectedIdForList == "4-columns" ? "lg:grid-cols-4" : "lg:grid-cols-2" }  lg:gap-y-16`}>
               {featuresList.map((feature) => (
                 <div key={feature.name} className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-gray-900">
