@@ -2,12 +2,10 @@
 
 import { createContext, useContext, useState } from "react";
 import {
-  Bars3Icon,
   ChartPieIcon,
   CursorArrowRaysIcon,
   FingerPrintIcon,
   SquaresPlusIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
   PhoneIcon,
@@ -254,44 +252,89 @@ export function SelectedElementsProvider({ children }) {
     },
   });
   const [newsletter, setNewsletter] = useState({
-    display: false,
+    display: true,
     options: {
-      styleSelections: [
+      iconsStyle: [
         {
           id: "default",
-          name: "Centered text without image",
-          description: "Include a headline and description",
+          name: "With solid background",
+          description: "Brand color as BG and white icons",
           selected: true,
         },
         {
-          id: "image_right",
-          name: "Split with image",
-          description: "Image on the left, text on the right",
+          id: "no-background",
+          name: "Solid color with no background",
+          description: "Brand color as text color and no background",
           selected: false,
         },
         {
-          id: "image_bottom",
-          name: "Image on the bottom",
-          description: "Text on top, image on the bottom",
+          id: "checkmarks",
+          name: "Just checkmarks instead of icons",
+          description: "Each feature will have a checkmark instead of an icon",
           selected: false,
         },
         {
-          id: "array_of_images",
-          name: "Array of images",
-          description: "Text on left, and array of images on right",
+          id: "no-icons",
+          name: "Icons disabled",
+          description: "Feature will just have a title and description",
+          selected: false,
+        },
+      ],
+      bulletPoints: [
+        {
+          name: "Weekly articles",
+          description:
+            "Non laboris consequat cupidatat laborum magna. Eiusmod non irure cupidatat duis commodo amet.",
+          icon: ChartPieIcon,
+          
+        },
+        {
+            name: "No spam",
+            description:
+              "Officia excepteur ullamco ut sint duis proident non adipisicing. Voluptate incididunt anim.",
+            icon: ChartPieIcon,
+            
+          },
+      ],
+      styleSelections: [
+        {
+          id: "default",
+          name: "One line",
+          description: "Text on left & form on right",
+          selected: true,
+        },
+        {
+          id: "stacked",
+          name: "Stacked",
+          description: "Text and input stacked on top of each other",
+          selected: false,
+        },
+        {
+          id: "stacked-centered",
+          name: "Stacked centered",
+          description: "Text and form stacked centered",
+          selected: false,
+        },
+        {
+          id: "with-bullet-points",
+          name: "With bullet points",
+          description: "Text and form on the left and bullet points on right",
           selected: false,
         },
       ],
       headline: {
-        text: "Data to enrich your online business",
+        text: "Want product news and updates?.",
       },
-      cta: [
-        {
-          text: "Get Started",
-          link: "#",
-          style: "btn",
-        },
-      ],
+      subheadline: {
+        text: "Sign up for our newsletter.",
+      },
+      privacyNote: {
+        text: " We care about your data. Read our",
+        link: "#",
+      },
+      button: {
+        text: "subscribe",
+      },
     },
   });
 

@@ -13,6 +13,8 @@ export default function AddOrEditFeatureModal({ open, setOpen }) {
   const { features, setFeatures } = useSelectedElements();
   const { iconsStyle } = features.options;
   const selectedId = useSelectedFeatureStyle(iconsStyle);
+  const { styleSelections } = features.options;
+  const selectedStyleId = useSelectedFeatureStyle(styleSelections);
   const [selectedFeature, setSelectedFeature] = useState({
     name: "",
     description: "",
@@ -133,7 +135,7 @@ export default function AddOrEditFeatureModal({ open, setOpen }) {
                               : "opacity-45"
                           }`}
                         >
-                          <SelectedIcon Icon={icon.icon} />
+                          <SelectedIcon selectedId={selectedId} Icon={icon.icon} />
                         </div>
                       ))}
                     </div>

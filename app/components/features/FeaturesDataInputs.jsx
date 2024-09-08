@@ -284,16 +284,18 @@ const FeaturesDataInputs = () => {
         </h3>
 
         
+
         {features.options.featuresList.map((feature) => (
           <FeaturesEditList
-            key={feature.name}
-            name={feature.name}
-            description={feature.description}
-            Icon={feature.icon}
-            onClick={() => handleEditFeature(feature)}
-            link={feature.link}
+          key={feature.name}
+          name={feature.name}
+          description={feature.description}
+          Icon={feature.icon}
+          onClick={() => handleEditFeature(feature)}
+          link={feature.link}
           />
         ))}
+        
         <div
           onClick={handleAddFeature}
           className="relative flex justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"

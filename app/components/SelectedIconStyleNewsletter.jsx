@@ -3,9 +3,11 @@ import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import useSelectedFeatureStyle from "../hooks/useSelectedFeatureStyle";
 import { CheckIcon } from "@heroicons/react/24/outline";
 
-const SelectedIconStyle = ({ Icon = CheckIcon, selectedId }) => {
+const SelectedIconStyleNewsletter = ({ Icon=CheckIcon }) => {
+  const { newsletter } = useSelectedElements();
+  const { iconsStyle } = newsletter.options;
+  const selectedId = useSelectedFeatureStyle(iconsStyle);
   
-
   if (selectedId == "no-background") {
     return (
       <div className="flex h-10 w-10 items-center justify-center  bg-white">
@@ -13,22 +15,21 @@ const SelectedIconStyle = ({ Icon = CheckIcon, selectedId }) => {
       </div>
     );
   }
-  if (selectedId == "checkmarks") {
+  if (selectedId == "checkmarks"){
     return (
       <div className="flex h-10 w-10 items-center justify-center ">
         <CheckIcon aria-hidden="true" className="h-5 w-5 text-indigo-500" />
       </div>
     );
   }
-  if (selectedId == "no-icons") {
+  if (selectedId == "no-icons"){
     return null;
   }
- 
-  return (
-    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-      <Icon className="h-6 w-6 text-white" />
-    </div>
-  );
+    return (
+      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+        <Icon className="h-6 w-6 text-white" />
+      </div>
+    );
 };
 
-export default SelectedIconStyle;
+export default SelectedIconStyleNewsletter;
