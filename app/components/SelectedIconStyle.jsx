@@ -3,7 +3,7 @@ import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import useSelectedFeatureStyle from "../hooks/useSelectedFeatureStyle";
 import { CheckIcon } from "@heroicons/react/24/outline";
 
-const SelectedIcon = ({ Icon=CheckIcon }) => {
+const SelectedIconStyle = ({ Icon=CheckIcon }) => {
   const { features } = useSelectedElements();
   const { iconsStyle } = features.options;
   const selectedId = useSelectedFeatureStyle(iconsStyle);
@@ -32,4 +32,4 @@ const SelectedIcon = ({ Icon=CheckIcon }) => {
     );
 };
 
-export default SelectedIcon;
+export default SelectedIconStyle;

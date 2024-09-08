@@ -85,7 +85,7 @@ export function SelectedElementsProvider({ children }) {
     },
   });
   const [hero, setHero] = useState({
-    display: true,
+    display: false,
     options: {
       styleSelections: [
         {
@@ -177,6 +177,12 @@ export function SelectedElementsProvider({ children }) {
         {
           id: "image-under-text",
           name: "Text beetwen headline and features list",
+          description: "Optional link to feature page on Title click",
+          selected: false,
+        },
+        {
+          id: "image-right",
+          name: "Text & features on the left and image on the right",
           description: "Optional link to feature page on Title click",
           selected: false,
         },

@@ -6,7 +6,7 @@ import { MapIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import { availableIcons } from "./icons";
-import SelectedIcon from "../SelectedIcon";
+import SelectedIcon from "../SelectedIconStyle";
 import useSelectedFeatureStyle from "@/app/hooks/useSelectedFeatureStyle";
 
 export default function AddOrEditFeatureModal({ open, setOpen }) {
