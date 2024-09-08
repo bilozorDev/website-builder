@@ -6,14 +6,18 @@ import { MapIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import { availableIcons } from "./icons";
+import SelectedIcon from "../SelectedIcon";
+import useSelectedFeatureStyle from "@/app/hooks/useSelectedFeatureStyle";
 
 export default function AddOrEditFeatureModal({ open, setOpen }) {
   const { features, setFeatures } = useSelectedElements();
+  const { iconsStyle } = features.options;
+  const selectedId = useSelectedFeatureStyle(iconsStyle);
   const [selectedFeature, setSelectedFeature] = useState({
     name: "",
     description: "",
     icon: MapIcon,
-    link: ""
+    link: "",
   });
   const handleSave = () => {
     if (selectedFeature.name) {
@@ -106,32 +110,35 @@ export default function AddOrEditFeatureModal({ open, setOpen }) {
                     </div>
                   </div>
                 </div>
-                <label className="block text-sm font-medium leading-6 text-gray-900 my-2">
-                  Icon
-                </label>
-                <div className="grid grid-cols-8 gap-5">
-                  {availableIcons.map((icon, iconIdx) => (
-                    <div
-                      key={iconIdx}
-                      onClick={() =>
-                        setSelectedFeature({
-                          ...selectedFeature,
-                          icon: icon.icon,
-                        })
-                      }
-                      className={`flex h-10 w-10 relative items-center justify-center rounded-lg bg-indigo-600 hover:cursor-pointer hover:bg-indigo-700 hover:opacity-90 ${
-                        icon.icon === selectedFeature.icon
-                          ? "opacity-100 ring-2 ring-offset-2 ring-indigo-700"
-                          : "opacity-45"
-                      }`}
-                    >
-                      <icon.icon
-                        aria-hidden="true"
-                        className="h-6 w-6 text-white"
-                      />
+
+                {selectedId !== "no-icons" && selectedId !== "checkmarks" ? (
+                  <>
+                    <label className="block text-sm font-medium leading-6 text-gray-900 my-2">
+                      Icon
+                    </label>
+
+                    <div className="grid grid-cols-8 gap-5">
+                      {availableIcons.map((icon, iconIdx) => (
+                        <div
+                          key={iconIdx}
+                          onClick={() =>
+                            setSelectedFeature({
+                              ...selectedFeature,
+                              icon: icon.icon,
+                            })
+                          }
+                          className={`flex h-10 w-10 relative items-center hover:scale-110 justify-center overflow-hidden rounded-full bg-indigo-600 hover:cursor-pointer hover:bg-indigo-700 hover:opacity-90 ${
+                            icon.icon === selectedFeature.icon
+                              ? "opacity-100 ring-1 ring-offset-2 ring-indigo-700 scale-110"
+                              : "opacity-45"
+                          }`}
+                        >
+                          <SelectedIcon Icon={icon.icon} />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </>
+                ) : null}
 
                 <div className="mt-2">
                   <label

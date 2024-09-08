@@ -141,39 +141,77 @@ export function SelectedElementsProvider({ children }) {
   const [features, setFeatures] = useState({
     display: true,
     options: {
-      styleSelections: [{}],
+      iconsStyle: [
+        {
+          id: "default",
+          name: "With solid background",
+          description: "Brand color as BG and white icons",
+          selected: true,
+        },
+        {
+          id: "no-background",
+          name: "Solid color with no background",
+          description: "Brand color as text color and no background",
+          selected: false,
+        },
+        {
+          id: "checkmarks",
+          name: "Just checkmarks instead of icons",
+          description: "Each feature will have a checkmark instead of an icon",
+          selected: false,
+        },
+        {
+          id: "no-icons",
+          name: "Icons disabled",
+          description: "Feature will just have a title and description",
+          selected: false,
+        },
+      ],
+      styleSelections: [
+        {
+          id: "default",
+          name: "Centered content",
+          description: "Optional link to feature page on Title click",
+          selected: false,
+        },
+        {
+          id: "image-under-text",
+          name: "Text beetwen headline and features list",
+          description: "Optional link to feature page on Title click",
+          selected: false,
+        },
+      ],
       featuresList: [
         {
           name: "Analytics",
           description:
             "Get a better understanding where your traffic is coming from",
           icon: ChartPieIcon,
-          link: "http://localhost:3000/"
+          link: "http://localhost:3000/",
         },
         {
           name: "Engagement",
           description:
             "Speak directly to your customers with our engagement tool",
           icon: CursorArrowRaysIcon,
-          link: ""
+          link: "",
         },
         {
           name: "Security",
           description: "Your customers’ data will be safe and secure",
           icon: FingerPrintIcon,
-          link: ""
+          link: "",
         },
         {
           name: "Integrations",
           description: "Your customers’ data will be safe and secure",
           icon: SquaresPlusIcon,
-          link: ""
+          link: "",
         },
       ],
 
       subtitle: {
         text: "Deploy faster",
-      
       },
       headline: {
         text: "Everything you need to deploy your app",

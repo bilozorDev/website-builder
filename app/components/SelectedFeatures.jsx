@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import { LinkIcon } from "@heroicons/react/24/outline";
+import SelectedIcon from './SelectedIcon';
 
 export default function SelectedFeatures() {
   const { features } = useSelectedElements();
@@ -27,14 +28,13 @@ export default function SelectedFeatures() {
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-            {featuresList.map((feature) => (
+            {featuresList.map((feature) => {
+              console.log(feature)
+              return(
               <div key={feature.name} className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                    <feature.icon
-                      aria-hidden="true"
-                      className="h-6 w-6 text-white"
-                    />
+                  <div className="absolute left-0 top-0 ">
+                   <SelectedIcon Icon={feature.icon}/>
                   </div>
                  {feature.link? <Link href={feature.link} className="text-blue-800" >{feature.name} <LinkIcon className="w-3 -top-1 relative inline-block" /></Link> : feature.name}
                 </dt>
@@ -42,7 +42,7 @@ export default function SelectedFeatures() {
                   {feature.description}
                 </dd>
               </div>
-            ))}
+            )})}
           </dl>
         </div>
       </div>
