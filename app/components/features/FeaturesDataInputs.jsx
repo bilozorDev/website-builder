@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { PhotoIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import TextInput from "../TextInput";
+import TextInput from "../ui/TextInput";
 import FeaturesEditList from "./FeaturesEditList";
 import AddOrEditFeatureModal from "./AddOrEditFeatureModal";
 import classNamesJoin from "@/app/utils/classNamesJoin";
-import SettingsTitle from "../SettingsTitle";
+import SettingsTitle from "../ui/SettingsTitle";
 
 
 

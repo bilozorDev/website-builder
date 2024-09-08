@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import TextInput from "../TextInput";
+import TextInput from "../ui/TextInput";
 import classNamesJoin from "@/app/utils/classNamesJoin";
-import SettingsTitle from "../SettingsTitle";
-import LinkInput from "../LinkInput";
+import SettingsTitle from "../ui/SettingsTitle";
+import LinkInput from "../ui/LinkInput";
 
 const HeroDataInputs = () => {
   const { hero, setHero } = useSelectedElements();

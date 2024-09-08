@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
-import { MenuLinkInputComponent } from "./MenuLinkInputComponent";
+import { MenuLinkInputComponent } from "./ui/MenuLinkInputComponent";
 
 export default function MenuItemsEditor() {
   const { header, setHeader } = useSelectedElements(); // Use context

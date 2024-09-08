@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import useSelectedHeroStyle from "../hooks/useSelectedHeroStyle";
 import HeroWrapper from "./hero/HeroWrapper";
-import StyledButton from "./StyledButton";
+import StyledButton from "./ui/StyledButton";
 import { v4 } from "uuid";
 
 export default function SelectedHero() {

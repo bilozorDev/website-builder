@@ -1,6 +1,6 @@
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import CheckBox from "../SettingsToggle";
-import AccordionPanel from "../AccordionPanel";
+import CheckBox from "../ui/SettingsToggle";
+import AccordionPanel from "../ui/AccordionPanel";
 import FeaturesDataInputs from "./FeaturesDataInputs";
 
 const FeaturesSettings = () => {

@@ -2,12 +2,12 @@ import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import { Radio, RadioGroup } from "@headlessui/react";
 import React from "react";
 import { useState, useEffect } from "react";
-import TextInput from "../TextInput";
+import TextInput from "../ui/TextInput";
 import FeaturesEditList from "../features/FeaturesEditList";
 import useSelectedHeroStyle from "@/app/hooks/useSelectedHeroStyle";
 import classNamesJoin from "@/app/utils/classNamesJoin";
-import SettingsTitle from "../SettingsTitle";
-import LinkInput from "../LinkInput";
+import SettingsTitle from "../ui/SettingsTitle";
+import LinkInput from "../ui/LinkInput";
 
 function NewsletterDataInputs() {
   const { newsletter, setNewsletter } = useSelectedElements();
