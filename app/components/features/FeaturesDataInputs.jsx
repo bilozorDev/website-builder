@@ -7,10 +7,9 @@ import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import InfoInput from "../InfoInput";
 import FeaturesEditList from "./FeaturesEditList";
 import AddOrEditFeatureModal from "./AddOrEditFeatureModal";
+import classNamesJoin from "@/app/utils/classNamesJoin";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 const FeaturesDataInputs = () => {
   const { features, setFeatures } = useSelectedElements();
@@ -107,7 +106,7 @@ const FeaturesDataInputs = () => {
               value={setting}
               aria-label={setting.name}
               aria-description={setting.description}
-              className={classNames(
+              className={classNamesJoin(
                 settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
                 settingIdx === settings.length - 1
                   ? "rounded-bl-md rounded-br-md"
@@ -150,7 +149,7 @@ const FeaturesDataInputs = () => {
               aria-label={setting.name}
               aria-description={setting.description}
               disabled={selectedStyle.id == "headline-left-and-features-list-on-right" || selectedStyle.id == "image-right"}
-              className={classNames(
+              className={classNamesJoin(
                 settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
                 settingIdx === settings.length - 1
                   ? "rounded-bl-md rounded-br-md"
@@ -193,7 +192,7 @@ const FeaturesDataInputs = () => {
               value={setting}
               aria-label={setting.name}
               aria-description={setting.description}
-              className={classNames(
+              className={classNamesJoin(
                 settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
                 settingIdx === settings.length - 1
                   ? "rounded-bl-md rounded-br-md"

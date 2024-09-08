@@ -4,6 +4,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import HeaderOptionsSelection from "./HeaderOptionsSelection";
 import BodyOptionsSelection from "./BodyOptionsSelection";
+import classNamesJoin from "../utils/classNamesJoin";
 
 const tabs = [
   { name: "Header", value: "Header", count: "12" },
@@ -12,10 +13,6 @@ const tabs = [
   { name: "Description", value: "Description" },
   { name: "Disqualified", value: "Disqualified" },
 ];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function SettingsTabs() {
   const { currentStep, setCurrentStep } = useSelectedElements();
@@ -29,21 +26,16 @@ export default function SettingsTabs() {
       case "Header":
         return <HeaderOptionsSelection />;
       case "Body":
-        return <BodyOptionsSelection/>;
+        return <BodyOptionsSelection />;
       case "Footer":
         return <div>Footer Content</div>;
-      case "Description":
-        return <div>Description Content</div>;
-      case "Disqualified":
-        return <div>Disqualified Content</div>;
       default:
         return <div>Select a tab to start customizing</div>;
     }
   };
 
   return (
-    <div className="">
-     
+    <>
       <div className="sm:hidden">
         <label htmlFor="tabs" className="sr-only">
           Select a tab
@@ -71,7 +63,7 @@ export default function SettingsTabs() {
                 href="#"
                 onClick={() => handleTabClick(tab)}
                 aria-current={currentStep === tab.value ? "page" : undefined}
-                className={classNames(
+                className={classNamesJoin(
                   currentStep === tab.value
                     ? "border-indigo-500 text-indigo-600"
                     : "border-transparent text-gray-500 hover:border-gray-200 hover:text-gray-700",
@@ -81,7 +73,7 @@ export default function SettingsTabs() {
                 {tab.name}
                 {tab.count ? (
                   <span
-                    className={classNames(
+                    className={classNamesJoin(
                       currentStep === tab.value
                         ? "bg-indigo-100 text-indigo-600"
                         : "bg-gray-100 text-gray-900",
@@ -95,9 +87,10 @@ export default function SettingsTabs() {
             ))}
           </nav>
         </div>
+
+        {/* Render the content based on the selected tab */}
+        <div className="mt-6">{renderContent()}</div>
       </div>
-      {/* Render the content based on the selected tab */}
-      <div className="mt-6">{renderContent()}</div>
-    </div>
+    </>
   );
 }

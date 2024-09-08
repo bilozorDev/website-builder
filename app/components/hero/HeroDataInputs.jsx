@@ -5,10 +5,7 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import InfoInput from "../InfoInput";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import classNamesJoin from "@/app/utils/classNamesJoin";
 
 const HeroDataInputs = () => {
   const { hero, setHero, features, setFeatures } = useSelectedElements();
@@ -49,7 +46,7 @@ const HeroDataInputs = () => {
               value={setting}
               aria-label={setting.name}
               aria-description={setting.description}
-              className={classNames(
+              className={classNamesJoin(
                 settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
                 settingIdx === settings.length - 1
                   ? "rounded-bl-md rounded-br-md"

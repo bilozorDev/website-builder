@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import SettingsTabs from "./SettingsTabs";
 
-export default function SettingsSideBar({open, setOpen}) {
-  
-
+export default function SettingsSideBar({ open, setOpen }) {
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <div className="fixed inset-0" />
@@ -18,13 +20,9 @@ export default function SettingsSideBar({open, setOpen}) {
               transition
               className="pointer-events-auto w-screen max-w-2xl transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
             >
-             
               <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                 <div className="px-4 sm:px-6">
-                  <div className="flex items-start justify-between">
-                    <DialogTitle className="text-base font-semibold leading-6 text-gray-900">
-                      Panel title
-                    </DialogTitle>
+                  <div className="flex items-start justify-end">
                     <div className="ml-3 flex h-7 items-center">
                       <button
                         type="button"

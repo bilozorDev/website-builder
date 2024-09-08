@@ -5,10 +5,8 @@ import { useState, useEffect } from "react";
 import InfoInput from "../InfoInput";
 import FeaturesEditList from "../features/FeaturesEditList";
 import useSelectedHeroStyle from "@/app/hooks/useSelectedHeroStyle";
+import classNamesJoin from "@/app/utils/classNamesJoin";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 function NewsletterDataInputs() {
   const { newsletter, setNewsletter } = useSelectedElements();
   const [selectedIconStyle, setSelectedIconStyle] = useState(
@@ -69,7 +67,7 @@ function NewsletterDataInputs() {
               value={setting}
               aria-label={setting.name}
               aria-description={setting.description}
-              className={classNames(
+              className={classNamesJoin(
                 settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
                 settingIdx === settings.length - 1
                   ? "rounded-bl-md rounded-br-md"
@@ -129,7 +127,7 @@ function NewsletterDataInputs() {
                   value={setting}
                   aria-label={setting.name}
                   aria-description={setting.description}
-                  className={classNames(
+                  className={classNamesJoin(
                     settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
                     settingIdx === settings.length - 1
                       ? "rounded-bl-md rounded-br-md"
