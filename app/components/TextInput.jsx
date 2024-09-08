@@ -13,18 +13,17 @@ const TextInput = ({ text = "", value = "", onChange, placeholder = "" }) => {
 
 export default TextInput;
 
-
 const InputField = ({ text, value, onChange, placeholder }) => {
   const replaceWhiteSpacesWithDashes = (string) => {
     return string.replace(" ", "-").toLowerCase();
   };
-  
+
   return (
-    <div className="isolate -space-y-px rounded-md shadow-sm">
-      <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+    <div className="isolate  rounded-md shadow-sm">
+      <div className="relative rounded-md  px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
         <label
           htmlFor={replaceWhiteSpacesWithDashes(text)}
-          className="block text-xs font-medium text-gray-900"
+          className="block text-xs font-medium text-gray-500"
         >
           {text}
         </label>
@@ -41,4 +40,3 @@ const InputField = ({ text, value, onChange, placeholder }) => {
     </div>
   );
 };
-

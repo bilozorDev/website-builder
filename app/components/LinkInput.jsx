@@ -16,7 +16,7 @@ const LinkInput = ({
       <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
         <label
           htmlFor={replaceWhiteSpacesWithDashes(text)}
-          className="block text-xs font-medium text-gray-900"
+          className="block text-xs font-medium text-gray-500"
         >
           {text}
         </label>
@@ -34,7 +34,7 @@ const LinkInput = ({
       <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
         <label
           htmlFor={replaceWhiteSpacesWithDashes(text) + "-link"}
-          className="block text-xs font-medium text-gray-900"
+          className="block text-xs font-medium text-gray-500"
         >
           {text + " link"}
         </label>
@@ -50,10 +50,10 @@ const LinkInput = ({
       </div>
 
       {btn ? (
-        <div>
+        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
           <label
             htmlFor="btn-style"
-            className="block text-xs font-medium text-gray-900"
+            className="block text-xs font-medium text-gray-500"
           >
             Button style
           </label>
@@ -62,10 +62,10 @@ const LinkInput = ({
             name="btn-style"
             value={btnValue}
             onChange={btnOnChange}
-            className="relative block w-full rounded-none rounded-t-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="relative block  border-0 bg-transparent py-1.5 text-gray-900 focus:z-10 sm:text-sm sm:leading-6"
           >
-            <option value="btn">button</option>
-            <option value="text">text</option>
+            <option value="btn">Button</option>
+            <option value="text">Text</option>
           </select>
         </div>
       ) : null}
