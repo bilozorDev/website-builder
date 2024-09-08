@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
-import { useSelectedElements } from "../contexts/SelectedElementsContext";
+
 import { useState } from "react";
 import { Description, Field, Label, Switch } from "@headlessui/react";
 import { HexColorPicker } from "react-colorful";
 import MenuItemsEditor from "./MenuItemsEditor";
+import { useHeader } from "../contexts/HeaderContext";
 
 const HeaderOptionsSelection = () => {
-  const { setHeader, header } = useSelectedElements();
+  const { setHeader, header } = useHeader();
   const [color, setColor] = useState("#aabbcc");
 
   useEffect(() => {

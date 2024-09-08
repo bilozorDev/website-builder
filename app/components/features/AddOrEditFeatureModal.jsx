@@ -3,14 +3,13 @@
 import { useState } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { MapIcon, XMarkIcon } from "@heroicons/react/24/outline";
-
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import { availableIcons } from "./icons";
 import SelectedIcon from "../SelectedIconStyle";
-import useSelectedFeatureStyle from "@/app/hooks/useSelectedFeatureStyle";
+import useSelectedFeatureStyle from "@/app/hooks/useGetSelectedStyleId";
+import { useFeatures } from "@/app/contexts/FeaturesContext";
 
 export default function AddOrEditFeatureModal({ open, setOpen }) {
-  const { features, setFeatures } = useSelectedElements();
+  const { features, setFeatures } = useFeatures();
   const { iconsStyle } = features.options;
   const selectedId = useSelectedFeatureStyle(iconsStyle);
   const { styleSelections } = features.options;

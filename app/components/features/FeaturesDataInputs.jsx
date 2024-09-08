@@ -3,17 +3,17 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { PhotoIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import TextInput from "../ui/TextInput";
 import FeaturesEditList from "./FeaturesEditList";
 import AddOrEditFeatureModal from "./AddOrEditFeatureModal";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import SettingsTitle from "../ui/SettingsTitle";
+import { useFeatures } from "@/app/contexts/FeaturesContext";
 
 
 
 const FeaturesDataInputs = () => {
-  const { features, setFeatures } = useSelectedElements();
+  const { features, setFeatures } = useFeatures();
   const [openModal, setOpenModal] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState({
     name: "",

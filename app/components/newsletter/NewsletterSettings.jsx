@@ -1,10 +1,10 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import AccordionPanel from "../ui/AccordionPanel";
 import CheckBox from "../ui/SettingsToggle";
 import NewsletterDataInputs from "./NewsletterDataInputs";
+import { useNewsletter } from "@/app/contexts/NewsletterContext";
 
 const NewsletterSettings = () => {
-  const { newsletter, setNewsletter } = useSelectedElements();
+  const { newsletter, setNewsletter } = useNewsletter();
   return (
     <>
     {/* Toggle the display of the newsletter section */}

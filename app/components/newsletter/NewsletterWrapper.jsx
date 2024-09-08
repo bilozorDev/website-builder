@@ -1,11 +1,11 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import useSelectedHeroStyle from "@/app/hooks/useSelectedHeroStyle";
+import { useNewsletter } from "@/app/contexts/NewsletterContext";
+import useGetSelectedStyleId from "@/app/hooks/useGetSelectedStyleId";
 import React from "react";
 
 const NewsletterWrapper = ({ children }) => {
-  const { newsletter } = useSelectedElements();
+  const { newsletter } = useNewsletter();
   const { styleSelections } = newsletter.options;
-  const selectedId = useSelectedHeroStyle(styleSelections);
+  const selectedId = useGetSelectedStyleId(styleSelections);
 
   if (selectedId === "default") {
     return (

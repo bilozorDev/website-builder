@@ -1,11 +1,11 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import useSelectedHeroStyle from "@/app/hooks/useSelectedHeroStyle";
+import { useHero } from "@/app/contexts/HeroContext";
+import useGetSelectedStyleId from "@/app/hooks/useGetSelectedStyleId";
 import React from "react";
 
 const HeroWrapper = ({ children }) => {
-  const { hero, setHero } = useSelectedElements();
+  const { hero, setHero } = useHero();
   const { styleSelections } = hero.options;
-  const selectedId = useSelectedHeroStyle(styleSelections);
+  const selectedId = useGetSelectedStyleId(styleSelections);
 
   if (selectedId === "default") {
     return (

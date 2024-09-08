@@ -1,9 +1,9 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import useSelectedFeatureStyle from "@/app/hooks/useSelectedFeatureStyle";
+import { useFeatures } from "@/app/contexts/FeaturesContext";
+import useSelectedFeatureStyle from "@/app/hooks/useGetSelectedStyleId";
 import React from "react";
 
 const FeaturesWrapper = ({ children }) => {
-  const { features, setFeatures } = useSelectedElements();
+  const { features, setFeatures } = useFeatures();
   const { styleSelections } = features.options;
   const selectedId = useSelectedFeatureStyle(styleSelections);
 

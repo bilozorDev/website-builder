@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import { LinkIcon } from "@heroicons/react/24/outline";
 import SelectedIcon from "./SelectedIconStyle";
-import useSelectedFeatureStyle from "../hooks/useSelectedFeatureStyle";
+import useSelectedFeatureStyle from "../hooks/useGetSelectedStyleId";
 import FeaturesWrapper from "./features/FeaturesWrapper";
+import { useFeatures } from "../contexts/FeaturesContext";
 
 export default function SelectedFeatures() {
-  const { features } = useSelectedElements();
+  const { features } = useFeatures();
   const { styleSelections } = features.options;
   const selectedId = useSelectedFeatureStyle(styleSelections);
   const { iconsStyle } = features.options;

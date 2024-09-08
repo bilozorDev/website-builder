@@ -1,10 +1,10 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import CheckBox from "../ui/SettingsToggle";
 import AccordionPanel from "../ui/AccordionPanel";
 import FeaturesDataInputs from "./FeaturesDataInputs";
+import { useFeatures } from "@/app/contexts/FeaturesContext";
 
 const FeaturesSettings = () => {
-  const { features, setFeatures } = useSelectedElements();
+  const { features, setFeatures } = useFeatures();
   return (
     <>
       {/* Toggle the display of the features section */}

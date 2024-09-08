@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { useSelectedElements } from "../contexts/SelectedElementsContext";
-import useSelectedHeroStyle from "../hooks/useSelectedHeroStyle";
 import HeroWrapper from "./hero/HeroWrapper";
 import StyledButton from "./ui/StyledButton";
 import { v4 } from "uuid";
+import { useHero } from "../contexts/HeroContext";
+import useGetSelectedStyleId from "../hooks/useGetSelectedStyleId";
 
 export default function SelectedHero() {
-  const { hero } = useSelectedElements();
+  const { hero } = useHero();
   const { news, headline, description, cta, styleSelections } = hero.options;
-  const selectedId = useSelectedHeroStyle(styleSelections);
+  const selectedId = useGetSelectedStyleId(styleSelections);
   return (
     <>
       <div className="bg-white">

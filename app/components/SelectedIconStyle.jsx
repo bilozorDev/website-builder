@@ -1,6 +1,5 @@
 import React from "react";
-import { useSelectedElements } from "../contexts/SelectedElementsContext";
-import useSelectedFeatureStyle from "../hooks/useSelectedFeatureStyle";
+import useSelectedFeatureStyle from "../hooks/useGetSelectedStyleId";
 import { CheckIcon } from "@heroicons/react/24/outline";
 
 const SelectedIconStyle = ({ Icon = CheckIcon, selectedId }) => {

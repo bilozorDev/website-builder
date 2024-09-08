@@ -1,10 +1,9 @@
 "use client";
 
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import HeaderOptionsSelection from "./HeaderOptionsSelection";
 import BodyOptionsSelection from "./BodyOptionsSelection";
 import classNamesJoin from "../utils/classNamesJoin";
+import { useStep } from "../contexts/StepContext";
 
 const tabs = [
   { name: "Header", value: "Header", count: "12" },
@@ -15,7 +14,7 @@ const tabs = [
 ];
 
 export default function SettingsTabs() {
-  const { currentStep, setCurrentStep } = useSelectedElements();
+  const { currentStep, setCurrentStep } = useStep();
 
   const handleTabClick = (tab) => {
     setCurrentStep(tab.value);

@@ -1,16 +1,16 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import { Radio, RadioGroup } from "@headlessui/react";
 import React from "react";
 import { useState, useEffect } from "react";
 import TextInput from "../ui/TextInput";
 import FeaturesEditList from "../features/FeaturesEditList";
-import useSelectedHeroStyle from "@/app/hooks/useSelectedHeroStyle";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import SettingsTitle from "../ui/SettingsTitle";
 import LinkInput from "../ui/LinkInput";
+import { useNewsletter } from "@/app/contexts/NewsletterContext";
+import useGetSelectedStyleId from "@/app/hooks/useGetSelectedStyleId";
 
 function NewsletterDataInputs() {
-  const { newsletter, setNewsletter } = useSelectedElements();
+  const { newsletter, setNewsletter } = useNewsletter();
   const [selectedIconStyle, setSelectedIconStyle] = useState(
     newsletter.options.iconsStyle[0]
   );
@@ -20,7 +20,7 @@ function NewsletterDataInputs() {
   );
   const settings = newsletter.options.styleSelections;
   const { styleSelections } = newsletter.options;
-  const selectedId = useSelectedHeroStyle(styleSelections);
+  const selectedId = useGetSelectedStyleId(styleSelections);
 
   // update the selected style for icon design
   useEffect(() => {
@@ -54,7 +54,7 @@ function NewsletterDataInputs() {
 
   return (
     <>
-     <SettingsTitle title="Style" />
+      <SettingsTitle title="Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedStyle}
@@ -96,7 +96,7 @@ function NewsletterDataInputs() {
 
       {selectedId === "with-bullet-points" ? (
         <>
-         <SettingsTitle title="Features"/>
+          <SettingsTitle title="Features" />
           <div className="space-y-4 pl-8">
             {newsletter.options.bulletPoints.map((feature) => (
               <FeaturesEditList
@@ -110,7 +110,7 @@ function NewsletterDataInputs() {
             ))}
           </div>
 
-         <SettingsTitle title="Icon Style" />
+          <SettingsTitle title="Icon Style" />
           <fieldset aria-label="Features Block Style">
             <RadioGroup
               value={selectedIconStyle}
@@ -193,19 +193,18 @@ function NewsletterDataInputs() {
               ...newsletter,
               options: {
                 ...newsletter.options,
-                privacyNote: { text: e.target.value },
+                privacyNote: { ...newsletter.options.privacyNote, text: e.target.value },
               },
             })
           }
           placeholder="We care about your data"
-          link={true}
-          linkValue={newsletter.options.privacyNote.link || ""}
+          linkValue={newsletter.options.privacyNote.link}
           linkOnChange={(e) =>
             setNewsletter({
               ...newsletter,
               options: {
                 ...newsletter.options,
-                privacyNote: { link: e.target.value },
+                privacyNote: { ...newsletter.options.privacyNote, link: e.target.value },
               },
             })
           }

@@ -1,8 +1,8 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
+import { useHeader } from "@/app/contexts/HeaderContext";
 import React from "react";
 
 const NavWrapper = ({ children}) => {
-  const { setHeader, header } = useSelectedElements();
+  const { setHeader, header } = useHeader();
   return (
     <nav
       aria-label="Global"

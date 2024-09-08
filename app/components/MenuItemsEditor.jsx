@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import { MenuLinkInputComponent } from "./ui/MenuLinkInputComponent";
+import { useHeader } from "../contexts/HeaderContext";
 
 export default function MenuItemsEditor() {
-  const { header, setHeader } = useSelectedElements(); // Use context
+  const { header, setHeader } = useHeader(); // Use context
   const [newItem, setNewItem] = useState({ name: "", href: "#" });
   const [editIndex, setEditIndex] = useState(null);
   const [editItem, setEditItem] = useState({ name: "", href: "#" });

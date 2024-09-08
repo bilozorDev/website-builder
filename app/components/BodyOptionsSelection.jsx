@@ -2,6 +2,7 @@ import React from "react";
 import HeroSettings from "./hero/HeroSettings";
 import FeaturesSettings from "./features/FeaturesSettings";
 import NewsletterSettings from "@/app/components/newsletter/NewsletterSettings";
+import StatsSettings from "./stats/StatsSettings";
 
 const BodyOptionsSelection = () => {
   return (
@@ -15,6 +16,9 @@ const BodyOptionsSelection = () => {
 
         {/* Newsletter Settings */}
         <NewsletterSettings />
+
+        {/* Stats Settings */}
+        <StatsSettings/>
       </div>
     </>
   );

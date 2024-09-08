@@ -1,15 +1,14 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import NewsletterWrapper from "./newsletter/NewsletterWrapper";
-import useSelectedHeroStyle from "../hooks/useSelectedHeroStyle";
-import { CalendarDaysIcon, HandRaisedIcon } from "@heroicons/react/24/outline";
 import SelectedIconStyle from "./SelectedIconStyle";
+import { useNewsletter } from "../contexts/NewsletterContext";
+import useGetSelectedStyleId from "../hooks/useGetSelectedStyleId";
 
 export default function SelectedNewsletter() {
-  const { newsletter } = useSelectedElements();
+  const { newsletter } = useNewsletter();
   const { iconsStyle } = newsletter.options;
-  const selectedIconId = useSelectedHeroStyle(iconsStyle);
+  const selectedIconId = useGetSelectedStyleId(iconsStyle);
   const { styleSelections } = newsletter.options;
-  const selectedId = useSelectedHeroStyle(styleSelections);
+  const selectedId = useGetSelectedStyleId(styleSelections);
 
   if (selectedId === "with-bullet-points") {
     return (

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useSelectedFeatureStyle = (styleSelections) => {
+const useGetSelectedStyleId = (styleSelections) => {
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
@@ -15,4 +15,4 @@ const useSelectedFeatureStyle = (styleSelections) => {
   return selectedId;
 };
 
-export default useSelectedFeatureStyle;
+export default useGetSelectedStyleId;

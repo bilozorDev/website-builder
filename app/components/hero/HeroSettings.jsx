@@ -1,21 +1,10 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import { Fragment } from "react";
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Radio,
-  RadioGroup,
-} from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { AnimatePresence, easeOut, motion } from "framer-motion";
-import clsx from "clsx";
 import HeroDataInputs from "./HeroDataInputs";
 import CheckBox from "../ui/SettingsToggle";
 import AccordionPanel from "../ui/AccordionPanel";
+import { useHero } from "@/app/contexts/HeroContext";
 
 const HeroSettings = () => {
-  const { hero, setHero } = useSelectedElements();
+  const { hero, setHero } = useHero();
   return (
     <>
       {/* Toggle the display of the hero section */}

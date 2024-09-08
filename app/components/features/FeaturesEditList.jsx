@@ -1,7 +1,7 @@
 import { ChartPieIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import SelectedIcon from "../SelectedIconStyle";
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
-import useSelectedFeatureStyle from "@/app/hooks/useSelectedFeatureStyle";
+import useSelectedFeatureStyle from "@/app/hooks/useGetSelectedStyleId";
+import { useFeatures } from "@/app/contexts/FeaturesContext";
 
 export default function FeaturesEditList({
   name = "",
@@ -12,7 +12,7 @@ export default function FeaturesEditList({
 }) 
 
 {
-  const { features } = useSelectedElements();
+  const { features } = useFeatures();
   const { iconsStyle } = features.options;
   const selectedId = useSelectedFeatureStyle(iconsStyle);
   return (

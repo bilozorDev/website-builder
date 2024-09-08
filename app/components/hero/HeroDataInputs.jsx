@@ -3,14 +3,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { PhotoIcon } from "@heroicons/react/24/outline";
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
 import TextInput from "../ui/TextInput";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import SettingsTitle from "../ui/SettingsTitle";
 import LinkInput from "../ui/LinkInput";
+import { useHero } from "@/app/contexts/HeroContext";
 
 const HeroDataInputs = () => {
-  const { hero, setHero } = useSelectedElements();
+  const { hero, setHero } = useHero();
   const [selected, setSelected] = useState(hero.options.styleSelections[0]);
   const settings = hero.options.styleSelections;
 
@@ -102,7 +102,7 @@ const HeroDataInputs = () => {
           }
           placeholder="Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
         />
-        <TextInput
+        <LinkInput
           text="News text"
           value={hero.options.news.text}
           onChange={(e) =>

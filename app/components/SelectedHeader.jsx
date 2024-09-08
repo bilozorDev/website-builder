@@ -4,19 +4,14 @@ import HamburgerMenuOpener from "./header/HamburgerMenuOpener";
 import MobileMenuDialog from "./header/MobileMenuDialog";
 import Logo from "./header/Logo";
 import NavWrapper from "./header/NavWrapper";
-import { useSelectedElements } from "../contexts/SelectedElementsContext";
 import {
-  Dialog,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Popover,
   PopoverButton,
   PopoverGroup,
   PopoverPanel,
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { useHeader } from "../contexts/HeaderContext";
 // Utility function to convert hex color to RGB
 function hexToRgb(hex) {
   // Expand shorthand hex notation (e.g. "03F") to full form (e.g. "0033FF")
@@ -51,7 +46,7 @@ function getTextColorForBackground(hexColor) {
 
 export default function SelectedHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { header } = useSelectedElements();
+  const { header } = useHeader();
   // console.log(header.alignment.selected)
   // Determine text color based on background color
   const textColor = getTextColorForBackground(header?.bgColor || "#ffffff");
