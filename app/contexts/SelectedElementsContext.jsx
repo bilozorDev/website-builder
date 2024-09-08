@@ -252,7 +252,7 @@ export function SelectedElementsProvider({ children }) {
     },
   });
   const [newsletter, setNewsletter] = useState({
-    display: true,
+    display: false,
     options: {
       iconsStyle: [
         {
