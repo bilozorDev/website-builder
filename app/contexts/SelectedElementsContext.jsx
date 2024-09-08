@@ -201,6 +201,12 @@ export function SelectedElementsProvider({ children }) {
           selected: false,
         },
         {
+          id: "headline-left-and-features-list-on-right",
+          name: "Headline left and 2 columns of features on the right",
+          description: "Optional link to feature page on Title click",
+          selected: false,
+        },
+        {
           id: "image-right",
           name: "Text & features on the left and image on the right",
           description: "Optional link to feature page on Title click",

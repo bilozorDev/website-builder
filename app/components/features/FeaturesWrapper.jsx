@@ -32,6 +32,7 @@ const FeaturesWrapper = ({ children }) => {
       </div>
     );
   }
+  
   return (
     <div className="bg-white py-24 sm:py-32 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">{children}</div>

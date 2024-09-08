@@ -27,6 +27,7 @@ const FeaturesDataInputs = () => {
   const [selectedIconStyle, setSelectedIconStyle] = useState(features.options.iconsStyle[0]);
   const settingsIcon = features.options.iconsStyle;
 
+  console.log(selectedStyle)
  //update the amount of columns for the list of features
   useEffect(() => {
     setFeatures({
@@ -42,7 +43,8 @@ const FeaturesDataInputs = () => {
       },
     });
   }, [selectedListStyle]);
-   
+  
+
 
 
 // update the selected style for entire block
@@ -77,6 +79,8 @@ const FeaturesDataInputs = () => {
       },
     });
   }, [selectedIconStyle]);
+
+ 
 
 
   const handleAddFeature = () => {
@@ -145,12 +149,13 @@ const FeaturesDataInputs = () => {
               value={setting}
               aria-label={setting.name}
               aria-description={setting.description}
+              disabled={selectedStyle.id == "headline-left-and-features-list-on-right" || selectedStyle.id == "image-right"}
               className={classNames(
                 settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
                 settingIdx === settings.length - 1
                   ? "rounded-bl-md rounded-br-md"
                   : "",
-                "group relative flex cursor-pointer border border-gray-200 p-4 focus:outline-none data-[checked]:z-10 data-[checked]:border-indigo-200 data-[checked]:bg-indigo-50"
+                "group data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[disabled]:bg-gray-50  relative flex cursor-pointer border border-gray-200 p-4 focus:outline-none data-[checked]:z-10 data-[checked]:border-indigo-200 data-[checked]:bg-indigo-50"
               )}
             >
               <span
