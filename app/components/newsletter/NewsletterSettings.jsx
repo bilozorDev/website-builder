@@ -1,37 +1,30 @@
-import React from 'react'
-import {useSelectedElements} from "@/app/contexts/SelectedElementsContext";
+import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
+import AccordionPanel from "../AccordionPanel";
+import CheckBox from "../CheckBox";
+import NewsletterDataInputs from "./NewsletterDataInputs";
 
 const NewsletterSettings = () => {
-    const {newsletter, setNewsletter} = useSelectedElements();
-    return (
-        <div className="relative flex items-start">
-            <div className="flex h-6 items-center">
-                <input
-                    id="newsletter"
-                    name="newsletter"
-                    type="checkbox"
-                    aria-describedby="features-description"
-                    checked={newsletter.display}
-                    onChange={() => {
-                        setNewsletter({
-                            ...newsletter,
-                            display: !newsletter.display,
-                        })
-                    }}
-                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                />
-            </div>
+  const { newsletter, setNewsletter } = useSelectedElements();
+  return (
+    <>
+    {/* Toggle the display of the newsletter section */}
+    <CheckBox
+      value={newsletter.display}
+      onChange={() =>
+        setNewsletter({ ...newsletter, display: !newsletter.display })
+      }
+      title="Add Features"
+      description="Add features section"
+    />
 
-            <div className="ml-3 text-sm leading-6">
-                <label htmlFor="newsletter" className="font-medium text-gray-900">
-                    Add Newsletter
-                </label>
-                <p id="newsletter-description" className="text-gray-500">
-                    Add newsletter section
-                </p>
-            </div>
-        </div>
-    );
+    {/* Display the newsletter settings only if the newsletter section is displayed */}
+    {newsletter.display ? (
+      <AccordionPanel title="Settings">
+        <NewsletterDataInputs />
+      </AccordionPanel>
+    ) : null}
+  </>
+  );
 };
 
-export default NewsletterSettings
+export default NewsletterSettings;

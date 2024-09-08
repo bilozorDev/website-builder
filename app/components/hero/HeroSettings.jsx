@@ -1,32 +1,39 @@
-import { useSelectedElements } from '@/app/contexts/SelectedElementsContext';
-import React from 'react'
+import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
+import { Fragment } from "react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Radio,
+  RadioGroup,
+} from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { AnimatePresence, easeOut, motion } from "framer-motion";
+import clsx from "clsx";
+import HeroDataInputs from "./HeroDataInputs";
+import CheckBox from "../CheckBox";
+import AccordionPanel from "../AccordionPanel";
 
 const HeroSettings = () => {
-  const { hero, setHero} = useSelectedElements();
+  const { hero, setHero } = useSelectedElements();
   return (
-    <div className="relative flex items-start">
-            <div className="flex h-6 items-center">
-              <input
-                id="comments"
-                name="comments"
-                type="checkbox"
-                aria-describedby="comments-description"
-                checked={hero.display}
-                onChange={() => setHero({ ...hero, display: !hero.display })}
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-            </div>
+    <>
+      {/* Toggle the display of the hero section */}
+      <CheckBox
+        value={hero.display}
+        onChange={() => setHero({ ...hero, display: !hero.display })}
+        title="Add Hero"
+        description="Add hero section"
+      />
 
-            <div className="ml-3 text-sm leading-6">
-              <label htmlFor="comments" className="font-medium text-gray-900">
-                Add Hero
-              </label>
-              <p id="comments-description" className="text-gray-500">
-                Add hero section
-              </p>
-            </div>
-          </div>
-  )
-}
+      {/* Display the hero settings only if the hero section is displayed */}
+      {hero.display ? (
+        <AccordionPanel title="Settings">
+          <HeroDataInputs />
+        </AccordionPanel>
+      ) : null}
+    </>
+  );
+};
 
-export default HeroSettings
+export default HeroSettings;

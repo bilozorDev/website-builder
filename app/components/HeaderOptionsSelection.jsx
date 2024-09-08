@@ -17,24 +17,6 @@ const HeaderOptionsSelection = () => {
     });
   }, [color]);
 
-  {
-    /*
-  {
-    darkBg: false,
-    constrained: false,
-    brandBg: false,
-    flyoutMegaMenu: {
-      selected: false,
-      fullWidth: false,
-    },
-    simpleFlyoutMenu: {
-      selected: false,
-    },
-    alignment: { options: [{ id: "Left" }, { id: "Center" }, { id: "Right" }], selected: "Center" },
-  }
-  */
-  }
-
   return (
     <>
       <fieldset>
@@ -46,25 +28,22 @@ const HeaderOptionsSelection = () => {
         </p>
         <div className="mt-6 space-y-6">
           {header.alignment.options.map((aligmentSelection) => (
-            
             <div key={aligmentSelection.id} className="flex items-center">
               <input
                 defaultChecked={aligmentSelection.id === "center"}
                 id={aligmentSelection.id}
                 name="notification-method"
                 type="radio"
-                onClick={() =>
-                  
-                  {
-                    console.log(aligmentSelection.id)
+                onClick={() => {
+                  console.log(aligmentSelection.id);
                   setHeader({
                     ...header,
                     alignment: {
                       ...header.alignment,
                       selected: aligmentSelection.id,
                     },
-                  })}
-                }
+                  });
+                }}
                 className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
               />
               <label
@@ -77,7 +56,7 @@ const HeaderOptionsSelection = () => {
           ))}
         </div>
       </fieldset>
-      <hr className="my-8"/>
+      <hr className="my-8" />
       <Field className="flex items-center">
         <Switch
           checked={header?.constrained}
@@ -95,11 +74,11 @@ const HeaderOptionsSelection = () => {
           <span className="font-medium text-gray-900">Boxed</span>{" "}
         </Label>
       </Field>
-      <hr className="my-8"/>
+      <hr className="my-8" />
 
       <HexColorPicker color={color} onChange={setColor} />
 
-      <hr className="my-8"/>
+      <hr className="my-8" />
 
       <MenuItemsEditor />
     </>
