@@ -139,7 +139,7 @@ export function SelectedElementsProvider({ children }) {
     },
   });
   const [features, setFeatures] = useState({
-    display: true,
+    display: false,
     options: {
       iconsStyle: [
         {
@@ -253,6 +253,47 @@ export function SelectedElementsProvider({ children }) {
       },
     },
   });
+  const [newsletter, setNewsletter] = useState({
+    display: false,
+    options: {
+      styleSelections: [
+        {
+          id: "default",
+          name: "Centered text without image",
+          description: "Include a headline and description",
+          selected: true,
+        },
+        {
+          id: "image_right",
+          name: "Split with image",
+          description: "Image on the left, text on the right",
+          selected: false,
+        },
+        {
+          id: "image_bottom",
+          name: "Image on the bottom",
+          description: "Text on top, image on the bottom",
+          selected: false,
+        },
+        {
+          id: "array_of_images",
+          name: "Array of images",
+          description: "Text on left, and array of images on right",
+          selected: false,
+        },
+      ],
+      headline: {
+        text: "Data to enrich your online business",
+      },
+      cta: [
+        {
+          text: "Get Started",
+          link: "#",
+          style: "btn",
+        },
+      ],
+    },
+  });
 
   return (
     <SelectedElementsContext.Provider
@@ -265,6 +306,8 @@ export function SelectedElementsProvider({ children }) {
         setHero,
         features,
         setFeatures,
+        newsletter,
+        setNewsletter,
       }}
     >
       {children}

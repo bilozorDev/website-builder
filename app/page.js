@@ -7,15 +7,17 @@ import { useSelectedElements } from "./contexts/SelectedElementsContext";
 import { useState } from "react";
 import SelectedHero from "./components/SelectedHero";
 import SelectedFeatures from "./components/SelectedFeatures";
+import SelectedNewsletter from "./components/SelectedNewsletter";
 
 export default function Home() {
-  const { header, hero, features } = useSelectedElements();
+  const { header, hero, features, newsletter } = useSelectedElements();
   const [open, setOpen] = useState(true);
   return (
     <>
       <SelectedHeader config={header} />
       {hero.display ? <SelectedHero /> : null}
-      {features.display ? <SelectedFeatures       /> : null}
+      {features.display ? <SelectedFeatures/> : null}
+      {newsletter.display ? <SelectedNewsletter/> : null}
       {/* <div
         className="bg-white flex justify-end pr-7 py-2 items-center group hover:cursor-pointer"
         onClick={() => setOpen(true)}

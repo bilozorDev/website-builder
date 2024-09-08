@@ -12,8 +12,8 @@ import { AnimatePresence, easeOut, motion } from 'framer-motion'
 import clsx from 'clsx'
 
 const BodyOptionsSelection = () => {
-  const { hero, setHero, features, setFeatures } = useSelectedElements();
-
+  const { hero, setHero, features, setFeatures, newsletter, setNewsletter } = useSelectedElements();
+  
   const [selected, setSelected] = useState(hero.options.styleSelections[0]);
   const settings = hero.options.styleSelections;
 
