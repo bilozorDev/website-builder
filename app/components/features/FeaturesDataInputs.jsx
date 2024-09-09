@@ -20,15 +20,21 @@ const FeaturesDataInputs = () => {
     description: "",
     icon: PhotoIcon,
   });
-  const [selectedStyle, setSelectedStyle] = useState(features.options.styleSelections[0]);
+
+  // Initialize `selectedStyle`, `selectedListStyle`, and `selectedIconStyle` based on `selected: true` or fallback to the first item
+  const initialSelectedStyle = features.options.styleSelections.find(style => style.selected) || features.options.styleSelections[0];
+  const initialSelectedListStyle = features.options.listStyle.find(style => style.selected) || features.options.listStyle[0];
+  const initialSelectedIconStyle = features.options.iconsStyle.find(iconStyle => iconStyle.selected) || features.options.iconsStyle[0];
+
+  const [selectedStyle, setSelectedStyle] = useState(initialSelectedStyle);
+  const [selectedListStyle, setSelectedListStyle] = useState(initialSelectedListStyle);
+  const [selectedIconStyle, setSelectedIconStyle] = useState(initialSelectedIconStyle);
+
   const settings = features.options.styleSelections;
-  const [selectedListStyle, setSelectedListStyle] = useState(features.options.listStyle[0]);
   const settingsListStyle = features.options.listStyle;
-  const [selectedIconStyle, setSelectedIconStyle] = useState(features.options.iconsStyle[0]);
   const settingsIcon = features.options.iconsStyle;
 
-  console.log(selectedStyle)
- //update the amount of columns for the list of features
+  // Update the listStyle state in features context when `selectedListStyle` changes
   useEffect(() => {
     setFeatures({
       ...features,
@@ -43,11 +49,8 @@ const FeaturesDataInputs = () => {
       },
     });
   }, [selectedListStyle]);
-  
 
-
-
-// update the selected style for entire block
+  // Update the styleSelections state in features context when `selectedStyle` changes
   useEffect(() => {
     setFeatures({
       ...features,
@@ -63,8 +66,7 @@ const FeaturesDataInputs = () => {
     });
   }, [selectedStyle]);
 
-
-// update the selected style for icon design
+  // // Update the iconsStyle state in features context when `selectedIconStyle` changes
   useEffect(() => {
     setFeatures({
       ...features,
@@ -80,15 +82,8 @@ const FeaturesDataInputs = () => {
     });
   }, [selectedIconStyle]);
 
- 
-
-
-  const handleAddFeature = () => {
-    setSelectedFeature({ name: "", description: "", icon: PhotoIcon });
-    setOpenModal(true);
-  };
-
   
+
   
   return (
     <>
@@ -287,7 +282,7 @@ const FeaturesDataInputs = () => {
         ))}
         
         <div
-          onClick={handleAddFeature}
+          
           className="relative flex justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
         >
           Add Feature
@@ -300,45 +295,3 @@ const FeaturesDataInputs = () => {
 };
 
 export default FeaturesDataInputs;
-
-// {
-//     display: true,
-//     options: {
-//       styleSelections: [{}],
-//       featuresList: [
-//         {
-//           name: "Analyticsss",
-//           description:
-//             "Get a better understanding where your traffic is coming from",
-//           icon: ChartPieIcon,
-//         },
-//         {
-//           name: "Engagement",
-//           description:
-//             "Speak directly to your customers with our engagement tool",
-//           icon: CursorArrowRaysIcon,
-//         },
-//         {
-//           name: "Security",
-//           description: "Your customers’ data will be safe and secure",
-//           icon: FingerPrintIcon,
-//         },
-//         {
-//           name: "Integrations",
-//           description: "Your customers’ data will be safe and secure",
-//           icon: SquaresPlusIcon,
-//         },
-//       ],
-
-//       subtitle: {
-//         text: "Announcing our next round of funding.",
-
-//       },
-//       headline: {
-//         text: "Data to enrich your online business",
-//       },
-//       description: {
-//         text: "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.",
-//       },
-//     },
-//   }

@@ -41,7 +41,10 @@ export default function SelectedFeatures() {
                 {featuresList.map((feature) => (
                   <div key={feature.name} className="relative pl-9">
                     <dt className="font-semibold text-gray-900">
-                      <SelectedIcon selectedId={selectedId} Icon={feature.icon} />
+                      <SelectedIcon
+                        selectedId={selectedId}
+                        iconName={feature.icon}
+                      />
                       <div className="mt-2">{feature.name}</div>
                     </dt>
                     <dd className="mt-2">{feature.description}</dd>
@@ -93,7 +96,7 @@ export default function SelectedFeatures() {
             <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
               {featuresList.map((feature) => (
                 <div key={feature.name} className="relative pl-9 flex flex-row">
-                  <SelectedIcon selectedId={selectedId} Icon={feature.icon} />
+                  <SelectedIcon selectedId={selectedId} iconName={feature.icon} />
 
                   <dd className="flex-inline ml-4">
                     <span className="font-semibold text-gray-900 ">
@@ -115,11 +118,16 @@ export default function SelectedFeatures() {
                   : "lg:grid-cols-2"
               }  lg:gap-y-16`}
             >
-              {featuresList.map((feature) => (
+              {featuresList.map((feature) => {
+                console.log("feature:" + JSON.stringify(feature));
+                return(
                 <div key={feature.name} className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-gray-900">
                     <div className="absolute left-0 top-0 ">
-                      <SelectedIcon selectedId={selectedIconsId} Icon={feature.icon} />
+                      <SelectedIcon
+                        selectedId={selectedIconsId}
+                        iconName={feature.icon}
+                      />
                     </div>
                     {feature.link ? (
                       <a href={feature.link} className="text-blue-800">
@@ -134,7 +142,7 @@ export default function SelectedFeatures() {
                     {feature.description}
                   </dd>
                 </div>
-              ))}
+              )})}
             </dl>
           )}
         </div>

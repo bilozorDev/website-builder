@@ -9,9 +9,7 @@ export default function FeaturesEditList({
   Icon = ChartPieIcon,
   onClick,
   link,
-}) 
-
-{
+}) {
   const { features } = useFeatures();
   const { iconsStyle } = features.options;
   const selectedId = useSelectedFeatureStyle(iconsStyle);
@@ -21,7 +19,7 @@ export default function FeaturesEditList({
       className="relative flex hover:cursor-move items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
     >
       <div className="flex-shrink-0">
-        <SelectedIcon selectedId={selectedId} Icon={Icon} />
+        <SelectedIcon selectedId={selectedId} iconName={Icon} />
       </div>
       <div className="min-w-0 flex-1">
         <span aria-hidden="true" className="absolute inset-0" />

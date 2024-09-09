@@ -21,8 +21,8 @@ export default function Home() {
 
   const [open, setOpen] = useState(false);
   return (
-    <div div className="relative">
-      <SelectedHeader  />
+    <div className="relative">
+      {/* <SelectedHeader  /> */}
 
       {/* Display Hero block */}
       {hero.display ? <SelectedHero /> : null}

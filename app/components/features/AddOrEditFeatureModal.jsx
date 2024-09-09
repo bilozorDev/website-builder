@@ -134,7 +134,7 @@ export default function AddOrEditFeatureModal({ open, setOpen }) {
                               : "opacity-45"
                           }`}
                         >
-                          <SelectedIcon selectedId={selectedId} Icon={icon.icon} />
+                          <SelectedIcon selectedId={selectedId} iconName={icon.icon} />
                         </div>
                       ))}
                     </div>

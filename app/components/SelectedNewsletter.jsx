@@ -58,7 +58,7 @@ export default function SelectedNewsletter() {
             <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
               <div className="flex flex-col items-start">
                 
-                <SelectedIconStyle selectedId={selectedIconId} Icon={newsletter.options.bulletPoints[0].icon} />
+                <SelectedIconStyle selectedId={selectedIconId} iconName={newsletter.options.bulletPoints[0].icon} />
                 
                 <dt className="mt-4 font-semibold ">
                   Weekly articles
@@ -70,7 +70,7 @@ export default function SelectedNewsletter() {
               </div>
               <div className="flex flex-col items-start">
                 
-                <SelectedIconStyle selectedId={selectedIconId} Icon={newsletter.options.bulletPoints[1].icon} />
+                <SelectedIconStyle selectedId={selectedIconId} iconName={newsletter.options.bulletPoints[1].icon} />
                 
                 <dt className="mt-4 font-semibold ">No spam</dt>
                 <dd className="mt-2 leading-7 text-gray-800">
