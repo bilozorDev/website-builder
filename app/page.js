@@ -19,7 +19,7 @@ export default function Home() {
   const { newsletter } = useNewsletter();
   const { stats } = useStats();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className="relative">
       {/* <SelectedHeader  /> */}

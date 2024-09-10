@@ -4,6 +4,7 @@ import { FeaturesProvider } from "./FeaturesContext";
 import { NewsletterProvider } from "./NewsletterContext";
 import { StepProvider } from "./StepContext"; // Import StepContext
 import { StatsProvider } from "./StatsContext";
+import { ColorProvider } from "./ColorContext";
 
 export function SelectedElementsProvider({ children }) {
   return (
@@ -12,7 +13,9 @@ export function SelectedElementsProvider({ children }) {
         <HeroProvider>
           <FeaturesProvider>
             <NewsletterProvider>
-              <StatsProvider>{children}</StatsProvider>
+              <StatsProvider>
+                <ColorProvider>{children}</ColorProvider>
+              </StatsProvider>
             </NewsletterProvider>
           </FeaturesProvider>
         </HeroProvider>

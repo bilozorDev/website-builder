@@ -4,8 +4,10 @@ import HeaderOptionsSelection from "./HeaderOptionsSelection";
 import BodyOptionsSelection from "./BodyOptionsSelection";
 import classNamesJoin from "../utils/classNamesJoin";
 import { useStep } from "../contexts/StepContext";
+import GeneralOptionsSelection from "./general/GeneralOptionsSelection";
 
 const tabs = [
+  { name: "General", value: "General" },
   { name: "Header", value: "Header", count: "12" },
   { name: "Body", value: "Body", count: "6" },
   { name: "Footer", value: "Footer", count: "4" },
@@ -22,6 +24,8 @@ export default function SettingsTabs() {
 
   const renderContent = () => {
     switch (currentStep) {
+      case "General":
+        return <GeneralOptionsSelection />;
       case "Header":
         return <HeaderOptionsSelection />;
       case "Body":
