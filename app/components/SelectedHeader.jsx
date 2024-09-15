@@ -12,6 +12,7 @@ import {
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useHeader } from "../contexts/HeaderContext";
+
 // Utility function to convert hex color to RGB
 function hexToRgb(hex) {
   // Expand shorthand hex notation (e.g. "03F") to full form (e.g. "0033FF")
@@ -58,10 +59,8 @@ export default function SelectedHeader() {
           <Logo />
         </div>
         <HamburgerMenuOpener setMobileMenuOpen={setMobileMenuOpen} />
-        <PopoverGroup>
-          <div
-            className={`hidden lg:flex lg:flex-grow lg:justify-start lg:gap-x-12`}
-          >
+        <PopoverGroup className={`hidden lg:flex lg:grow-1 ${header.alignment.selected != "center" ? "w-full" : null}  lg:justify-${header.alignment.selected} lg:gap-x-12`}>
+          
             {header?.menuItems?.regularItems.map((item) => {
               // console.log(item);
               return item.megaMenu ? (
@@ -135,7 +134,7 @@ export default function SelectedHeader() {
                 </a>
               );
             })}
-          </div>
+         
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-none">
           <a
