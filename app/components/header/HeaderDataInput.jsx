@@ -4,10 +4,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Description, Field, Label, Switch } from "@headlessui/react";
 import { HexColorPicker } from "react-colorful";
-import MenuItemsEditor from "./MenuItemsEditor";
-import { useHeader } from "../contexts/HeaderContext";
+import { useHeader } from "@/app/contexts/HeaderContext";
+import MenuItemsEditor from "../MenuItemsEditor";
 
-const HeaderOptionsSelection = () => {
+const HeaderDataInput = () => {
   const { setHeader, header } = useHeader();
   const [color, setColor] = useState(header.bgColor || "ffffff");
 
@@ -86,4 +86,4 @@ const HeaderOptionsSelection = () => {
   );
 };
 
-export default HeaderOptionsSelection;
+export default HeaderDataInput;

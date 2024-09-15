@@ -1,10 +1,10 @@
 "use client";
 
-import HeaderOptionsSelection from "./HeaderOptionsSelection";
 import BodyOptionsSelection from "./BodyOptionsSelection";
 import classNamesJoin from "../utils/classNamesJoin";
 import { useStep } from "../contexts/StepContext";
 import GeneralOptionsSelection from "./general/GeneralOptionsSelection";
+import HeaderDataInput from "./header/HeaderDataInput";
 
 const tabs = [
   { name: "General", value: "General" },
@@ -27,7 +27,7 @@ export default function SettingsTabs() {
       case "General":
         return <GeneralOptionsSelection />;
       case "Header":
-        return <HeaderOptionsSelection />;
+        return <HeaderDataInput />;
       case "Body":
         return <BodyOptionsSelection />;
       case "Footer":
