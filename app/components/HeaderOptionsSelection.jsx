@@ -9,7 +9,7 @@ import { useHeader } from "../contexts/HeaderContext";
 
 const HeaderOptionsSelection = () => {
   const { setHeader, header } = useHeader();
-  const [color, setColor] = useState("#aabbcc");
+  const [color, setColor] = useState(header.bgColor || "ffffff");
 
   useEffect(() => {
     setHeader({

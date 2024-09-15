@@ -4,6 +4,7 @@ import SelectedIcon from "./SelectedIconStyle";
 import useSelectedFeatureStyle from "../hooks/useGetSelectedStyleId";
 import FeaturesWrapper from "./features/FeaturesWrapper";
 import { useFeatures } from "../contexts/FeaturesContext";
+import { useColor } from "../contexts/ColorContext";
 
 export default function SelectedFeatures() {
   const { features } = useFeatures();
@@ -13,7 +14,7 @@ export default function SelectedFeatures() {
   const selectedIconsId = useSelectedFeatureStyle(iconsStyle);
   const { listStyle } = features.options;
   const selectedIdForList = useSelectedFeatureStyle(listStyle);
-
+  const {colors}=  useColor()
   const {
     subtitle = "Deploy faster",
     headline = "Everything you need to deploy your app",
@@ -23,31 +24,43 @@ export default function SelectedFeatures() {
   if (selectedId === "headline-left-and-features-list-on-right") {
     return (
       <>
-        <div className="bg-white py-24 sm:py-32">
+        <div className="bg-white py-24 sm:py-32" style={{ backgroundColor: colors.backgroundColor }}>
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto grid max-w-2xl grid-cols-1 vertical gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               <div>
-                <h2 className="text-base font-semibold leading-7 text-indigo-600">
+                <h2 className="text-base font-semibold leading-7 text-indigo-600"
+                  style={{ color: colors.brandColor }}
+                >
                   {subtitle.text}
                 </h2>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                  style={{ color: colors.textColor }}
+                >
                   {headline.text}
                 </p>
-                <p className="mt-6 text-base leading-7 text-gray-600">
+                <p className="mt-6 text-base leading-7 text-gray-600"
+                  style={{ color: colors.textColor }}
+                >
                   {description.text}
                 </p>
               </div>
               <dl className="col-span-2 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 text-gray-600 sm:grid-cols-2 lg:gap-y-16">
                 {featuresList.map((feature) => (
                   <div key={feature.name} className="relative pl-9">
-                    <dt className="font-semibold text-gray-900">
+                    <dt className="font-semibold text-gray-900"
+                      style={{ color: colors.textColor }}
+                    >
                       <SelectedIcon
                         selectedId={selectedId}
                         iconName={feature.icon}
                       />
-                      <div className="mt-2">{feature.name}</div>
+                      <div className="mt-2"
+                        style={{ color: colors.textColor }}
+                      >{feature.name}</div>
                     </dt>
-                    <dd className="mt-2">{feature.description}</dd>
+                    <dd className="mt-2"
+                      style={{ color: colors.textColor }}
+                    >{feature.description}</dd>
                   </div>
                 ))}
               </dl>
@@ -61,7 +74,8 @@ export default function SelectedFeatures() {
     <>
       <FeaturesWrapper>
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-600">
+          <h2 className="text-base font-semibold leading-7 text-indigo-600"
+           style={{ backgroundColor: colors.brandColor }}>
             {subtitle.text}
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -119,7 +133,7 @@ export default function SelectedFeatures() {
               }  lg:gap-y-16`}
             >
               {featuresList.map((feature) => {
-                console.log("feature:" + JSON.stringify(feature));
+                // console.log("feature:" + JSON.stringify(feature));
                 return(
                 <div key={feature.name} className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-gray-900">

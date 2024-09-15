@@ -3,7 +3,20 @@ import { useState } from "react";
 import { BlockPicker } from "react-color";
 import { AnimatePresence, motion } from "framer-motion";
 import { useColor } from "@/app/contexts/ColorContext";
-// Import the context
+
+// Predefined Tailwind Colors
+const predefinedColors = [
+  "#dc2626", // red-600
+  "#fafafa", // white
+  "#d97706", // amber
+  "#059669", // emerald
+  "#0284c7", // blue
+  "#c026d3", // Fuchsia
+  "#e11d48", // rose
+  "#0891b2", // cyan
+  "#52525b", // Zinc
+  "#0f172a", // Slate
+];
 
 const ColorPickerButton = ({ colorType }) => {
   const { colors, setColors } = useColor(); // Access colors and setColors from the context
@@ -39,6 +52,7 @@ const ColorPickerButton = ({ colorType }) => {
             <BlockPicker
               color={colors[colorType]}
               onChange={handleColorChange}
+              colors={predefinedColors} // Pass predefined Tailwind colors
               triangle="hide"
             />
           </motion.div>

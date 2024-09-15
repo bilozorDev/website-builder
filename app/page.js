@@ -22,7 +22,7 @@ export default function Home() {
   const [open, setOpen] = useState(true);
   return (
     <div className="relative">
-      {/* <SelectedHeader  /> */}
+      <SelectedHeader  />
 
       {/* Display Hero block */}
       {hero.display ? <SelectedHero /> : null}

@@ -1,3 +1,4 @@
+import { useColor } from "@/app/contexts/ColorContext";
 import { useFeatures } from "@/app/contexts/FeaturesContext";
 import useSelectedFeatureStyle from "@/app/hooks/useGetSelectedStyleId";
 import React from "react";
@@ -6,13 +7,13 @@ const FeaturesWrapper = ({ children }) => {
   const { features, setFeatures } = useFeatures();
   const { styleSelections } = features.options;
   const selectedId = useSelectedFeatureStyle(styleSelections);
-
+const {colors}=  useColor()
  
     
  
   if (selectedId === "image-right") {
     return (
-      <div className="bg-white py-24 sm:py-32 overflow-hidden">
+      <div className="bg-white py-24 sm:py-32 overflow-hidden" style={{ backgroundColor: colors.backgroundColor }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid  max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div>
@@ -34,7 +35,7 @@ const FeaturesWrapper = ({ children }) => {
   }
   
   return (
-    <div className="bg-white py-24 sm:py-32 overflow-hidden">
+    <div className="bg-white py-24 sm:py-32 overflow-hidden" style={{ backgroundColor: colors.backgroundColor }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">{children}</div>
     </div>
   );

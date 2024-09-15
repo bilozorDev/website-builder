@@ -47,7 +47,7 @@ function getTextColorForBackground(hexColor) {
 export default function SelectedHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { header } = useHeader();
-  // console.log(header.alignment.selected)
+  console.log(header.alignment.selected)
   // Determine text color based on background color
   const textColor = getTextColorForBackground(header?.bgColor || "#ffffff");
   // console.log(header.menuItems)

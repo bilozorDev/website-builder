@@ -35,7 +35,7 @@ const HeroWrapper = ({ children }) => {
   if (selectedId === "image_bottom") {
     return (
       <>
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56" >
           {children}
         </div>
         <div className="-mt-16 flow-root sm:-mt-24">

@@ -4,16 +4,18 @@ import StyledButton from "./ui/StyledButton";
 import { v4 } from "uuid";
 import { useHero } from "../contexts/HeroContext";
 import useGetSelectedStyleId from "../hooks/useGetSelectedStyleId";
+import { useColor } from "../contexts/ColorContext";
 
 export default function SelectedHero() {
   const { hero } = useHero();
+  const { colors } = useColor();
   const { news, headline, description, cta, styleSelections } = hero.options;
   const selectedId = useGetSelectedStyleId(styleSelections);
   return (
     <>
-      <div className="bg-white">
-        <div className="relative isolate px-6 pt-14 lg:px-8">
-          <div
+      <div className="bg-white" style={{ backgroundColor: colors.backgroundColor }}>
+        <div className="relative isolate px-6 pt-14 lg:px-8" >
+          {/* <div
             aria-hidden="true"
             className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           >
@@ -24,7 +26,7 @@ export default function SelectedHero() {
               }}
               className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
             />
-          </div>
+          </div> */}
           <HeroWrapper>
             <div className="flex-1">
               <div
@@ -35,11 +37,12 @@ export default function SelectedHero() {
                     : "sm:justify-center"
                 }`}
               >
-                <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20"  style={{ color: colors.textColor }}>
                   {news?.text}{" "}
                   <Link
                     href={news?.link || "#"}
                     className="font-semibold text-indigo-600"
+                    style={{ color: colors.brandColor }}
                   >
                     <span aria-hidden="true" className="absolute inset-0" />
                     Read more <span aria-hidden="true">&rarr;</span>
@@ -54,10 +57,10 @@ export default function SelectedHero() {
                     : "text-center"
                 }
               >
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"  style={{ color: colors.textColor }}>
                   {headline?.text}
                 </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
+                <p className="mt-6 text-lg leading-8 text-gray-600"  style={{ color: colors.textColor }}>
                   {description?.text}
                 </p>
                 <div
