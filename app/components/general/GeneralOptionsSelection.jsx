@@ -14,43 +14,69 @@ import { useGlobalSettings } from "@/app/contexts/GlobalSettingsContext";
 const GeneralOptionsSelection = () => {
   const { globalSettings, setGlobalSettings } = useGlobalSettings();
   const [websiteName, setWebsiteName] = useState(globalSettings.title);
-  const [websiteDescription, setWebsiteDescription] = useState(globalSettings.description);
+  const [websiteDescription, setWebsiteDescription] = useState(
+    globalSettings.description
+  );
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    setGlobalSettings((prev) => ({
+      ...prev,
+      title: websiteName, // Correct key for the title
+      description: websiteDescription, // Correct key for the description
+      //reload the page to see the changes
+    }));
+    window.location.reload();
+  };
 
   return (
     <>
       <SettingsTitle title="Website identity" />
-      <div className="isolate -space-y-px rounded-md shadow-sm">
-        <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="name"
-            className="block text-xs font-medium text-gray-900"
-          >
-            Website name
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Website builder"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
+      <form onSubmit={handleSave}>
+        <div className="isolate -space-y-px rounded-md shadow-sm">
+          <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+            <label
+              htmlFor="name"
+              className="block text-xs font-medium text-gray-500"
+            >
+              Website name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              value={websiteName}
+              onChange={(e) => setWebsiteName(e.target.value)}
+              placeholder="Website builder"
+              className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            />
+          </div>
+          <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+            <label
+              htmlFor="desc"
+              className="block text-xs font-medium text-gray-500"
+            >
+              Website Description
+            </label>
+            <input
+              id="desc"
+              name="desc"
+              type="text"
+              value={websiteDescription}
+              onChange={(e) => setWebsiteDescription(e.target.value)}
+              placeholder="Awesome website to build your own website"
+              className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            />
+          </div>
         </div>
-        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label
-            htmlFor="desc"
-            className="block text-xs font-medium text-gray-900"
-          >
-            Website Description
-          </label>
-          <input
-            id="desc"
-            name="desc"
-            type="text"
-            placeholder="Awesome website to build your own website"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-          />
-        </div>
-      </div>
+        <button
+          type="submit"
+          className="inline-flex mt-5 items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Save
+        </button>
+      </form>
+
       <hr className="my-5" />
       <SettingsTitle title="Logo" />
       <div className="grid grid-cols-1 md:grid-cols-2">
@@ -110,7 +136,12 @@ const GeneralOptionsSelection = () => {
           style={{ backgroundColor: globalSettings?.colors.backgroundColor }} // Apply background color
         >
           <div className="mx-auto max-w-2xl sm:text-center">
-          <h2 className="text-base font-semibold leading-8"  style={{ color: globalSettings?.colors.brandColor }}>Our track record</h2>
+            <h2
+              className="text-base font-semibold leading-8"
+              style={{ color: globalSettings?.colors.brandColor }}
+            >
+              Our track record
+            </h2>
             <h2
               className="text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: globalSettings?.colors.textColor }} // Apply text color
