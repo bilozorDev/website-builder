@@ -8,6 +8,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import SettingsTabs from "./SettingsTabs";
+import { ResetLocalStorage } from "../utils/ResetLocalStorage";
 
 export default function SettingsSideBar({ open, setOpen }) {
   return (
@@ -22,6 +23,7 @@ export default function SettingsSideBar({ open, setOpen }) {
             >
               <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                 <div className="px-4 sm:px-6">
+                  <ResetLocalStorage/>
                   <div className="flex items-start justify-end">
                     <div className="ml-3 flex h-7 items-center">
                       <button
