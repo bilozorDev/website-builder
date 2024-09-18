@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SettingsTitle from "../ui/SettingsTitle";
 import {
   BugAntIcon,
@@ -12,8 +12,10 @@ import { useColor } from "@/app/contexts/ColorContext";
 import { useGlobalSettings } from "@/app/contexts/GlobalSettingsContext";
 
 const GeneralOptionsSelection = () => {
-    const {globalSettings} = useGlobalSettings(); 
-    const { colors } = useColor(); // Make sure you access colors here
+  const { globalSettings, setGlobalSettings } = useGlobalSettings();
+  const [websiteName, setWebsiteName] = useState(globalSettings.title);
+  const [websiteDescription, setWebsiteDescription] = useState(globalSettings.description);
+
   return (
     <>
       <SettingsTitle title="Website identity" />
@@ -105,19 +107,19 @@ const GeneralOptionsSelection = () => {
         </h2>
         <div
           className="isolate bg-gray-800 rounded-3xl px-6 py-24 sm:py-32 lg:px-8 mt-8"
-          style={{ backgroundColor: colors.backgroundColor }} // Apply background color
+          style={{ backgroundColor: globalSettings?.colors.backgroundColor }} // Apply background color
         >
           <div className="mx-auto max-w-2xl sm:text-center">
-          <h2 className="text-base font-semibold leading-8"  style={{ color: colors.brandColor }}>Our track record</h2>
+          <h2 className="text-base font-semibold leading-8"  style={{ color: globalSettings?.colors.brandColor }}>Our track record</h2>
             <h2
               className="text-3xl font-bold tracking-tight sm:text-4xl"
-              style={{ color: colors.textColor }} // Apply text color
+              style={{ color: globalSettings?.colors.textColor }} // Apply text color
             >
               Contact sales
             </h2>
             <p
               className="mt-2 text-lg leading-8"
-              style={{ color: colors.textColor }}
+              style={{ color: globalSettings?.colors.textColor }}
             >
               Aute magna irure deserunt veniam aliqua magna enim voluptate.
             </p>
@@ -126,7 +128,7 @@ const GeneralOptionsSelection = () => {
             <div className="flex gap-x-6">
               <div
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                style={{ backgroundColor: colors.brandColor }} // Apply brand color
+                style={{ backgroundColor: globalSettings?.colors.brandColor }} // Apply brand color
               >
                 <ChatBubbleLeftRightIcon
                   aria-hidden="true"
@@ -136,13 +138,13 @@ const GeneralOptionsSelection = () => {
               <div>
                 <h3
                   className="text-base font-semibold leading-7"
-                  style={{ color: colors.textColor }}
+                  style={{ color: globalSettings?.colors.textColor }}
                 >
                   Sales support
                 </h3>
                 <p
                   className="mt-2 leading-7"
-                  style={{ color: colors.textColor }}
+                  style={{ color: globalSettings?.colors.textColor }}
                 >
                   Ut cursus est ut amet. Lobortis eget egestas leo vitae eget
                   porttitor risus blandit. Nunc a in lorem vel iaculis
@@ -152,7 +154,7 @@ const GeneralOptionsSelection = () => {
                   <a
                     href="#"
                     className="text-sm font-semibold leading-6"
-                    style={{ color: colors.brandColor }} // Apply brand color to link
+                    style={{ color: globalSettings?.colors.brandColor }} // Apply brand color to link
                   >
                     Contact us <span aria-hidden="true">&rarr;</span>
                   </a>

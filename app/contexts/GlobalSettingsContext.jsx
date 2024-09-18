@@ -13,7 +13,7 @@ export function GlobalSettingsProvider({ children }) {
           title: "My Awesome Website",
           description: "Welcome to my website, the best place for awesome content.",
           colors: {
-            primaryColor: "#6366F1",  // Tailwind Indigo
+            brandColor: "#6366F1",  // Tailwind Indigo
             backgroundColor: "#FFFFFF", // Default white
             textColor: "#000000",       // Default black
           },
@@ -25,22 +25,9 @@ export function GlobalSettingsProvider({ children }) {
     localStorage.setItem("globalSettings", JSON.stringify(globalSettings));
   }, [globalSettings]);
 
-  // Reset function to restore global settings to initial values
-  const resetGlobalSettings = () => {
-    setGlobalSettings({
-      title: "My Awesome Website",
-      description: "Welcome to my website, the best place for awesome content.",
-      colors: {
-        primaryColor: "#6366F1",  // Tailwind Indigo
-        backgroundColor: "#FFFFFF", // Default white
-        textColor: "#000000",       // Default black
-      },
-    });
-    localStorage.removeItem("globalSettings");
-  };
 
   return (
-    <GlobalSettingsContext.Provider value={{ globalSettings, setGlobalSettings, resetGlobalSettings }}>
+    <GlobalSettingsContext.Provider value={{ globalSettings, setGlobalSettings }}>
       {children}
     </GlobalSettingsContext.Provider>
   );
