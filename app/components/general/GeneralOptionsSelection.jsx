@@ -11,7 +11,7 @@ import { BlockPicker } from "react-color";
 import { useColor } from "@/app/contexts/ColorContext";
 import { useGlobalSettings } from "@/app/contexts/GlobalSettingsContext";
 import LogoUploader from "../ui/LogoUploader";
-
+import logo from "@/public/uploads/logo.png"; 
 const GeneralOptionsSelection = () => {
   const { globalSettings, setGlobalSettings } = useGlobalSettings();
   const [websiteName, setWebsiteName] = useState(globalSettings.title);
@@ -88,24 +88,15 @@ const GeneralOptionsSelection = () => {
           <div className="flex items-center h-full justify-center ">
             <img
               alt="Your Company"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-              className="h-8 w-auto"
+              src={logo.src}
+              className="max-h-24 w-auto"
             />
           </div>
           <div className=" tracking-tighter absolute w-full text-center bottom-0 text-gray-400">
             Recommended ratio 1:1{" "}
           </div>
         </div>
-        <button
-          type="button"
-          className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          <PhotoIcon className="mx-auto h-12 w-12 text-gray-400" />
-
-          <span className="mt-2 block text-sm font-semibold text-gray-900">
-            Upload new logo
-          </span>
-        </button>
+       
         <LogoUploader/>
       </div>
       <hr className="my-5" />
