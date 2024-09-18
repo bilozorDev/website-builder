@@ -5,6 +5,7 @@ import { NewsletterProvider } from "./NewsletterContext";
 import { StepProvider } from "./StepContext"; // Import StepContext
 import { StatsProvider } from "./StatsContext";
 import { ColorProvider } from "./ColorContext";
+import { GlobalSettingsProvider } from "./GlobalSettingsContext";
 
 export function SelectedElementsProvider({ children }) {
   return (
@@ -14,7 +15,9 @@ export function SelectedElementsProvider({ children }) {
           <FeaturesProvider>
             <NewsletterProvider>
               <StatsProvider>
-                <ColorProvider>{children}</ColorProvider>
+                <ColorProvider>
+                  <GlobalSettingsProvider>{children}</GlobalSettingsProvider>
+                </ColorProvider>
               </StatsProvider>
             </NewsletterProvider>
           </FeaturesProvider>

@@ -48,4 +48,5 @@ export function GlobalSettingsProvider({ children }) {
 
 // Custom hook to use the GlobalSettingsContext
 export function useGlobalSettings() {
-  return useContext(Global
+  return useContext(GlobalSettingsContext);
+}

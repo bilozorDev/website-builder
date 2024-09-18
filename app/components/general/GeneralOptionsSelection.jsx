@@ -9,8 +9,10 @@ import {
 import ColorPickerButton, { ColorPicker } from "../ui/ColorPickerButton";
 import { BlockPicker } from "react-color";
 import { useColor } from "@/app/contexts/ColorContext";
+import { useGlobalSettings } from "@/app/contexts/GlobalSettingsContext";
 
 const GeneralOptionsSelection = () => {
+    const {globalSettings} = useGlobalSettings(); 
     const { colors } = useColor(); // Make sure you access colors here
   return (
     <>
