@@ -10,6 +10,7 @@ import ColorPickerButton, { ColorPicker } from "../ui/ColorPickerButton";
 import { BlockPicker } from "react-color";
 import { useColor } from "@/app/contexts/ColorContext";
 import { useGlobalSettings } from "@/app/contexts/GlobalSettingsContext";
+import LogoUploader from "../ui/LogoUploader";
 
 const GeneralOptionsSelection = () => {
   const { globalSettings, setGlobalSettings } = useGlobalSettings();
@@ -105,6 +106,7 @@ const GeneralOptionsSelection = () => {
             Upload new logo
           </span>
         </button>
+        <LogoUploader/>
       </div>
       <hr className="my-5" />
       <SettingsTitle title="Colors" />
