@@ -116,7 +116,7 @@ const GeneralOptionsSelection = () => {
 
       {/* Example Section */}
       <div>
-        <h2 className="text-base font-semibold leading-7 text-gray-900">
+        <h2 className="text-base font-semibold leading-7 text-gray-900 border-t my-8 pt-5">
           Example:
         </h2>
         <div
