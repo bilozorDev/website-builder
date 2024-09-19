@@ -75,7 +75,6 @@ const LogoUploader = () => {
               src={image}
               style={{ height: "85%", width: "100%" }}
               className="absolute top-0 left-0 z-50"
-              aspectRatio={1}
               guides={false}
               ref={cropperRef}
             />

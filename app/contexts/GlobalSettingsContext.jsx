@@ -17,6 +17,9 @@ export function GlobalSettingsProvider({ children }) {
             backgroundColor: "#FFFFFF", // Default white
             textColor: "#000000",       // Default black
           },
+          logo: {
+            size: 20, // Default size
+          }
         };
   });
 

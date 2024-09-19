@@ -12,6 +12,7 @@ import { useColor } from "@/app/contexts/ColorContext";
 import { useGlobalSettings } from "@/app/contexts/GlobalSettingsContext";
 import LogoUploader from "../ui/LogoUploader";
 import logo from "@/public/uploads/logo.png"; 
+import LogoSizeSlider from "../LogoSizeSlider";
 const GeneralOptionsSelection = () => {
   const { globalSettings, setGlobalSettings } = useGlobalSettings();
   const [websiteName, setWebsiteName] = useState(globalSettings.title);
@@ -86,15 +87,9 @@ const GeneralOptionsSelection = () => {
             Current logo:
           </div>
           <div className="flex items-center h-full justify-center ">
-            <img
-              alt="Your Company"
-              src={logo.src}
-              className="max-h-24 w-auto"
-            />
+            <LogoSizeSlider logoUrl={logo.src}/>
           </div>
-          <div className=" tracking-tighter absolute w-full text-center bottom-0 text-gray-400">
-            Recommended ratio 1:1{" "}
-          </div>
+          
         </div>
        
         <LogoUploader/>
