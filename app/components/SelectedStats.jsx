@@ -1,8 +1,10 @@
+import { useGlobalSettings } from "../contexts/GlobalSettingsContext";
 import { useStats } from "../contexts/StatsContext";
 import useGetSelectedStyleId from "../hooks/useGetSelectedStyleId";
 
 export default function SelectedStats() {
   const { stats } = useStats();
+  const { globalSettings } = useGlobalSettings();
   const selectedId = useGetSelectedStyleId(stats.options.styleSelections);
   const { headline, subtitle, description } = stats.options;
   // Dynamically determine the grid class based on the number of stats
@@ -28,7 +30,10 @@ export default function SelectedStats() {
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
           <div className="px-6 pb-24 pt-16 sm:pb-32 sm:pt-20 lg:col-start-2 lg:px-8 lg:pt-32">
             <div className="mx-auto max-w-2xl lg:mr-0 lg:max-w-lg">
-              <h2 className="text-base font-semibold leading-8 text-indigo-600">
+              <h2
+                className="text-base font-semibold leading-8 text-indigo-600"
+                style={{ color: globalSettings.colors.brandColor }}
+              >
                 {subtitle.text}
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -44,10 +49,10 @@ export default function SelectedStats() {
                     className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6"
                   >
                     <dt className="text-sm leading-6 text-gray-600">
-                    {stat.description}
+                      {stat.description}
                     </dt>
                     <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">
-                       {stat.name}
+                      {stat.name}
                     </dd>
                   </div>
                 ))}
@@ -80,7 +85,8 @@ export default function SelectedStats() {
             />
           </div>
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-            <h2 className="text-base font-semibold leading-8 text-indigo-400">
+            <h2 className="text-base font-semibold leading-8 text-indigo-400"
+            style={{ color: globalSettings.colors.brandColor }}>
               {" "}
               {subtitle?.text}
             </h2>
@@ -111,41 +117,40 @@ export default function SelectedStats() {
   }
 
   return (
-    
-      <div className="bg-white py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {selectedId === "with_title" ? (
-            <div className="mx-auto max-w-2xl lg:max-w-none mb-12">
-              <div className="text-center">
-                <h2 className="text-base font-semibold leading-8 text-indigo-600">
-                  {subtitle?.text}
-                </h2>
-                <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  {headline?.text}
-                </p>
-                <p className="mt-4 text-lg max-w-2xl mx-auto leading-8 text-gray-600">
-                  {description.text}
-                </p>
-              </div>
+    <div className="bg-white py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {selectedId === "with_title" ? (
+          <div className="mx-auto max-w-2xl lg:max-w-none mb-12">
+            <div className="text-center">
+              <h2 className="text-base font-semibold leading-8 text-indigo-600"
+              style={{ color: globalSettings.colors.brandColor }}>
+                {subtitle?.text}
+              </h2>
+              <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                {headline?.text}
+              </p>
+              <p className="mt-4 text-lg max-w-2xl mx-auto leading-8 text-gray-600">
+                {description.text}
+              </p>
             </div>
-          ) : null}
+          </div>
+        ) : null}
 
-          <dl
-            className={`mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:${getGridColsClass()}`}
-          >
-            {stats.options.statsList.map((stat) => (
-              <div key={stat.id} className="flex flex-col bg-gray-400/5 p-8">
-                <dt className="text-sm font-semibold leading-6 text-gray-600">
-                  {stat.description}
-                </dt>
-                <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">
-                  {stat.name}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        <dl
+          className={`mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:${getGridColsClass()}`}
+        >
+          {stats.options.statsList.map((stat) => (
+            <div key={stat.id} className="flex flex-col bg-gray-400/5 p-8">
+              <dt className="text-sm font-semibold leading-6 text-gray-600">
+                {stat.description}
+              </dt>
+              <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">
+                {stat.name}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
-   
+    </div>
   );
 }
