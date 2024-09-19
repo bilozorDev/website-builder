@@ -4,17 +4,17 @@ import StyledButton from "./ui/StyledButton";
 import { v4 } from "uuid";
 import { useHero } from "../contexts/HeroContext";
 import useGetSelectedStyleId from "../hooks/useGetSelectedStyleId";
-import { useColor } from "../contexts/ColorContext";
+import { useGlobalSettings } from "../contexts/GlobalSettingsContext";
 
 export default function SelectedHero() {
   const { hero } = useHero();
-  const { colors } = useColor();
+  const { globalSettings } = useGlobalSettings();
   const { news, headline, description, cta, styleSelections } = hero.options;
   const selectedId = useGetSelectedStyleId(styleSelections);
   return (
     <>
-      <div className="bg-white" style={{ backgroundColor: colors.backgroundColor }}>
-        <div className="relative isolate px-6 pt-14 lg:px-8" >
+      <div className="bg-white">
+        <div className="relative isolate px-6 pt-14 lg:px-8">
           {/* <div
             aria-hidden="true"
             className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -37,12 +37,15 @@ export default function SelectedHero() {
                     : "sm:justify-center"
                 }`}
               >
-                <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20"  style={{ color: colors.textColor }}>
+                <div
+                  className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                  style={{ color: globalSettings.colors.textColor }}
+                >
                   {news?.text}{" "}
                   <Link
                     href={news?.link || "#"}
                     className="font-semibold text-indigo-600"
-                    style={{ color: colors.brandColor }}
+                    style={{ color: globalSettings.colors.brandColor }}
                   >
                     <span aria-hidden="true" className="absolute inset-0" />
                     Read more <span aria-hidden="true">&rarr;</span>
@@ -57,10 +60,16 @@ export default function SelectedHero() {
                     : "text-center"
                 }
               >
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"  style={{ color: colors.textColor }}>
+                <h1
+                  className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
+                  style={{ color: globalSettings.colors.textColor }}
+                >
                   {headline?.text}
                 </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600"  style={{ color: colors.textColor }}>
+                <p
+                  className="mt-6 text-lg leading-8 text-gray-600"
+                  style={{ color: globalSettings.colors.textColor }}
+                >
                   {description?.text}
                 </p>
                 <div

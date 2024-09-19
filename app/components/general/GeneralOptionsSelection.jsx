@@ -103,10 +103,10 @@ const GeneralOptionsSelection = () => {
         </h2>
         <ColorPickerButton colorType="brandColor" />
 
-        <h2 className="text-base font-semibold leading-7 text-gray-900">
+        {/* <h2 className="text-base font-semibold leading-7 text-gray-900">
           Background color:
         </h2>
-        <ColorPickerButton colorType="backgroundColor" />
+        <ColorPickerButton colorType="backgroundColor" /> */}
 
         <h2 className="text-base font-semibold leading-7 text-gray-900">
           Text color:
