@@ -5,6 +5,7 @@ import useSelectedFeatureStyle from "../hooks/useGetSelectedStyleId";
 import FeaturesWrapper from "./features/FeaturesWrapper";
 import { useFeatures } from "../contexts/FeaturesContext";
 import { useColor } from "../contexts/ColorContext";
+import { useGlobalSettings } from "../contexts/GlobalSettingsContext";
 
 export default function SelectedFeatures() {
   const { features } = useFeatures();
@@ -14,7 +15,7 @@ export default function SelectedFeatures() {
   const selectedIconsId = useSelectedFeatureStyle(iconsStyle);
   const { listStyle } = features.options;
   const selectedIdForList = useSelectedFeatureStyle(listStyle);
-  const {colors}=  useColor()
+  const { globalSettings } = useGlobalSettings();
   const {
     subtitle = "Deploy faster",
     headline = "Everything you need to deploy your app",
@@ -24,22 +25,25 @@ export default function SelectedFeatures() {
   if (selectedId === "headline-left-and-features-list-on-right") {
     return (
       <>
-        <div className="bg-white py-24 sm:py-32" style={{ backgroundColor: colors.backgroundColor }}>
+        <div className="bg-white py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto grid max-w-2xl grid-cols-1 vertical gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               <div>
-                <h2 className="text-base font-semibold leading-7 text-indigo-600"
-                  style={{ color: colors.brandColor }}
+                <h2
+                  className="text-base font-semibold leading-7 text-indigo-600"
+                  style={{ color: globalSettings.colors.brandColor }}
                 >
                   {subtitle.text}
                 </h2>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
-                  style={{ color: colors.textColor }}
+                <p
+                  className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                  style={{ color: globalSettings.colors.textColor }}
                 >
                   {headline.text}
                 </p>
-                <p className="mt-6 text-base leading-7 text-gray-600"
-                  style={{ color: colors.textColor }}
+                <p
+                  className="mt-6 text-base leading-7 text-gray-600"
+                  style={{ color: globalSettings.colors.textColor }}
                 >
                   {description.text}
                 </p>
@@ -47,20 +51,27 @@ export default function SelectedFeatures() {
               <dl className="col-span-2 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 text-gray-600 sm:grid-cols-2 lg:gap-y-16">
                 {featuresList.map((feature) => (
                   <div key={feature.name} className="relative pl-9">
-                    <dt className="font-semibold text-gray-900"
-                      style={{ color: colors.textColor }}
+                    <dt
+                      className="font-semibold text-gray-900"
+                      style={{ color: globalSettings.colors.textColor }}
                     >
                       <SelectedIcon
                         selectedId={selectedId}
                         iconName={feature.icon}
                       />
-                      <div className="mt-2"
-                        style={{ color: colors.textColor }}
-                      >{feature.name}</div>
+                      <div
+                        className="mt-2"
+                        style={{ color: globalSettings.colors.textColor }}
+                      >
+                        {feature.name}
+                      </div>
                     </dt>
-                    <dd className="mt-2"
-                      style={{ color: colors.textColor }}
-                    >{feature.description}</dd>
+                    <dd
+                      className="mt-2"
+                      style={{ color: globalSettings.colors.textColor }}
+                    >
+                      {feature.description}
+                    </dd>
                   </div>
                 ))}
               </dl>
@@ -74,8 +85,10 @@ export default function SelectedFeatures() {
     <>
       <FeaturesWrapper>
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-600"
-           style={{ backgroundColor: colors.brandColor }}>
+          <h2
+            className="text-base font-semibold leading-7 text-indigo-600"
+            style={{ color: globalSettings.colors.brandColor }}
+          >
             {subtitle.text}
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -110,10 +123,16 @@ export default function SelectedFeatures() {
             <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
               {featuresList.map((feature) => (
                 <div key={feature.name} className="relative pl-9 flex flex-row">
-                  <SelectedIcon selectedId={selectedId} iconName={feature.icon} />
+                  <SelectedIcon
+                    selectedId={selectedId}
+                    iconName={feature.icon}
+                  />
 
                   <dd className="flex-inline ml-4">
-                    <span className="font-semibold text-gray-900 ">
+                    <span
+                      className="font-semibold text-gray-900 "
+                      style={{ color: globalSettings.colors.brandColor }}
+                    >
                       {" "}
                       {feature.name}
                     </span>{" "}
@@ -134,29 +153,30 @@ export default function SelectedFeatures() {
             >
               {featuresList.map((feature) => {
                 // console.log("feature:" + JSON.stringify(feature));
-                return(
-                <div key={feature.name} className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7 text-gray-900">
-                    <div className="absolute left-0 top-0 ">
-                      <SelectedIcon
-                        selectedId={selectedIconsId}
-                        iconName={feature.icon}
-                      />
-                    </div>
-                    {feature.link ? (
-                      <a href={feature.link} className="text-blue-800">
-                        {feature.name}{" "}
-                        <LinkIcon className="w-3 -top-1 relative inline-block" />
-                      </a>
-                    ) : (
-                      feature.name
-                    )}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-gray-600">
-                    {feature.description}
-                  </dd>
-                </div>
-              )})}
+                return (
+                  <div key={feature.name} className="relative pl-16">
+                    <dt className="text-base font-semibold leading-7 text-gray-900">
+                      <div className="absolute left-0 top-0 ">
+                        <SelectedIcon
+                          selectedId={selectedIconsId}
+                          iconName={feature.icon}
+                        />
+                      </div>
+                      {feature.link ? (
+                        <a href={feature.link} className="text-blue-800"   style={{ color: globalSettings.colors.brandColor }}>
+                          {feature.name}{" "}
+                          <LinkIcon className="w-3 -top-1 relative inline-block" />
+                        </a>
+                      ) : (
+                        feature.name
+                      )}
+                    </dt>
+                    <dd className="mt-2 text-base leading-7 text-gray-600">
+                      {feature.description}
+                    </dd>
+                  </div>
+                );
+              })}
             </dl>
           )}
         </div>
