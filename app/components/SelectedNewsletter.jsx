@@ -2,6 +2,7 @@ import NewsletterWrapper from "./newsletter/NewsletterWrapper";
 import SelectedIconStyle from "./SelectedIconStyle";
 import { useNewsletter } from "../contexts/NewsletterContext";
 import useGetSelectedStyleId from "../hooks/useGetSelectedStyleId";
+import { useGlobalSettings } from "../contexts/GlobalSettingsContext";
 
 export default function SelectedNewsletter() {
   const { newsletter } = useNewsletter();
@@ -9,7 +10,7 @@ export default function SelectedNewsletter() {
   const selectedIconId = useGetSelectedStyleId(iconsStyle);
   const { styleSelections } = newsletter.options;
   const selectedId = useGetSelectedStyleId(styleSelections);
-
+  const { globalSettings } = useGlobalSettings();
   if (selectedId === "with-bullet-points") {
     return (
       <div className="relative isolate overflow-hidden py-16 sm:py-24 lg:py-32">
@@ -39,6 +40,9 @@ export default function SelectedNewsletter() {
                   <button
                     type="submit"
                     className="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    style={{
+                      backgroundColor: globalSettings.colors.brandColor,
+                    }}
                   >
                     {newsletter?.options?.button?.text}
                   </button>
@@ -48,6 +52,7 @@ export default function SelectedNewsletter() {
                   <a
                     href={newsletter?.options?.privacyNote?.link}
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    style={{ color: globalSettings.colors.brandColor }}
                   >
                     privacy&nbsp;policy
                   </a>
@@ -57,21 +62,23 @@ export default function SelectedNewsletter() {
             </div>
             <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
               <div className="flex flex-col items-start">
-                
-                <SelectedIconStyle selectedId={selectedIconId} iconName={newsletter.options.bulletPoints[0].icon} />
-                
-                <dt className="mt-4 font-semibold ">
-                  Weekly articles
-                </dt>
+                <SelectedIconStyle
+                  selectedId={selectedIconId}
+                  iconName={newsletter.options.bulletPoints[0].icon}
+                />
+
+                <dt className="mt-4 font-semibold ">Weekly articles</dt>
                 <dd className="mt-2 leading-7 text-gray-800">
                   Non laboris consequat cupidatat laborum magna. Eiusmod non
                   irure cupidatat duis commodo amet.
                 </dd>
               </div>
               <div className="flex flex-col items-start">
-                
-                <SelectedIconStyle selectedId={selectedIconId} iconName={newsletter.options.bulletPoints[1].icon} />
-                
+                <SelectedIconStyle
+                  selectedId={selectedIconId}
+                  iconName={newsletter.options.bulletPoints[1].icon}
+                />
+
                 <dt className="mt-4 font-semibold ">No spam</dt>
                 <dd className="mt-2 leading-7 text-gray-800">
                   Officia excepteur ullamco ut sint duis proident non
@@ -113,6 +120,7 @@ export default function SelectedNewsletter() {
                   <button
                     type="submit"
                     className="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    style={{ backgroundColor: globalSettings.colors.brandColor }}
                   >
                     {newsletter?.options?.button?.text}
                   </button>
@@ -122,6 +130,7 @@ export default function SelectedNewsletter() {
                   <a
                     href={newsletter?.options?.privacyNote?.link}
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    style={{ color: globalSettings.colors.brandColor }}
                   >
                     privacy&nbsp;policy
                   </a>
@@ -163,6 +172,7 @@ export default function SelectedNewsletter() {
             <button
               type="submit"
               className="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              style={{ backgroundColor: globalSettings.colors.brandColor }}
             >
               {newsletter?.options?.button?.text}
             </button>
@@ -172,6 +182,7 @@ export default function SelectedNewsletter() {
             <a
               href={newsletter?.options?.privacyNote?.link}
               className="font-semibold text-indigo-600 hover:text-indigo-500"
+              style={{ color: globalSettings.colors.brandColor }}
             >
               privacy&nbsp;policy
             </a>
