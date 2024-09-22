@@ -70,6 +70,7 @@ export function FooterProvider({ children }) {
               },
             ],
             copyright: { companyName: "Your Company Name"},
+            companyMission: {text:"Making the world a better place through constructing elegant hierarchies."},
           },
         };
   });

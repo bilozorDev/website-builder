@@ -1,19 +1,26 @@
 import React from "react";
 
-const TextInput = ({ text = "", value = "", onChange, placeholder = "" }) => {
+const TextInput = ({
+  text = "",
+  value = "",
+  onChange,
+  placeholder = "",
+  disabled = false,
+}) => {
   return (
     <InputField
       text={text}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      disabled={disabled}
     />
   );
 };
 
 export default TextInput;
 
-const InputField = ({ text, value, onChange, placeholder }) => {
+const InputField = ({ text, value, onChange, placeholder, disabled }) => {
   const replaceWhiteSpacesWithDashes = (string) => {
     return string.replace(" ", "-").toLowerCase();
   };
@@ -31,10 +38,11 @@ const InputField = ({ text, value, onChange, placeholder }) => {
           id={replaceWhiteSpacesWithDashes(text)}
           name={replaceWhiteSpacesWithDashes(text)}
           type="text"
+          disabled={disabled}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+          className={`block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 ${disabled ? "opacity-50 hover:cursor-not-allowed" : ""}`}
         />
       </div>
     </div>

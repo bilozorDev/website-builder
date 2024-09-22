@@ -13,6 +13,7 @@ const FooterDataInput = () => {
 
   const settings = footer.options.styleSelections;
   const [selectedStyle, setSelectedStyle] = useState(initialSelectedStyle);
+  console.log(initialSelectedStyle);
   useEffect(() => {
     setFooter((prev) => ({
       ...prev,
@@ -25,7 +26,7 @@ const FooterDataInput = () => {
       },
     }));
   }, [selectedStyle]);
-
+  console.log("selectedStyle:" + selectedStyle.id);
   return (
     <>
       <SettingsTitle title="Style" />
@@ -85,6 +86,32 @@ const FooterDataInput = () => {
         }
         placeholder="Apple, Inc."
       />
+      <div className="mt-5">
+        <TextInput
+          text="Company Mission"
+          value={footer.options.companyMission.text}
+          onChange={(e) =>
+            setFooter((prev) => ({
+              ...prev,
+              options: {
+                ...prev.options,
+                companyMission: { text: e.target.value },
+              },
+            }))
+          }
+          disabled={
+            selectedStyle.id !== "4-columns" &&
+            selectedStyle.id !== "4-columns_with_newsletter"
+          }
+          placeholder="Apple, Inc."
+        />
+        {selectedStyle.id === "4-columns" ||
+        selectedStyle.id === "4-columns_with_newsletter" ? null : (
+          <span className="text-sm text-gray-400">
+            Only available in 4 column design
+          </span>
+        )}
+      </div>
     </>
   );
 };
