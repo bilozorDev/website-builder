@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const useGetSelectedStyleId = (styleSelections) => {
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
-    const selectedStyle = styleSelections.find(style => style.selected === true);
+    const selectedStyle = styleSelections.find(
+      (style) => style.selected === true
+    );
     if (selectedStyle) {
       setSelectedId(selectedStyle.id);
     } else {

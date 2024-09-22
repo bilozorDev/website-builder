@@ -12,13 +12,16 @@ import { useNewsletter } from "./contexts/NewsletterContext";
 import { useState } from "react";
 import { useStats } from "./contexts/StatsContext";
 import SelectedStats from "./components/SelectedStats";
+import { useFooter } from "./contexts/FooterContext";
+import SelectedFooter from "./components/SelectedFooter";
 
 export default function Home() {
   const { hero } = useHero();
   const { features } = useFeatures();
   const { newsletter } = useNewsletter();
   const { stats } = useStats();
-
+  const {footer } = useFooter();
+  
   const [open, setOpen] = useState(true);
   return (
     <div className="relative">
@@ -32,7 +35,9 @@ export default function Home() {
       {features.display ? <SelectedFeatures /> : null}
       {/* Display Newsletter block */}
       {newsletter.display ? <SelectedNewsletter /> : null}
-      
+      {/* Display Footer block */}
+      {footer.display ? <SelectedFooter /> : null}
+
 
       {/* Show Settings sidebar */}
       <div

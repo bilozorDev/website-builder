@@ -5,6 +5,7 @@ import classNamesJoin from "../utils/classNamesJoin";
 import { useStep } from "../contexts/StepContext";
 import GeneralOptionsSelection from "./general/GeneralOptionsSelection";
 import HeaderDataInput from "./header/HeaderDataInput";
+import FooterDataInput from "./footer/FooterDataInput";
 
 const tabs = [
   { name: "General", value: "General" },
@@ -31,7 +32,7 @@ export default function SettingsTabs() {
       case "Body":
         return <BodyOptionsSelection />;
       case "Footer":
-        return <div>Footer Content</div>;
+        return <FooterDataInput />;
       default:
         return <div>Select a tab to start customizing</div>;
     }
