@@ -4,6 +4,8 @@ import SettingsTitle from "../ui/SettingsTitle";
 import { Radio, RadioGroup } from "@headlessui/react";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import TextInput from "../ui/TextInput";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { SocialMediaIcon } from "./SocialMediaIcons";
 
 const FooterDataInput = () => {
   const { footer, setFooter } = useFooter();
@@ -112,6 +114,43 @@ const FooterDataInput = () => {
           </span>
         )}
       </div>
+
+      <hr className="my-5" />
+
+      {footer.options.socialMediaLinks.map((socialMediaLink) => (
+        <div>
+       
+        <div className="relative mt-3 rounded-md shadow-sm">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <SocialMediaIcon name={socialMediaLink.icon} className="h-6 w-6" />
+          </div>
+          <input
+            id={socialMediaLink.name}
+            name={socialMediaLink.name}
+            type="text"
+            value={socialMediaLink.href}
+            onChange={(e) =>
+              setFooter((prev) => ({
+                ...prev,
+                options: {
+                  ...prev.options,
+                  socialMediaLinks: prev.options.socialMediaLinks.map((link) =>
+                    link.name === socialMediaLink.name
+                      ? { ...link, href: e.target.value }
+                      : link
+                  ),
+                },
+              }))
+            }
+            placeholder={`${socialMediaLink.name} URL`}
+            className="block w-full rounded-md border-0 py-1.5 pl-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
+      </div>
+      
+      
+      ))}
+      
     </>
   );
 };
