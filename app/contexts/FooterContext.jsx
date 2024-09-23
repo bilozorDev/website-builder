@@ -28,20 +28,20 @@ export function FooterProvider({ children }) {
                 description: "Inlcudes social links and page links",
                 selected: false,
               },
-              {
-                id: "4-columns",
-                name: "4 columns",
-                description:
-                  "4 columns with links and social links on the bottom",
-                selected: false,
-              },
-              {
-                id: "4-columns_with_newsletter",
-                name: "4 columns with newsletter form",
-                description:
-                  "4 columns with links and social links on the bottom and newsletter form",
-                selected: false,
-              },
+            //   {
+            //     id: "4-columns",
+            //     name: "4 columns",
+            //     description:
+            //       "4 columns with links and social links on the bottom",
+            //     selected: false,
+            //   },
+            //   {
+            //     id: "4-columns_with_newsletter",
+            //     name: "4 columns with newsletter form",
+            //     description:
+            //       "4 columns with links and social links on the bottom and newsletter form",
+            //     selected: false,
+            //   },
             ],
             socialMediaLinks: [
               {

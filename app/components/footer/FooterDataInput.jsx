@@ -141,7 +141,7 @@ const FooterDataInput = () => {
         }
         placeholder="Apple, Inc."
       />
-      <div className="mt-5">
+      {/* <div className="mt-5">
         <TextInput
           text="Company Mission"
           value={footer.options.companyMission.text}
@@ -171,7 +171,7 @@ const FooterDataInput = () => {
         >
           Only available in 4 column design
         </span>
-      </div>
+      </div> */}
 
       <hr className="mb-5" />
       <SettingsTitle title="Social Media Links" />
