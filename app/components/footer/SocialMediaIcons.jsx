@@ -42,7 +42,7 @@ const icons = {
     ),
   };
   export function SocialMediaIcon({ name, className }) {
-    const IconComponent = icons[name.toLowerCase()]; // Ensure the name is lowercase for consistency
+    const IconComponent = icons[name]; // Ensure the name is lowercase for consistency
     if (!IconComponent) {
       console.warn(`Icon "${name}" not found`);
       return null;

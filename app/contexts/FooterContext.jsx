@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
+import { v4 } from "uuid";
 
 // Create the Footer Context
 const FooterContext = createContext();
@@ -73,6 +74,12 @@ export function FooterProvider({ children }) {
                 id: "youtube",
                 icon: "youtube",
               },
+            ],
+            menuItems: [
+                { name: "Home", href: "#", id: v4() },
+                { name: "About", href: "#", id: v4() },
+                { name: "Contact", href: "#", id: v4() },
+                { name: "Blog", href: "#", id: v4() },
             ],
             copyright: { companyName: "Your Company Name"},
             companyMission: {text:"Making the world a better place through constructing elegant hierarchies."},

@@ -5,7 +5,6 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import TextInput from "../ui/TextInput";
 import { SocialMediaIcon } from "./SocialMediaIcons";
-import { Reorder } from "framer-motion";
 import DraggableList from "../ui/DraggableList";
 
 const FooterDataInput = () => {
@@ -13,11 +12,23 @@ const FooterDataInput = () => {
   const initialSelectedStyle =
     footer.options.styleSelections.find((style) => style.selected) ||
     footer.options.styleSelections[0];
-
-  const settings = footer.options.styleSelections;
+  
+  // Use state directly from footer context
+  const [menuItems, setMenuItems] = useState(footer.options.menuItems);
   const [selectedStyle, setSelectedStyle] = useState(initialSelectedStyle);
 
-  // Update footer style selection when `selectedStyle` changes
+  const settings = footer.options.styleSelections;
+
+  // Handle reordering of social media links
+  const handleSocialMediaReorder = (newOrder) => {
+    setFooter((prev) => ({
+      ...prev,
+      options: {
+        ...prev.options,
+        socialMediaLinks: newOrder,
+      },
+    }));
+  };
   useEffect(() => {
     setFooter((prev) => ({
       ...prev,
@@ -31,12 +42,42 @@ const FooterDataInput = () => {
     }));
   }, [selectedStyle]);
 
-  const handleReorder = (newOrder) => {
+  // Handle changes in social media link fields (href)
+  const handleSocialMediaLinkChange = (name, value) => {
     setFooter((prev) => ({
       ...prev,
       options: {
         ...prev.options,
-        socialMediaLinks: newOrder,
+        socialMediaLinks: prev.options.socialMediaLinks.map((link) =>
+          link.name === name ? { ...link, href: value } : link
+        ),
+      },
+    }));
+  };
+
+  // Handle menu item field changes
+  const handleMenuItemChange = (index, field, value) => {
+    const updatedMenuItems = menuItems.map((item, idx) =>
+      idx === index ? { ...item, [field]: value } : item
+    );
+    setMenuItems(updatedMenuItems);
+    setFooter((prev) => ({
+      ...prev,
+      options: {
+        ...prev.options,
+        menuItems: updatedMenuItems,
+      },
+    }));
+  };
+
+  // Handle reordering of menu items
+  const handleMenuItemsReorder = (newOrder) => {
+    setMenuItems(newOrder);
+    setFooter((prev) => ({
+      ...prev,
+      options: {
+        ...prev.options,
+        menuItems: newOrder,
       },
     }));
   };
@@ -137,7 +178,7 @@ const FooterDataInput = () => {
 
       <DraggableList
         items={footer.options.socialMediaLinks}
-        onReorder={handleReorder}
+        onReorder={handleSocialMediaReorder}
         renderItem={(item) => (
           <div className="relative mt-3 ">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -148,22 +189,59 @@ const FooterDataInput = () => {
               name={item.name}
               type="text"
               value={item.href}
-              onChange={(e) =>
-                setFooter((prev) => ({
-                  ...prev,
-                  options: {
-                    ...prev.options,
-                    socialMediaLinks: prev.options.socialMediaLinks.map((link) =>
-                      link.name === item.name
-                        ? { ...link, href: e.target.value }
-                        : link
-                    ),
-                  },
-                }))
-              }
+              onChange={(e) => handleSocialMediaLinkChange(item.name, e.target.value)}
               placeholder={`${item.name} URL`}
               className="block w-full rounded-md border-0 py-1.5 pl-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
+          </div>
+        )}
+      />
+
+      <SettingsTitle title="Menu Items" />
+
+      <DraggableList
+        items={menuItems}
+        onReorder={handleMenuItemsReorder}
+        renderItem={(item, index) => (
+          <div className="isolate -space-y-px rounded-md shadow-sm">
+            <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+              <label
+                htmlFor={`menu-item-name-${index}`}
+                className="block text-xs font-medium text-gray-500"
+              >
+                Link Name
+              </label>
+              <input
+                id={`menu-item-name-${index}`}
+                name={`menu-item-name-${index}`}
+                type="text"
+                value={item.name}
+                onChange={(e) =>
+                  handleMenuItemChange(index, "name", e.target.value)
+                }
+                placeholder="Link name"
+                className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              />
+            </div>
+            <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+              <label
+                htmlFor={`menu-item-link-${index}`}
+                className="block text-xs font-medium text-gray-500"
+              >
+                Link URL
+              </label>
+              <input
+                id={`menu-item-link-${index}`}
+                name={`menu-item-link-${index}`}
+                type="text"
+                value={item.href}
+                onChange={(e) =>
+                  handleMenuItemChange(index, "href", e.target.value)
+                }
+                placeholder="https://example.com"
+                className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              />
+            </div>
           </div>
         )}
       />
