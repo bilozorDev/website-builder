@@ -46,26 +46,31 @@ export function FooterProvider({ children }) {
               {
                 name: "Facebook",
                 href: "ss",
+                id: "facebook",
                 icon: "facebook",
               },
               {
                 name: "Instagram",
                 href: "#",
+                id: "instagram",
                 icon: "instagram",
               },
               {
                 name: "x",
                 href: null,
+                id: "x",
                 icon: "x",
               },
               {
                 name: "GitHub",
                 href: "#",
+                id: "github",
                 icon: "github",
               },
               {
                 name: "YouTube",
                 href: "#",
+                id: "youtube",
                 icon: "youtube",
               },
             ],

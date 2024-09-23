@@ -4,6 +4,7 @@ import HamburgerMenuOpener from "./header/HamburgerMenuOpener";
 import MobileMenuDialog from "./header/MobileMenuDialog";
 import Logo from "./header/Logo";
 import NavWrapper from "./header/NavWrapper";
+import {SelectedIconStyle} from "@/app/components/SelectedIconStyle";
 import {
   Popover,
   PopoverButton,
@@ -12,6 +13,7 @@ import {
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useHeader } from "../contexts/HeaderContext";
+
 
 // Utility function to convert hex color to RGB
 function hexToRgb(hex) {
@@ -48,7 +50,7 @@ function getTextColorForBackground(hexColor) {
 export default function SelectedHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { header } = useHeader();
-  console.log(header.alignment.selected)
+  
   // Determine text color based on background color
   const textColor = getTextColorForBackground(header?.bgColor || "#ffffff");
   // console.log(header.menuItems)
@@ -84,10 +86,8 @@ export default function SelectedHeader() {
                           className="group relative rounded-lg p-6 text-sm leading-6 hover:bg-gray-50"
                         >
                           <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                            <item.icon
-                              aria-hidden="true"
-                              className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
-                            />
+                           {/* <SelectedIconStyle name={item.icon} className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" /> */}
+                           icon
                           </div>
                           <a
                             href={item.href}
@@ -111,10 +111,11 @@ export default function SelectedHeader() {
                               href={item.href}
                               className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
                             >
-                              <item.icon
+                              {/* <item.icon
                                 aria-hidden="true"
                                 className="h-5 w-5 flex-none text-gray-400"
-                              />
+                              /> */}
+                              icon
                               {item.name}
                             </a>
                           ))}

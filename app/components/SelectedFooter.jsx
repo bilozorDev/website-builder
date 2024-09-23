@@ -43,7 +43,7 @@ const SelectedFooter = () => {
   const { footer } = useFooter();
   const { styleSelections } = footer.options;
   const selectedId = useSelectedFeatureStyle(styleSelections);
- 
+
   if (selectedId === "4-columns") {
     return (
       <footer aria-labelledby="footer-heading" className="bg-white">
@@ -53,7 +53,7 @@ const SelectedFooter = () => {
         <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
             <div className="space-y-8">
-            <Logo/>
+              <Logo />
               <p className="text-sm leading-6 text-gray-600">
                 {footer.options.companyMission.text}
               </p>
@@ -152,8 +152,8 @@ const SelectedFooter = () => {
           </div>
           <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
             <p className="text-xs leading-5 text-gray-500">
-            &copy; {new Date().getFullYear()}{" "}
-            {footer.options.copyright.companyName}. All rights reserved.
+              &copy; {new Date().getFullYear()}{" "}
+              {footer.options.copyright.companyName}. All rights reserved.
             </p>
           </div>
         </div>
@@ -187,17 +187,15 @@ const SelectedFooter = () => {
         <div className="flex justify-center space-x-6 md:order-2 ">
           {footer.options.socialMediaLinks.map((item) =>
             item.href ? (
-              <>
-                <a
-                  key={item.name}
-                  target="_blank"
-                  href={item.href}
-                  className="text-gray-400 hover:text-gray-500"
-                >
-                  <span className="sr-only">{item.name}</span>
-                  <SocialMediaIcon name={item.icon} className="h-6 w-6" />
-                </a>
-              </>
+              <a
+                key={item.name}
+                target="_blank"
+                href={item.href}
+                className="text-gray-400 hover:text-gray-500"
+              >
+                <span className="sr-only">{item.name}</span>
+                <SocialMediaIcon name={item.icon} className="h-6 w-6" />
+              </a>
             ) : null
           )}
         </div>
