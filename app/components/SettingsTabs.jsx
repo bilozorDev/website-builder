@@ -6,13 +6,14 @@ import { useStep } from "../contexts/StepContext";
 import GeneralOptionsSelection from "./general/GeneralOptionsSelection";
 import HeaderDataInput from "./header/HeaderDataInput";
 import FooterDataInput from "./footer/FooterDataInput";
+import GalleryDataInput from "./gallery/GalleryDataInput";
 
 const tabs = [
   { name: "General", value: "General" },
   { name: "Header", value: "Header", count: "12" },
   { name: "Body", value: "Body", count: "6" },
   { name: "Footer", value: "Footer", count: "4" },
-  { name: "Description", value: "Description" },
+  { name: "Gallery", value: "Gallery" },
   { name: "Disqualified", value: "Disqualified" },
 ];
 
@@ -33,6 +34,8 @@ export default function SettingsTabs() {
         return <BodyOptionsSelection />;
       case "Footer":
         return <FooterDataInput />;
+      case "Gallery":
+        return <GalleryDataInput />;
       default:
         return <div>Select a tab to start customizing</div>;
     }
