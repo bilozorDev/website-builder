@@ -107,50 +107,59 @@ const FooterDataInput = () => {
           }
           placeholder="Apple, Inc."
         />
-        {selectedStyle.id === "4-columns" ||
-        selectedStyle.id === "4-columns_with_newsletter" ? null : (
-          <span className="text-sm text-gray-400">
+        
+          <span className={`text-sm ${selectedStyle.id === "4-columns" ||
+        selectedStyle.id === "4-columns_with_newsletter" ? "text-transparent": "text-gray-400"}`}>
             Only available in 4 column design
           </span>
-        )}
+        
       </div>
 
-      <hr className="my-5" />
-
-      {footer.options.socialMediaLinks.map((socialMediaLink) => (
-        <div>
-       
-        <div className="relative mt-3 rounded-md shadow-sm">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <SocialMediaIcon name={socialMediaLink.icon} className="h-6 w-6" />
+      <hr className="mb-5" />
+      <SettingsTitle title="Social Media Links" />
+      <div
+        className={`${
+          selectedStyle.id === "default"
+            ? "opacity-50 hover:cursor-not-allowed"
+            : null
+        }`}
+      >
+        {footer.options.socialMediaLinks.map((socialMediaLink) => (
+          <div>
+            <div className="relative mt-3 rounded-md shadow-sm">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <SocialMediaIcon
+                  name={socialMediaLink.icon}
+                  className="h-6 w-6"
+                />
+              </div>
+              <input
+                id={socialMediaLink.name}
+                name={socialMediaLink.name}
+                type="text"
+                disabled={selectedStyle.id === "default"}
+                value={socialMediaLink.href}
+                onChange={(e) =>
+                  setFooter((prev) => ({
+                    ...prev,
+                    options: {
+                      ...prev.options,
+                      socialMediaLinks: prev.options.socialMediaLinks.map(
+                        (link) =>
+                          link.name === socialMediaLink.name
+                            ? { ...link, href: e.target.value }
+                            : link
+                      ),
+                    },
+                  }))
+                }
+                placeholder={`${socialMediaLink.name} URL`}
+                className="block w-full rounded-md border-0 py-1.5 pl-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
           </div>
-          <input
-            id={socialMediaLink.name}
-            name={socialMediaLink.name}
-            type="text"
-            value={socialMediaLink.href}
-            onChange={(e) =>
-              setFooter((prev) => ({
-                ...prev,
-                options: {
-                  ...prev.options,
-                  socialMediaLinks: prev.options.socialMediaLinks.map((link) =>
-                    link.name === socialMediaLink.name
-                      ? { ...link, href: e.target.value }
-                      : link
-                  ),
-                },
-              }))
-            }
-            placeholder={`${socialMediaLink.name} URL`}
-            className="block w-full rounded-md border-0 py-1.5 pl-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-        </div>
+        ))}
       </div>
-      
-      
-      ))}
-      
     </>
   );
 };
