@@ -1,114 +1,134 @@
 import React, { useState, useEffect } from "react";
-
-// Mock data for uploaded images and their usage (in real scenario, this would come from an API or database)
-const mockImages = [
-  {
-    id: 1,
-    src: "https://via.placeholder.com/150",
-    name: "Image 1",
-    usedIn: [
-      { type: "post", title: "How to Code", url: "/posts/how-to-code" },
-      { type: "page", title: "About Us", url: "/about" },
-    ],
-    uploadDate: "2023-09-01",
-    fileSize: "150 KB",
-  },
-  {
-    id: 2,
-    src: "https://via.placeholder.com/150",
-    name: "Image 2",
-    usedIn: [{ type: "post", title: "React Components", url: "/posts/react-components" }],
-    uploadDate: "2023-08-25",
-    fileSize: "200 KB",
-  },
-];
+import { useDropzone } from "react-dropzone";
+import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
+import { storage } from "../lib/firebase";
 
 // ImageItem Component: Displays each image and where it is used
-const ImageItem = ({ image, onClick }) => {
+const ImageItem = ({ image, onClick }) => (
+  <div className="border p-2">
+    <img src={image.src} alt={image.name} className="w-full h-auto" onClick={() => onClick(image)} />
+    <h4 className="text-sm mt-2">{image.name}</h4>
+  </div>
+);
+
+// ImageModal Component: Shows detailed image information
+const ImageModal = ({ image, onClose }) => {
+  if (!image) return null;
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="border p-2">
-      <img src={image.src} alt={image.name} className="w-full h-auto" onClick={() => onClick(image)} />
-      <h4 className="text-sm mt-2">{image.name}</h4>
-      <p className="text-xs text-gray-500">Used in:</p>
-      <ul className="list-disc pl-4 text-xs text-gray-600">
-        {image.usedIn.map((usage, idx) => (
-          <li key={idx}>
-            <a href={usage.url} className="text-indigo-600 underline">
-              {usage.title} ({usage.type})
-            </a>
-          </li>
-        ))}
-      </ul>
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center" onClick={handleOverlayClick}>
+      <div className="bg-white p-4 rounded shadow-lg relative">
+        <button onClick={onClose} className="absolute top-0 right-0 m-4">
+          Close
+        </button>
+        <img src={image.src} alt={image.name} className="w-48 h-auto mx-auto mb-4" />
+        <h3 className="text-lg font-bold">{image.name}</h3>
+      </div>
     </div>
   );
 };
 
-// Modal Component: Shows detailed image information
-const ImageModal = ({ image, onClose }) => {
-    if (!image) return null;
-  
-    // This function closes the modal only when clicking outside of the modal content
-    const handleOverlayClick = (e) => {
-      if (e.target === e.currentTarget) {
-        onClose();
-      }
-    };
-  
-    return (
-      <div
-        className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center"
-        onClick={handleOverlayClick} // Close modal on outside click
-      >
-        <div className="bg-white p-4 rounded shadow-lg relative">
-          <button onClick={onClose} className="absolute top-0 right-0 m-4">
-            Close
-          </button>
-          <img src={image.src} alt={image.name} className="w-48 h-auto mx-auto mb-4" />
-          <h3 className="text-lg font-bold">{image.name}</h3>
-          <p className="text-sm text-gray-500">Uploaded: {image.uploadDate}</p>
-          <p className="text-sm text-gray-500">File Size: {image.fileSize}</p>
-          <h4 className="text-sm mt-4">Used in:</h4>
-          <ul className="list-disc pl-4 text-sm">
-            {image.usedIn.map((usage, idx) => (
-              <li key={idx}>
-                <a href={usage.url} className="text-indigo-600 underline">
-                  {usage.title} ({usage.type})
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  };
-  
-
-// Main ImageGallery Component
+// Main ImageGallery Component with Firebase Storage upload
 const ImageGallery = () => {
   const [images, setImages] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [existingFileNames, setExistingFileNames] = useState([]);
+
+  // Fetch images and store the file names in state
+  const fetchImages = async () => {
+    const storageRef = ref(storage, "images/"); // Assuming 'images/' folder
+    const res = await listAll(storageRef);
+    const fileNames = res.items.map((itemRef) => itemRef.name);
+    setExistingFileNames(fileNames); // Save file names for duplicate check
+    const urls = await Promise.all(
+      res.items.map(async (itemRef) => {
+        const url = await getDownloadURL(itemRef);
+        return {
+          id: itemRef.name,
+          src: url,
+          name: itemRef.name,
+        };
+      })
+    );
+    setImages(urls);
+  };
 
   useEffect(() => {
-    // Load the images from an API or database
-    setImages(mockImages); // In a real scenario, replace this with a fetch call to load images
+    fetchImages(); // Fetch images on component mount
   }, []);
 
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
+  // Handle drop event to upload images
+  const onDrop = (acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      // Check if the file name already exists in Firebase Storage
+      if (existingFileNames.includes(file.name)) {
+        alert(`File with the name "${file.name}" already exists.`);
+        return; // Skip uploading this file
+      }
+
+      const storageRef = ref(storage, `images/${file.name}`);
+      const metadata = {
+        cacheControl: "public, max-age=31536000", // Cache for 1 year
+      };
+
+      const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          console.error("Upload failed:", error);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          const newImage = {
+            id: file.name,
+            src: downloadURL,
+            name: file.name,
+          };
+          setImages((prevImages) => [...prevImages, newImage]);
+          setExistingFileNames((prevFileNames) => [...prevFileNames, file.name]); // Update file names
+        }
+      );
+    });
   };
 
-  const handleCloseModal = () => {
-    setSelectedImage(null);
-  };
+  // React Dropzone setup
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {images.map((image) => (
-        <ImageItem key={image.id} image={image} onClick={handleImageClick} />
-      ))}
+    <div>
+      {/* Drag and Drop Area */}
+      <div
+        {...getRootProps()}
+        className={`border-dashed border-2 p-6 text-center cursor-pointer mb-4 ${
+          isDragActive ? "border-green-400" : "border-gray-300"
+        }`}
+      >
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p className="text-green-400">Drop the files here ...</p>
+        ) : (
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        )}
+      </div>
 
-      {/* Show Modal if an image is selected */}
-      {selectedImage && <ImageModal image={selectedImage} onClose={handleCloseModal} />}
+      {/* Image Grid */}
+      <div className="grid grid-cols-3 gap-4">
+        {images.length === 0 ? (
+          <p className="text-gray-500 col-span-3">No images found.</p>
+        ) : (
+          images.map((image) => <ImageItem key={image.id} image={image} />)
+        )}
+      </div>
     </div>
   );
 };

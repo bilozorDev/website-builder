@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": "public", // Make sure this directory exists or change it to your actual public directory
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      // Optional: For dynamic hosting with rewrites
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
