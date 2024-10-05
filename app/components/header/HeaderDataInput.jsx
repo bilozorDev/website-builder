@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect } from "react";
-import { useSelectedElements } from "../contexts/SelectedElementsContext";
+
 import { useState } from "react";
 import { Description, Field, Label, Switch } from "@headlessui/react";
 import { HexColorPicker } from "react-colorful";
-import MenuItemsEditor from "./MenuItemsEditor";
+import { useHeader } from "@/app/contexts/HeaderContext";
+import MenuItemsEditor from "../MenuItemsEditor";
 
-const HeaderOptionsSelection = () => {
-  const { setHeader, header } = useSelectedElements();
-  const [color, setColor] = useState("#aabbcc");
+const HeaderDataInput = () => {
+  const { setHeader, header } = useHeader();
+  const [color, setColor] = useState(header.bgColor || "ffffff");
 
   useEffect(() => {
     setHeader({
@@ -16,24 +17,6 @@ const HeaderOptionsSelection = () => {
       bgColor: color,
     });
   }, [color]);
-
-  {
-    /*
-  {
-    darkBg: false,
-    constrained: false,
-    brandBg: false,
-    flyoutMegaMenu: {
-      selected: false,
-      fullWidth: false,
-    },
-    simpleFlyoutMenu: {
-      selected: false,
-    },
-    alignment: { options: [{ id: "Left" }, { id: "Center" }, { id: "Right" }], selected: "Center" },
-  }
-  */
-  }
 
   return (
     <>
@@ -52,15 +35,16 @@ const HeaderOptionsSelection = () => {
                 id={aligmentSelection.id}
                 name="notification-method"
                 type="radio"
-                onClick={() =>
+                onClick={() => {
+                  console.log(aligmentSelection.id);
                   setHeader({
                     ...header,
                     alignment: {
                       ...header.alignment,
                       selected: aligmentSelection.id,
                     },
-                  })
-                }
+                  });
+                }}
                 className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
               />
               <label
@@ -73,7 +57,7 @@ const HeaderOptionsSelection = () => {
           ))}
         </div>
       </fieldset>
-      <hr className="my-8"/>
+      <hr className="my-8" />
       <Field className="flex items-center">
         <Switch
           checked={header?.constrained}
@@ -91,15 +75,15 @@ const HeaderOptionsSelection = () => {
           <span className="font-medium text-gray-900">Boxed</span>{" "}
         </Label>
       </Field>
-      <hr className="my-8"/>
+      <hr className="my-8" />
 
       <HexColorPicker color={color} onChange={setColor} />
 
-      <hr className="my-8"/>
+      <hr className="my-8" />
 
       <MenuItemsEditor />
     </>
   );
 };
 
-export default HeaderOptionsSelection;
+export default HeaderDataInput;

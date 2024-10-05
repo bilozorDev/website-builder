@@ -3,7 +3,7 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 
 const HamburgerMenuOpener = ({setMobileMenuOpen}) => {
   return (
-    <div className="flex lg:hidden">
+    <div className="flex lg:hidden ml-auto">
       <button
         type="button"
         onClick={() => setMobileMenuOpen(true)}

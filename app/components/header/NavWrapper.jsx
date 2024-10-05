@@ -1,12 +1,12 @@
-import { useSelectedElements } from "@/app/contexts/SelectedElementsContext";
+import { useHeader } from "@/app/contexts/HeaderContext";
 import React from "react";
 
 const NavWrapper = ({ children}) => {
-  const { setHeader, header } = useSelectedElements();
+  const { setHeader, header } = useHeader();
   return (
     <nav
       aria-label="Global"
-      className={`flex items-center justify-between p-6 lg:px-8 lg:space-x-12 ${
+      className={`flex items-center justify-between px-8 lg:space-x-12 ${
         header?.constrained ? "max-w-7xl mx-auto" : ""
       }`}
     >
