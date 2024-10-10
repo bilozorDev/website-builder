@@ -4,7 +4,7 @@ import HamburgerMenuOpener from "./header/HamburgerMenuOpener";
 import MobileMenuDialog from "./header/MobileMenuDialog";
 import Logo from "./header/Logo";
 import NavWrapper from "./header/NavWrapper";
-import {SelectedIconStyle} from "@/app/components/SelectedIconStyle";
+import { SelectedIconStyle } from "@/app/components/SelectedIconStyle";
 import {
   Popover,
   PopoverButton,
@@ -13,7 +13,6 @@ import {
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useHeader } from "../contexts/HeaderContext";
-
 
 // Utility function to convert hex color to RGB
 function hexToRgb(hex) {
@@ -50,7 +49,7 @@ function getTextColorForBackground(hexColor) {
 export default function SelectedHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { header } = useHeader();
-  
+
   // Determine text color based on background color
   const textColor = getTextColorForBackground(header?.bgColor || "#ffffff");
   // console.log(header.menuItems)
@@ -61,89 +60,89 @@ export default function SelectedHeader() {
           <Logo />
         </div>
         <HamburgerMenuOpener setMobileMenuOpen={setMobileMenuOpen} />
-        <PopoverGroup className={`hidden lg:flex lg:grow-1 ${header.alignment.selected != "center" ? "w-full" : null}  lg:justify-${header.alignment.selected} lg:gap-x-12`}>
-          
-            {header?.menuItems?.regularItems.map((item) => {
-              // console.log(item);
-              return item.megaMenu ? (
-                <Popover key={item.name}>
-                  <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-                    {item.name}
-                    <ChevronDownIcon
-                      aria-hidden="true"
-                      className="h-5 w-5 flex-none text-gray-400"
-                    />
-                  </PopoverButton>
+        <PopoverGroup
+          className={`hidden lg:flex lg:grow-1 ${
+            header.alignment.selected != "center" ? "w-full" : null
+          }  lg:justify-${header.alignment.selected} lg:gap-x-12`}
+        >
+          {header?.menuItems?.regularItems.map((item) => {
+            // console.log(item);
+            return item.megaMenu ? (
+              <Popover key={item.name}>
+                <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                  {item.name}
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className="h-5 w-5 flex-none text-gray-400"
+                  />
+                </PopoverButton>
 
-                  <PopoverPanel
-                    transition
-                    className="absolute inset-x-0 top-0 -z-10 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-                  >
-                    <div className="mx-auto grid max-w-7xl grid-cols-4 gap-x-4 px-6 py-10 lg:px-8 xl:gap-x-8">
-                      {item?.megaMenu?.menuItems.map((item) => (
-                        <div
-                          key={item.name}
-                          className="group relative rounded-lg p-6 text-sm leading-6 hover:bg-gray-50"
-                        >
-                          <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                           {/* <SelectedIconStyle name={item.icon} className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" /> */}
-                           icon
-                          </div>
-                          <a
-                            href={item.href}
-                            className="mt-6 block font-semibold text-gray-900"
-                          >
-                            {item.name}
-                            <span className="absolute inset-0" />
-                          </a>
-                          <p className="mt-1 text-gray-600">
-                            {item.description}
-                          </p>
+                <PopoverPanel
+                  transition
+                  className="absolute inset-x-0 top-0 -z-10 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                >
+                  <div className="mx-auto grid max-w-7xl grid-cols-4 gap-x-4 px-6 py-10 lg:px-8 xl:gap-x-8">
+                    {item?.megaMenu?.menuItems.map((item) => (
+                      <div
+                        key={item.name}
+                        className="group relative rounded-lg p-6 text-sm leading-6 hover:bg-gray-50"
+                      >
+                        <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                          {/* <SelectedIconStyle name={item.icon} className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" /> */}
+                          icon
                         </div>
-                      ))}
-                    </div>
-                    <div className="bg-gray-50">
-                      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                        <div className="grid grid-cols-3 divide-x divide-gray-900/5 border-x border-gray-900/5">
-                          {item?.megaMenu?.callsToAction.map((item) => (
-                            <a
-                              key={item.name}
-                              href={item.href}
-                              className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                            >
-                              {/* <item.icon
+                        <a
+                          href={item.href}
+                          className="mt-6 block font-semibold text-gray-900"
+                        >
+                          {item.name}
+                          <span className="absolute inset-0" />
+                        </a>
+                        <p className="mt-1 text-gray-600">{item.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="bg-gray-50">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                      <div className="grid grid-cols-3 divide-x divide-gray-900/5 border-x border-gray-900/5">
+                        {item?.megaMenu?.callsToAction.map((item) => (
+                          <a
+                            key={item.name}
+                            href={item.href}
+                            className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
+                          >
+                            {/* <item.icon
                                 aria-hidden="true"
                                 className="h-5 w-5 flex-none text-gray-400"
                               /> */}
-                              icon
-                              {item.name}
-                            </a>
-                          ))}
-                        </div>
+                            icon
+                            {item.name}
+                          </a>
+                        ))}
                       </div>
                     </div>
-                  </PopoverPanel>
-                </Popover>
-              ) : (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-semibold leading-6"
-                  style={{ color: textColor }}
-                >
-                  {item.name}
-                </a>
-              );
-            })}
-         
+                  </div>
+                </PopoverPanel>
+              </Popover>
+            ) : (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold leading-6"
+                style={{ color: textColor }}
+              >
+                {item.name}
+              </a>
+            );
+          })}
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-none">
           <a
-            href="#"
+            href={header?.menuItems?.cta?.href}
             className="text-sm font-semibold leading-6"
             style={{ color: textColor }}
           >
-            Log in <span aria-hidden="true">&rarr;</span>
+            {header?.menuItems?.cta?.text} <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </NavWrapper>

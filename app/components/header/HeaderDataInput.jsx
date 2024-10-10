@@ -6,11 +6,14 @@ import { Description, Field, Label, Switch } from "@headlessui/react";
 import { HexColorPicker } from "react-colorful";
 import { useHeader } from "@/app/contexts/HeaderContext";
 import MenuItemsEditor from "../MenuItemsEditor";
+import DraggableList from "../ui/DraggableList";
+import SettingsTitle from "../ui/SettingsTitle";
 
 const HeaderDataInput = () => {
   const { setHeader, header } = useHeader();
   const [color, setColor] = useState(header.bgColor || "ffffff");
-
+  const [menuItems, setMenuItems] = useState(header.menuItems.regularItems);
+  const [cta, setCta] = useState(header.menuItems.cta);
   useEffect(() => {
     setHeader({
       ...header,
@@ -18,15 +21,33 @@ const HeaderDataInput = () => {
     });
   }, [color]);
 
+  const handleHeaderItemReorder = (newOrder) => {
+    setHeader({
+      ...header,
+      menuItems: {
+        ...header.menuItems,
+        regularItems: newOrder,
+      },
+    });
+  };
+
+  const handleMenuItemChange = (index, field, value) => {
+    const updatedMenuItems = menuItems.map((item, idx) =>
+      idx === index ? { ...item, [field]: value } : item
+    );
+    setMenuItems(updatedMenuItems);
+    setHeader({
+      ...header,
+      menuItems: {
+        ...header.menuItems,
+        regularItems: updatedMenuItems,
+      },
+    });
+  };
   return (
     <>
       <fieldset>
-        <legend className="text-sm font-semibold leading-6 text-gray-900">
-          Notifications
-        </legend>
-        <p className="mt-1 text-sm leading-6 text-gray-600">
-          How do you prefer to receive notifications?
-        </p>
+        <SettingsTitle title="Menu Aligment" />
         <div className="mt-6 space-y-6">
           {header.alignment.options.map((aligmentSelection) => (
             <div key={aligmentSelection.id} className="flex items-center">
@@ -76,12 +97,96 @@ const HeaderDataInput = () => {
         </Label>
       </Field>
       <hr className="my-8" />
-
+      <SettingsTitle title="Background color" />
       <HexColorPicker color={color} onChange={setColor} />
 
       <hr className="my-8" />
 
-      <MenuItemsEditor />
+      <SettingsTitle title="Menu Items" />
+      <DraggableList
+        items={header.menuItems.regularItems}
+        onReorder={handleHeaderItemReorder}
+        renderItem={(item, index) => (
+          <div className="isolate -space-y-px rounded-md shadow-sm">
+            <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+              <label
+                htmlFor={`menu-item-name-${index}`}
+                className="block text-xs font-medium text-gray-500"
+              >
+                Link Name
+              </label>
+              <input
+                id={`header-item-name-${index}`}
+                name={`header-item-name-${index}`}
+                type="text"
+                value={item.name}
+                onChange={(e) =>
+                  handleMenuItemChange(index, "name", e.target.value)
+                }
+                placeholder="Link name"
+                className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              />
+            </div>
+            <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+              <label
+                htmlFor={`menu-item-link-${index}`}
+                className="block text-xs font-medium text-gray-500"
+              >
+                Link URL
+              </label>
+              <input
+                id={`menu-item-link-${index}`}
+                name={`menu-item-link-${index}`}
+                type="text"
+                value={item.href}
+                onChange={(e) =>
+                  handleMenuItemChange(index, "href", e.target.value)
+                }
+                placeholder="https://example.com"
+                className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+        )}
+      />
+
+      <SettingsTitle title="CTA" />
+      <div className="isolate -space-y-px rounded-md shadow-sm">
+        <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+          <label
+            htmlFor="CTA"
+            className="block text-xs font-medium text-gray-500"
+          >
+            CTA
+          </label>
+          <input
+            id="CTA"
+            name="CTA"
+            type="text"
+            value={cta.text}
+            onChange={(e) => setCta({ ...cta, text: e.target.value })}
+            placeholder="Link name"
+            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+          />
+        </div>
+        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+          <label
+            htmlFor="CTA-URL"
+            className="block text-xs font-medium text-gray-500"
+          >
+            CTA URL
+          </label>
+          <input
+            id="CTA-URL"
+            name="CTA-URL"
+            type="text"
+            value={cta.href}
+            onChange={(e) => setCta({ ...cta, href: e.target.value })}
+            placeholder="https://example.com"
+            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+          />
+        </div>
+      </div>
     </>
   );
 };

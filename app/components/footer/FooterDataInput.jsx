@@ -141,37 +141,7 @@ const FooterDataInput = () => {
         }
         placeholder="Apple, Inc."
       />
-      {/* <div className="mt-5">
-        <TextInput
-          text="Company Mission"
-          value={footer.options.companyMission.text}
-          onChange={(e) =>
-            setFooter((prev) => ({
-              ...prev,
-              options: {
-                ...prev.options,
-                companyMission: { text: e.target.value },
-              },
-            }))
-          }
-          disabled={
-            selectedStyle.id !== "4-columns" &&
-            selectedStyle.id !== "4-columns_with_newsletter"
-          }
-          placeholder="Apple, Inc."
-        />
-
-        <span
-          className={`text-sm ${
-            selectedStyle.id === "4-columns" ||
-            selectedStyle.id === "4-columns_with_newsletter"
-              ? "text-transparent"
-              : "text-gray-400"
-          }`}
-        >
-          Only available in 4 column design
-        </span>
-      </div> */}
+      
 
       <hr className="mb-5" />
       <SettingsTitle title="Social Media Links" />

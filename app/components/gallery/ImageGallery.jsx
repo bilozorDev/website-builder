@@ -1,79 +1,78 @@
 import React, { useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL, listAll, getMetadata, updateMetadata } from "firebase/storage";
 import { storage } from "../lib/firebase";
+import CryptoJS from "crypto-js"; // Import crypto-js for hashing
 
-// ImageItem Component: Displays each image and where it is used
-const ImageItem = ({ image, onClick }) => (
+// ImageItem Component: Displays each image
+const ImageItem = ({ image }) => (
   <div className="border p-2">
-    <img src={image.src} alt={image.name} className="w-full h-auto" onClick={() => onClick(image)} />
+    <img src={image.src} alt={image.name} className="w-full h-auto" />
     <h4 className="text-sm mt-2">{image.name}</h4>
   </div>
 );
 
-// ImageModal Component: Shows detailed image information
-const ImageModal = ({ image, onClose }) => {
-  if (!image) return null;
-
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
-  return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center" onClick={handleOverlayClick}>
-      <div className="bg-white p-4 rounded shadow-lg relative">
-        <button onClick={onClose} className="absolute top-0 right-0 m-4">
-          Close
-        </button>
-        <img src={image.src} alt={image.name} className="w-48 h-auto mx-auto mb-4" />
-        <h3 className="text-lg font-bold">{image.name}</h3>
-      </div>
-    </div>
-  );
-};
-
 // Main ImageGallery Component with Firebase Storage upload
 const ImageGallery = () => {
   const [images, setImages] = useState([]);
-  const [existingFileNames, setExistingFileNames] = useState([]);
+  const [existingHashes, setExistingHashes] = useState([]);
 
-  // Fetch images and store the file names in state
+  // Fetch images and hashes from Firebase Storage
   const fetchImages = async () => {
     const storageRef = ref(storage, "images/"); // Assuming 'images/' folder
     const res = await listAll(storageRef);
-    const fileNames = res.items.map((itemRef) => itemRef.name);
-    setExistingFileNames(fileNames); // Save file names for duplicate check
     const urls = await Promise.all(
       res.items.map(async (itemRef) => {
         const url = await getDownloadURL(itemRef);
+        const metadata = await getMetadata(itemRef);
+
         return {
           id: itemRef.name,
           src: url,
           name: itemRef.name,
+          hash: metadata.customMetadata?.hash, // Get stored hash
         };
       })
     );
+
     setImages(urls);
+    setExistingHashes(urls.map((image) => image.hash)); // Collect all hashes for duplicate checking
   };
 
   useEffect(() => {
-    fetchImages(); // Fetch images on component mount
+    fetchImages(); // Fetch images and hashes on component mount
   }, []);
 
+  // Generate an MD5 hash for the file
+  const generateFileHash = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const hash = CryptoJS.MD5(CryptoJS.enc.Latin1.parse(reader.result)).toString();
+        resolve(hash);
+      };
+      reader.onerror = (error) => reject(error);
+      reader.readAsBinaryString(file); // Read file as binary for hashing
+    });
+  };
+
   // Handle drop event to upload images
-  const onDrop = (acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      // Check if the file name already exists in Firebase Storage
-      if (existingFileNames.includes(file.name)) {
-        alert(`File with the name "${file.name}" already exists.`);
-        return; // Skip uploading this file
+  const onDrop = async (acceptedFiles) => {
+    for (const file of acceptedFiles) {
+      const fileHash = await generateFileHash(file);
+
+      // Check if the file hash already exists
+      if (existingHashes.includes(fileHash)) {
+        alert(`File "${file.name}" with the same content already exists.`);
+        continue; // Skip uploading this file
       }
 
       const storageRef = ref(storage, `images/${file.name}`);
       const metadata = {
         cacheControl: "public, max-age=31536000", // Cache for 1 year
+        customMetadata: {
+          hash: fileHash, // Store the hash as metadata
+        },
       };
 
       const uploadTask = uploadBytesResumable(storageRef, file, metadata);
@@ -93,12 +92,14 @@ const ImageGallery = () => {
             id: file.name,
             src: downloadURL,
             name: file.name,
+            hash: fileHash, // Add the file hash to the new image object
           };
+
           setImages((prevImages) => [...prevImages, newImage]);
-          setExistingFileNames((prevFileNames) => [...prevFileNames, file.name]); // Update file names
+          setExistingHashes((prevHashes) => [...prevHashes, fileHash]); // Add the new hash to the list of hashes
         }
       );
-    });
+    }
   };
 
   // React Dropzone setup

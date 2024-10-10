@@ -10,11 +10,11 @@ import GalleryDataInput from "./gallery/GalleryDataInput";
 
 const tabs = [
   { name: "General", value: "General" },
-  { name: "Header", value: "Header", count: "12" },
-  { name: "Body", value: "Body", count: "6" },
-  { name: "Footer", value: "Footer", count: "4" },
-  { name: "Gallery", value: "Gallery" },
-  { name: "Disqualified", value: "Disqualified" },
+  { name: "Header", value: "Header"},
+  { name: "Body", value: "Body" },
+  { name: "Footer", value: "Footer" },
+  // { name: "Gallery", value: "Gallery" },
+  // { name: "Disqualified", value: "Disqualified" },
 ];
 
 export default function SettingsTabs() {

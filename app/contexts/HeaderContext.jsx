@@ -36,51 +36,17 @@ export function HeaderProvider({ children }) {
             regularItems: [
               {
                 name: "Product",
+                id: "product",
                 href: "#",
-                megaMenu: {
-                  menuItems: [
-                    {
-                      name: "Analytics",
-                      description:
-                        "Get a better understanding where your traffic is coming from",
-                      href: "#",
-                      icon: ChartPieIcon,
-                    },
-                    {
-                      name: "Engagement",
-                      description:
-                        "Speak directly to your customers with our engagement tool",
-                      href: "#",
-                      icon: CursorArrowRaysIcon,
-                    },
-                    {
-                      name: "Security",
-                      description: "Your customers’ data will be safe and secure",
-                      href: "#",
-                      icon: FingerPrintIcon,
-                    },
-                    {
-                      name: "Integrations",
-                      description: "Your customers’ data will be safe and secure",
-                      href: "#",
-                      icon: SquaresPlusIcon,
-                    },
-                  ],
-                  callsToAction: [
-                    { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-                    { name: "Contact sales", href: "#", icon: PhoneIcon },
-                    {
-                      name: "View all products",
-                      href: "#",
-                      icon: RectangleGroupIcon,
-                    },
-                  ],
-                },
               },
-              { name: "Features", href: "#" },
-              { name: "Marketplace", href: "#" },
-              { name: "Company", href: "#" },
+              { name: "Features", href: "#", id: "features" },
+              { name: "Marketplace", href: "#", id: "marketplace" },
+              { name: "Company", href: "#", id: "company" },
             ],
+            cta: {
+              text: "Get Started",
+              href: "#",
+            },
           },
         };
   });
