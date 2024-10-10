@@ -18,7 +18,7 @@ function Layout({ children }) {
   }, [globalSettings?.title]);
 
   return (
-    <html lang="en">
+    <html lang="en" style={{overflow: "visable!important"}}>
       <head>
         <meta name="description" content={globalSettings?.description || "Welcome to my website"} />
       </head>
