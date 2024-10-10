@@ -14,12 +14,18 @@ const HeaderDataInput = () => {
   const [color, setColor] = useState(header.bgColor || "ffffff");
   const [menuItems, setMenuItems] = useState(header.menuItems.regularItems);
   const [cta, setCta] = useState(header.menuItems.cta);
+  
   useEffect(() => {
     setHeader({
       ...header,
       bgColor: color,
+      menuItems: {
+        ...header.menuItems,
+        regularItems: menuItems,
+        cta,
+      },
     });
-  }, [color]);
+  }, [color, cta, menuItems]);
 
   const handleHeaderItemReorder = (newOrder) => {
     setHeader({
