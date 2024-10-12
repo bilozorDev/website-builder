@@ -2,33 +2,49 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
-import { PhotoIcon, PlusIcon } from "@heroicons/react/24/outline";
+import {
+  PencilSquareIcon,
+  PhotoIcon,
+  PlusIcon,
+} from "@heroicons/react/24/outline";
 import TextInput from "../ui/TextInput";
-import FeaturesEditList from "./FeaturesEditList";
 import AddOrEditFeatureModal from "./AddOrEditFeatureModal";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import SettingsTitle from "../ui/SettingsTitle";
 import { useFeatures } from "@/app/contexts/FeaturesContext";
-
-
+import DraggableList from "../ui/DraggableList";
+import SelectedIconStyle from "../SelectedIconStyle";
+import useGetSelectedStyleId from "@/app/hooks/useGetSelectedStyleId";
 
 const FeaturesDataInputs = () => {
   const { features, setFeatures } = useFeatures();
   const [openModal, setOpenModal] = useState(false);
+  const { iconsStyle } = features.options;
+
   const [selectedFeature, setSelectedFeature] = useState({
     name: "",
     description: "",
     icon: PhotoIcon,
   });
-
+  const selectedId = useGetSelectedStyleId(iconsStyle);
   // Initialize `selectedStyle`, `selectedListStyle`, and `selectedIconStyle` based on `selected: true` or fallback to the first item
-  const initialSelectedStyle = features.options.styleSelections.find(style => style.selected) || features.options.styleSelections[0];
-  const initialSelectedListStyle = features.options.listStyle.find(style => style.selected) || features.options.listStyle[0];
-  const initialSelectedIconStyle = features.options.iconsStyle.find(iconStyle => iconStyle.selected) || features.options.iconsStyle[0];
+  const initialSelectedStyle =
+    features.options.styleSelections.find((style) => style.selected) ||
+    features.options.styleSelections[0];
+  const initialSelectedListStyle =
+    features.options.listStyle.find((style) => style.selected) ||
+    features.options.listStyle[0];
+  const initialSelectedIconStyle =
+    features.options.iconsStyle.find((iconStyle) => iconStyle.selected) ||
+    features.options.iconsStyle[0];
 
   const [selectedStyle, setSelectedStyle] = useState(initialSelectedStyle);
-  const [selectedListStyle, setSelectedListStyle] = useState(initialSelectedListStyle);
-  const [selectedIconStyle, setSelectedIconStyle] = useState(initialSelectedIconStyle);
+  const [selectedListStyle, setSelectedListStyle] = useState(
+    initialSelectedListStyle
+  );
+  const [selectedIconStyle, setSelectedIconStyle] = useState(
+    initialSelectedIconStyle
+  );
 
   const settings = features.options.styleSelections;
   const settingsListStyle = features.options.listStyle;
@@ -82,9 +98,16 @@ const FeaturesDataInputs = () => {
     });
   }, [selectedIconStyle]);
 
-  
+  const handleHeaderItemReorder = (newOrder) => {
+    setFeatures({
+      ...features,
+      options: {
+        ...features.options,
+        featuresList: newOrder,
+      },
+    });
+  };
 
-  
   return (
     <>
       <SettingsTitle title="Style" />
@@ -140,7 +163,11 @@ const FeaturesDataInputs = () => {
               value={setting}
               aria-label={setting.name}
               aria-description={setting.description}
-              disabled={selectedStyle.id == "headline-left-and-features-list-on-right" || selectedStyle.id == "image-right"}
+              disabled={
+                selectedStyle.id ==
+                  "headline-left-and-features-list-on-right" ||
+                selectedStyle.id == "image-right"
+              }
               className={classNamesJoin(
                 settingIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
                 settingIdx === settings.length - 1
@@ -167,7 +194,6 @@ const FeaturesDataInputs = () => {
           ))}
         </RadioGroup>
       </fieldset>
-
 
       <SettingsTitle title="Icon Style" />
       <fieldset aria-label="Features Block Style">
@@ -268,23 +294,30 @@ const FeaturesDataInputs = () => {
         />
         <SettingsTitle title="Features" />
 
-        
+        <DraggableList
+          items={features.options.featuresList}
+          onReorder={handleHeaderItemReorder}
+          renderItem={(item, index) => (
+            <div
+              key={item}
+              className="relative flex hover:cursor-move items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
+            >
+              <div className="flex-shrink-0">
+                <SelectedIconStyle selectedId={selectedId} iconName={item.icon} />
+              </div>
+              <div className="min-w-0 flex-1">
+                <span aria-hidden="true" className="absolute inset-0" />
+                <p className=" font-medium text-gray-900 pb-1">{item.name}</p>
+                <p className="truncate text-sm text-gray-500">
+                  {item.description}
+                </p>
+              </div>
+              <PencilSquareIcon className="h-5 w-5 hidden cursor-pointer group-hover:block text-gray-400 hover:text-gray-800 z-50" />
+            </div>
+          )}
+        />
 
-        {features.options.featuresList.map((feature) => (
-          <FeaturesEditList
-          key={feature.name}
-          name={feature.name}
-          description={feature.description}
-          Icon={feature.icon}
-          onClick={() => handleEditFeature(feature)}
-          link={feature.link}
-          />
-        ))}
-        
-        <div
-          
-          className="relative flex justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
-        >
+        <div className="relative flex justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
           Add Feature
           <PlusIcon className="h-5 w-5 ml-2 cursor-pointer  text-gray-600 z-50" />
         </div>

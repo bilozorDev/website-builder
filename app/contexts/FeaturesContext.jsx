@@ -90,30 +90,34 @@ export function FeaturesProvider({ children }) {
             ],
             featuresList: [
               {
+                id: 'analytics',
                 name: "Analytics",
                 description:
                   "Get a better understanding where your traffic is coming from",
                 icon: "ChartPieIcon",
-                link: "http://localhost:3000/",
+               
               },
               {
+                id: 'engagement',
                 name: "Engagement",
                 description:
                   "Speak directly to your customers with our engagement tool",
                 icon: "CursorArrowRaysIcon",
-                link: "",
+                
               },
               {
+                id: 'security',
                 name: "Security",
                 description: "Your customers’ data will be safe and secure",
                 icon: "FingerPrintIcon",
-                link: "",
+               
               },
               {
+                id: 'integrations',
                 name: "Integrations",
                 description: "Your customers’ data will be safe and secure",
                 icon: "SquaresPlusIcon",
-                link: "",
+               
               },
             ],
             subtitle: { text: "Deploy faster" },
