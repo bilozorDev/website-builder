@@ -20,12 +20,6 @@ const FeaturesDataInputs = () => {
   const { features, setFeatures } = useFeatures();
   const [openModal, setOpenModal] = useState(false);
   const { iconsStyle } = features.options;
-
-  const [selectedFeature, setSelectedFeature] = useState({
-    name: "",
-    description: "",
-    icon: PhotoIcon,
-  });
   const selectedId = useGetSelectedStyleId(iconsStyle);
   // Initialize `selectedStyle`, `selectedListStyle`, and `selectedIconStyle` based on `selected: true` or fallback to the first item
   const initialSelectedStyle =
@@ -108,9 +102,13 @@ const FeaturesDataInputs = () => {
     });
   };
 
+  const handleEditFeature = (feature) => {
+    console.log("Edit feature", feature);
+  };
+
   return (
     <>
-      {/* <SettingsTitle title="Style" />
+      <SettingsTitle title="Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedStyle}
@@ -193,9 +191,9 @@ const FeaturesDataInputs = () => {
             </Radio>
           ))}
         </RadioGroup>
-      </fieldset> */}
+      </fieldset>
 
-      {/* <SettingsTitle title="Icon Style" />
+      <SettingsTitle title="Icon Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedIconStyle}
@@ -233,7 +231,7 @@ const FeaturesDataInputs = () => {
             </Radio>
           ))}
         </RadioGroup>
-      </fieldset> */}
+      </fieldset>
 
       <hr />
       <SettingsTitle title="Content" />
@@ -300,13 +298,16 @@ const FeaturesDataInputs = () => {
           renderItem={(item, index) => (
             <>
               <div className="isolate -space-y-px rounded-md shadow-sm relative bg-white z-50">
-                <div className="absolute bg-white left-[1px] w-[96px] h-2 top-[46%] z-50 text-center flex items-center  justify-center">
+                <div className="absolute bg-white left-[1px] w-[96px] h-2 top-[46%] z-50 text-center flex items-center  justify-center ">
+
                   <SelectedIconStyle
                     selectedId={selectedId}
                     iconName={item.icon}
+                    className="hover:scale-110 hover:cursor-pointer transition-all duration-300 ease-in-out"
                   />
+                  
                 </div>
-                <div className="pl-24 relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+                <div className="pl-24 relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 ">
                   <label
                     htmlFor={`menu-item-name-${index}`}
                     className="block text-xs font-medium text-gray-500"
@@ -318,11 +319,22 @@ const FeaturesDataInputs = () => {
                     name={`header-item-name-${index}`}
                     type="text"
                     value={item.name}
-                    placeholder="Link name"
+                    onChange={(e) => {
+                      const newItems = [...features.options.featuresList];
+                      newItems[index].name = e.target.value;
+                      setFeatures({
+                        ...features,
+                        options: {
+                          ...features.options,
+                          featuresList: newItems,
+                        },
+                      });
+                    }}
+                    placeholder="Feature title"
                     className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
                 </div>
-                <div className="pl-24 relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+                <div className="pl-24 relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 ">
                   <label
                     htmlFor={`menu-item-link-${index}`}
                     className="block text-xs font-medium text-gray-500"
@@ -334,6 +346,17 @@ const FeaturesDataInputs = () => {
                     name={`menu-item-link-${index}`}
                     type="text"
                     value={item.description}
+                    onChange={(e) => {
+                      const newItems = [...features.options.featuresList];
+                      newItems[index].description = e.target.value;
+                      setFeatures({
+                        ...features,
+                        options: {
+                          ...features.options,
+                          featuresList: newItems,
+                        },
+                      });
+                    }}
                     className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
                 </div>
