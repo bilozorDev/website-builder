@@ -110,7 +110,7 @@ const FeaturesDataInputs = () => {
 
   return (
     <>
-      <SettingsTitle title="Style" />
+      {/* <SettingsTitle title="Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedStyle}
@@ -193,9 +193,9 @@ const FeaturesDataInputs = () => {
             </Radio>
           ))}
         </RadioGroup>
-      </fieldset>
+      </fieldset> */}
 
-      <SettingsTitle title="Icon Style" />
+      {/* <SettingsTitle title="Icon Style" />
       <fieldset aria-label="Features Block Style">
         <RadioGroup
           value={selectedIconStyle}
@@ -233,7 +233,7 @@ const FeaturesDataInputs = () => {
             </Radio>
           ))}
         </RadioGroup>
-      </fieldset>
+      </fieldset> */}
 
       <hr />
       <SettingsTitle title="Content" />
@@ -298,22 +298,47 @@ const FeaturesDataInputs = () => {
           items={features.options.featuresList}
           onReorder={handleHeaderItemReorder}
           renderItem={(item, index) => (
-            <div
-              key={item}
-              className="relative flex hover:cursor-move items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
-            >
-              <div className="flex-shrink-0">
-                <SelectedIconStyle selectedId={selectedId} iconName={item.icon} />
+            <>
+              <div className="isolate -space-y-px rounded-md shadow-sm relative bg-white z-50">
+                <div className="absolute bg-white left-[1px] w-[96px] h-2 top-[46%] z-50 text-center flex items-center  justify-center">
+                  <SelectedIconStyle
+                    selectedId={selectedId}
+                    iconName={item.icon}
+                  />
+                </div>
+                <div className="pl-24 relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+                  <label
+                    htmlFor={`menu-item-name-${index}`}
+                    className="block text-xs font-medium text-gray-500"
+                  >
+                    Feature title
+                  </label>
+                  <input
+                    id={`header-item-name-${index}`}
+                    name={`header-item-name-${index}`}
+                    type="text"
+                    value={item.name}
+                    placeholder="Link name"
+                    className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                <div className="pl-24 relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+                  <label
+                    htmlFor={`menu-item-link-${index}`}
+                    className="block text-xs font-medium text-gray-500"
+                  >
+                    Feature description
+                  </label>
+                  <input
+                    id={`menu-item-link-${index}`}
+                    name={`menu-item-link-${index}`}
+                    type="text"
+                    value={item.description}
+                    className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  />
+                </div>
               </div>
-              <div className="min-w-0 flex-1">
-                <span aria-hidden="true" className="absolute inset-0" />
-                <p className=" font-medium text-gray-900 pb-1">{item.name}</p>
-                <p className="truncate text-sm text-gray-500">
-                  {item.description}
-                </p>
-              </div>
-              <PencilSquareIcon className="h-5 w-5 hidden cursor-pointer group-hover:block text-gray-400 hover:text-gray-800 z-50" />
-            </div>
+            </>
           )}
         />
 
