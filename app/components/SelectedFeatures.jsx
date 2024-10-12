@@ -152,7 +152,7 @@ export default function SelectedFeatures() {
               }  lg:gap-y-16`}
             >
               {featuresList.map((feature) => {
-                // console.log("feature:" + JSON.stringify(feature));
+                 console.log("feature", feature);
                 return (
                   <div key={feature.name} className="relative pl-16">
                     <dt className="text-base font-semibold leading-7 text-gray-900">

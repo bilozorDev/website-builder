@@ -1,5 +1,6 @@
 "use client";
 
+import { ChartPieIcon, CursorArrowRaysIcon, FingerPrintIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
 import { createContext, useContext, useState, useEffect } from "react";
 
 // Create the Features Context
