@@ -248,7 +248,7 @@ const HeroDataInputs = () => {
           }
         />
       </div>
-      <div>
+      {/* <div>
         <div className="mt-2 flex items-center gap-x-3">
           <PhotoIcon aria-hidden="true" className="h-12 w-12 text-gray-300" />
           <button
@@ -258,7 +258,7 @@ const HeroDataInputs = () => {
             Change
           </button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
