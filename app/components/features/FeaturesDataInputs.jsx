@@ -8,13 +8,14 @@ import {
   PlusIcon,
 } from "@heroicons/react/24/outline";
 import TextInput from "../ui/TextInput";
-import AddOrEditFeatureModal from "./AddOrEditFeatureModal";
+import AddFeatureModala from "./AddFeatureModal";
 import classNamesJoin from "@/app/utils/classNamesJoin";
 import SettingsTitle from "../ui/SettingsTitle";
 import { useFeatures } from "@/app/contexts/FeaturesContext";
 import DraggableList from "../ui/DraggableList";
 import SelectedIconStyle from "../SelectedIconStyle";
 import useGetSelectedStyleId from "@/app/hooks/useGetSelectedStyleId";
+import AddFeatureModal from "./AddFeatureModal";
 
 const FeaturesDataInputs = () => {
   const { features, setFeatures } = useFeatures();
@@ -102,8 +103,8 @@ const FeaturesDataInputs = () => {
     });
   };
 
-  const handleEditFeature = (feature) => {
-    console.log("Edit feature", feature);
+  const handleFeatureAdd = () => {
+    setOpenModal(true);
   };
 
   return (
@@ -299,13 +300,11 @@ const FeaturesDataInputs = () => {
             <>
               <div className="isolate -space-y-px rounded-md shadow-sm relative bg-white z-50">
                 <div className="absolute bg-white left-[1px] w-[96px] h-2 top-[46%] z-50 text-center flex items-center  justify-center ">
-
                   <SelectedIconStyle
                     selectedId={selectedId}
                     iconName={item.icon}
                     className="hover:scale-110 hover:cursor-pointer transition-all duration-300 ease-in-out"
                   />
-                  
                 </div>
                 <div className="pl-24 relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 ">
                   <label
@@ -365,12 +364,12 @@ const FeaturesDataInputs = () => {
           )}
         />
 
-        <div className="relative flex justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+        <div onClick={handleFeatureAdd} className="relative flex justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
           Add Feature
           <PlusIcon className="h-5 w-5 ml-2 cursor-pointer  text-gray-600 z-50" />
         </div>
       </div>
-      <AddOrEditFeatureModal open={openModal} setOpen={setOpenModal} />
+      <AddFeatureModal open={openModal} setOpen={setOpenModal} />
     </>
   );
 };

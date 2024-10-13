@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { MapIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { availableIcons } from "./icons";
+
 import SelectedIcon from "../SelectedIconStyle";
 import useSelectedFeatureStyle from "@/app/hooks/useGetSelectedStyleId";
 import { useFeatures } from "@/app/contexts/FeaturesContext";
+import { availableIcons } from "@/app/utils/availableIcons";
+import classNamesJoin from "@/app/utils/classNamesJoin";
+import { v4 } from "uuid";
 
-export default function AddOrEditFeatureModal({ open, setOpen }) {
+export default function AddFeatureModal({ open, setOpen }) {
   const { features, setFeatures } = useFeatures();
   const { iconsStyle } = features.options;
   const selectedId = useSelectedFeatureStyle(iconsStyle);
@@ -17,11 +20,12 @@ export default function AddOrEditFeatureModal({ open, setOpen }) {
   const [selectedFeature, setSelectedFeature] = useState({
     name: "",
     description: "",
-    icon: MapIcon,
-    link: "",
+    icon: "",
+    id: v4(),
   });
   const handleSave = () => {
     if (selectedFeature.name) {
+      console.log(selectedFeature);
       setFeatures({
         ...features,
         options: {
@@ -32,9 +36,17 @@ export default function AddOrEditFeatureModal({ open, setOpen }) {
       setOpen(false);
     }
   };
+  const handleClose = () => {
+    setSelectedFeature({
+      name: "",
+      description: "",
+      icon: "",
+    });
+    setOpen(false);
+  };
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog open={open} onClose={handleClose} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
@@ -119,57 +131,32 @@ export default function AddOrEditFeatureModal({ open, setOpen }) {
                     </label>
 
                     <div className="grid grid-cols-8 gap-5">
-                      {availableIcons.map((icon, iconIdx) => (
+                      {Object.keys(availableIcons).map((icon, index) => (
                         <div
-                          key={iconIdx}
+                          key={index}
+                          className="relative"
                           onClick={() =>
                             setSelectedFeature({
                               ...selectedFeature,
-                              icon: icon.icon,
+                              icon: icon,
                             })
                           }
-                          className={`flex h-10 w-10 relative items-center hover:scale-110 justify-center overflow-hidden rounded-full bg-indigo-600 hover:cursor-pointer hover:bg-indigo-700 hover:opacity-90 ${
-                            icon.icon === selectedFeature.icon
-                              ? "opacity-100 ring-1 ring-offset-2 ring-indigo-700 scale-110"
-                              : "opacity-45"
-                          }`}
                         >
-                          <SelectedIcon selectedId={selectedId} iconName={icon.icon} />
+                          <SelectedIcon
+                            iconName={icon}
+                            selectedId={selectedId}
+                            className={classNamesJoin(
+                              selectedFeature.icon === icon
+                                ? "grayscale-0 scale-105 border rounded-lg "
+                                : "grayscale",
+                              "cursor-pointer hover:grayscale-0 hover:scale-105"
+                            )}
+                          />
                         </div>
                       ))}
                     </div>
                   </>
                 ) : null}
-
-                <div className="mt-2">
-                  <label
-                    htmlFor="feature-link"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Link
-                  </label>
-                  <div className="mt-2">
-                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                      <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                        http://
-                      </span>
-                      <input
-                        id="feature-link"
-                        name="feature-link"
-                        type="text"
-                        value={selectedFeature.link}
-                        onChange={(e) =>
-                          setSelectedFeature({
-                            ...selectedFeature,
-                            link: e.target.value,
-                          })
-                        }
-                        placeholder="www.example.com"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
