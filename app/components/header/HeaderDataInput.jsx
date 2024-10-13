@@ -8,13 +8,14 @@ import { useHeader } from "@/app/contexts/HeaderContext";
 import MenuItemsEditor from "../MenuItemsEditor";
 import DraggableList from "../ui/DraggableList";
 import SettingsTitle from "../ui/SettingsTitle";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 const HeaderDataInput = () => {
   const { setHeader, header } = useHeader();
   const [color, setColor] = useState(header.bgColor || "ffffff");
   const [menuItems, setMenuItems] = useState(header.menuItems.regularItems);
   const [cta, setCta] = useState(header.menuItems.cta);
-  
+
   useEffect(() => {
     setHeader({
       ...header,
@@ -47,6 +48,21 @@ const HeaderDataInput = () => {
       menuItems: {
         ...header.menuItems,
         regularItems: updatedMenuItems,
+      },
+    });
+  };
+
+  const handleAddMenuItem = () => {
+    const newMenuItem = {
+      name: "New Menu Item",
+      href: "#",
+    };
+    setMenuItems([...menuItems, newMenuItem]);
+    setHeader({
+      ...header,
+      menuItems: {
+        ...header.menuItems,
+        regularItems: [...menuItems, newMenuItem],
       },
     });
   };
@@ -155,6 +171,12 @@ const HeaderDataInput = () => {
           </div>
         )}
       />
+      {header.menuItems.regularItems.length < 6 ? (
+        <div onClick={handleAddMenuItem} className="relative flex mt-4 justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+          Add Menu Item
+          <PlusIcon className="h-5 w-5 ml-2 cursor-pointer  text-gray-600 z-50" />
+        </div>
+      ) : null}
 
       <SettingsTitle title="CTA" />
       <div className="isolate -space-y-px rounded-md shadow-sm">
