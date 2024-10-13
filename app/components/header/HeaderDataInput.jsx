@@ -9,6 +9,7 @@ import MenuItemsEditor from "../MenuItemsEditor";
 import DraggableList from "../ui/DraggableList";
 import SettingsTitle from "../ui/SettingsTitle";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { v4 } from "uuid";
 
 const HeaderDataInput = () => {
   const { setHeader, header } = useHeader();
@@ -54,6 +55,7 @@ const HeaderDataInput = () => {
 
   const handleAddMenuItem = () => {
     const newMenuItem = {
+      id: v4(),
       name: "New Menu Item",
       href: "#",
     };
@@ -100,7 +102,7 @@ const HeaderDataInput = () => {
           ))}
         </div>
       </fieldset>
-      <hr className="my-8" />
+      {/* <hr className="my-8" />
       <Field className="flex items-center">
         <Switch
           checked={header?.constrained}
@@ -117,7 +119,7 @@ const HeaderDataInput = () => {
         <Label as="span" className="ml-3 text-sm">
           <span className="font-medium text-gray-900">Boxed</span>{" "}
         </Label>
-      </Field>
+      </Field> */}
       <hr className="my-8" />
       <SettingsTitle title="Background color" />
       <HexColorPicker color={color} onChange={setColor} />
@@ -172,7 +174,10 @@ const HeaderDataInput = () => {
         )}
       />
       {header.menuItems.regularItems.length < 6 ? (
-        <div onClick={handleAddMenuItem} className="relative flex mt-4 justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+        <div
+          onClick={handleAddMenuItem}
+          className="relative flex mt-4 justify-center align-middle hover:cursor-pointer items-center space-x-3 rounded-lg border border-gray-300 group bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
+        >
           Add Menu Item
           <PlusIcon className="h-5 w-5 ml-2 cursor-pointer  text-gray-600 z-50" />
         </div>

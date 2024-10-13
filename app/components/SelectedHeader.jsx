@@ -126,7 +126,7 @@ export default function SelectedHeader() {
               </Popover>
             ) : (
               <a
-                key={item.name}
+                key={item.id || item.name}
                 href={item.href}
                 className="text-sm font-semibold leading-6"
                 style={{ color: textColor }}
